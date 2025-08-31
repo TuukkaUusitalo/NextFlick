@@ -1,38 +1,77 @@
-.App {
+
+html{
+  background-color: #202020 ;
+  color: #f7f7f7;
+}
+
+
+.navbar{
+  
+ display: flex;
+  justify-content: space-between;
+  align-items: center;
+  background-color: #000000;
+  padding: 10px 20px;
+
+}
+
+
+
+
+.nav-right {
+  margin-right:10px;
+  align-items: center;
+
+}
+
+
+  
+
+h1{
+  font-size:250%;
+  width:520px;
+  margin-left:5%;
+}
+
+h2{
+  font-size:200%;
+  width:520px;
+  margin-top: 5%;
+  margin-left:5%;
+}
+
+.MovieCardContainer{
+  display:inline-block;
+  margin-left: 40px;
+  margin-right: 40px;
+  width:80px;
+  
+}
+.MovieCard{
+  float:left;
+  width: 140px;
+  height: 320px;
+  box-shadow: 0 8px 16px rgba(0, 0, 0, 0.954);
+  background-color:#000000;
+  font-family: sans-serif;
+  
+}
+
+.MovieCard h3{
+  color:#FF5000;
+  text-align: center;
+  height:10px;
+  font-size: medium;
+}
+
+.MovieCard p{
+  font-size: small;
   text-align: center;
 }
 
-.App-logo {
-  height: 40vmin;
-  pointer-events: none;
-}
 
-@media (prefers-reduced-motion: no-preference) {
-  .App-logo {
-    animation: App-logo-spin infinite 20s linear;
-  }
-}
 
-.App-header {
-  background-color: #282c34;
-  min-height: 100vh;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  font-size: calc(10px + 2vmin);
-  color: white;
-}
 
-.App-link {
-  color: #61dafb;
-}
 
-@keyframes App-logo-spin {
-  from {
-    transform: rotate(0deg);
-  }
-  to {
-    transform: rotate(360deg);
-  }
-}
+
+

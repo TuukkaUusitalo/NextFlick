@@ -3,9 +3,15 @@ import './App.css';
 
 function ProfilePage(){
     return(
-        <div>
-            <h1> Welcome to the Profile page</h1>
-        </div>
+        <>
+            <div className={"recommendations"}>
+                <h1 style={{textAlign: 'center'}}>My Recommendations</h1>
+
+            </div>
+            <div className={"profilePicBox"}>
+
+            </div>
+        </>
     )
 
 }

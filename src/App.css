@@ -15,6 +15,18 @@ html{
 
 }
 
+.Trending{
+    text-decoration: none;
+    color:#f7f7f7;
+}
+.Reviews{
+    text-decoration: none;
+    color:#f7f7f7;
+}
+.Recommendations{
+    text-decoration: none;
+    color:#f7f7f7;
+}
 
 
 
@@ -51,7 +63,7 @@ h2{
   float:left;
   width: 140px;
   height: 320px;
-  box-shadow: 0 8px 16px rgba(0, 0, 0, 0.954);
+  box-shadow:  0 8px 16px rgba(0, 0, 0, 0.932);
   background-color:#000000;
   font-family: sans-serif;
   

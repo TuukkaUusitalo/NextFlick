@@ -5,13 +5,6 @@ import ProfilePic from './assets/Profile-pic1.jpg';
 import NotificationBell from './assets/Notification-pic1.jpg';
 
 
-const ProfilePicture = () => {
-    const handleClick = () =>{
-
-    }
-
-}
-
 
 const Nav = (props) => {
     return(
@@ -23,13 +16,13 @@ const Nav = (props) => {
                 style={{width:"90px"}}></img>
                 </Link>                    
                 </div>
-                    <div className="nav-right">
                     
-                
-                </div>
-                <a>Reviews</a>
-                <a>Trending</a>
-                <a>Recommendations</a> 
+                    
+                    <div className="nav-right">
+                    </div>
+                <Link to = "/Reviews" className="Reviews">Reviews</Link>
+                <Link to = "Trending" className="Trending">Trending</Link>
+                <Link to = "Recommendations" className="Recommendations">Recommendations </Link>
                 <a>
                     <img src={NotificationBell} alt ="Notifications"
                     style={{width:"30px"}}></img>

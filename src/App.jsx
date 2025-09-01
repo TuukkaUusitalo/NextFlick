@@ -4,6 +4,12 @@ import MoviePoster from './assets/movie-poster1.jpg'
 import MovieCard from "./MovieCard"
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
 import ProfilePage from './Profile.jsx';
+import RecommendationsPage from './Recommendations.jsx';
+import ReviewsPage from './Reviews.jsx';
+import TrendingPage from './Trending.jsx';
+
+
+
 
 function Homepage() {
   return(
@@ -42,6 +48,9 @@ function App(){
     <Routes>
       
       <Route path="/" element={<Homepage />} />
+      <Route path="/Trending" element={<TrendingPage />} />
+      <Route path="/Reviews" element={<ReviewsPage />} />
+      <Route path="/Recommendations" element={<RecommendationsPage />} />
 
       <Route path="/Profile" element={<ProfilePage />} />
     </Routes>

@@ -24,20 +24,22 @@ const Nav = (props) => {
                 </Link>                    
                 </div>
                     <div className="nav-right">
-                    <Link to ='/Profile'>
-                    <img src={ProfilePic} alt ="ProfilePic"
-                    style={{width:"30px", }}></img>
-                    </Link>
                     
+                
+                </div>
+                <a>Reviews</a>
+                <a>Trending</a>
+                <a>Recommendations</a> 
                 <a>
                     <img src={NotificationBell} alt ="Notifications"
                     style={{width:"30px"}}></img>
                 </a>
-                
-                <a>Reviews</a>
-                <a>Trending</a>
-                <a>Recommendations</a>
-            </div>
+                <Link to ='/Profile'>
+                    <img src={ProfilePic} alt ="ProfilePic"
+                    style={{width:"30px", }}></img>
+                </Link>
+                    
+               
             </nav>
         </div>
     );

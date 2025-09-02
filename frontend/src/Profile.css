@@ -7,3 +7,19 @@
     width: 35%;
     margin-top: 20px;
 }
+
+.MovieCardContainer{
+    display: inline-block;
+    margin-left: 1rem;
+    margin-right: 1rem;
+    width: 6rem;
+}
+
+.movieCard {
+    float: left;
+    width: 3rem;
+    height: 'auto';
+    box-shadow:  0 8px 16px rgba(0, 0, 0, 0.932);
+    background-color:#000000;
+    font-family: sans-serif;
+}

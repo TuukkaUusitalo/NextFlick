@@ -6,8 +6,8 @@ import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
 import ProfilePage from './profile/Profile.jsx';
 import RecommendationsPage from './recommendations/Recommendations.jsx';
 import ReviewsPage from './Reviews.jsx';
-import TrendingPage from './Trending.jsx';
-
+import TrendingPage from './TrendingMovies.jsx';
+import TrendingMovies from './TrendingMovies.jsx';
 
 
 
@@ -21,19 +21,11 @@ function Homepage() {
     style={{width: "80%", marginLeft:"10%"}}></img>
         
     <h2>What to watch next?</h2>
-
     <MovieCard
       name="F1: The Movie"
       text="Similar to the last movie you watched."
     />
-    <MovieCard
-      name="Shang-Chi"
-      text="Your friend “Alan” watched this movie and rated it 5/5."
-    />
-    <MovieCard
-      name="The Witch"
-      text="We recommend this movie for you based on what you like."
-    />
+    
     <p>{'\u00A0'}</p> {/*Unicode non-breaking space*/}
 
 

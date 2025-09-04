@@ -53,9 +53,6 @@ html{
 
 }
 
-
-  
-
 h1{
   font-size:250%;
   width:520px;
@@ -70,14 +67,18 @@ h2{
 }
 
 .MovieCardContainer{
-  display:inline-block;
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(140px, 1fr));
+  gap: 20px;
+  padding: 10px;
+  justify-items: center;
   margin-left: 40px;
   margin-right: 40px;
-  width:80px;
+
+
   
 }
 .MovieCard{
-  float:left;
   width: 140px;
   height: 320px;
   box-shadow:  0 8px 16px rgba(0, 0, 0, 0.932);
@@ -98,7 +99,15 @@ h2{
   text-align: center;
 }
 
+.trendingMovieimg{
+  width:9rem;
+}
 
+.trendingMovieName{
+  color:#FF5000;
+  text-align: center;
+  height: 3rem;
+}
 
 
 

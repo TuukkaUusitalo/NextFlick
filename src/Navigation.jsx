@@ -1,12 +1,26 @@
 
+import React, {useState} from 'react'
 import { Link } from 'react-router-dom';
 import NextFlick from './assets/NextFlickLogo1.jpg';
 import ProfilePic from './assets/Profile-pic1.jpg';
 import NotificationBell from './assets/Notification-pic1.jpg';
+import Notifications from './Notification';
 
 
 
-const Nav = (props) => {
+
+
+
+
+
+const Nav = () => {
+  const [dropdownVisible, setDropdownVisible] = useState(false);
+
+  const toggleDropdown = () => {
+    setDropdownVisible(prev => !prev);
+  }
+
+
     return(
         <div>
             <nav className="navbar">
@@ -23,17 +37,21 @@ const Nav = (props) => {
                 <Link to = "/Reviews" className="Reviews">Reviews</Link>
                 <Link to = "Trending" className="Trending">Trending</Link>
                 <Link to = "Recommendations" className="Recommendations">Recommendations </Link>
-                <a>
+                <a onClick={toggleDropdown} >
                     <img src={NotificationBell} alt ="Notifications"
-                    style={{width:"30px"}}></img>
+                    style={{width:"30px", cursor:"pointer"}} ></img>
                 </a>
+
+
                 <Link to ='/Profile'>
                     <img src={ProfilePic} alt ="ProfilePic"
                     style={{width:"30px", }}></img>
                 </Link>
                     
-               
             </nav>
+            <div className ={`NotificationDropDown ${dropdownVisible ? 'show' : ''}`}>
+                <Notifications/>
+            </div>
         </div>
     );
 }

@@ -28,6 +28,23 @@ html{
     color:#f7f7f7;
 }
 
+.NotificationDropDown{
+  display:none;
+  position:relative;
+  float: right;
+  margin-left: 80%;
+  width: 220px;
+  height: 120px;
+  border: solid black;
+  background-color: rgb(19, 18, 18);
+}
+.NotificationDropDown.show{
+  display:block;
+}
+
+.notification-item{
+  text-align: center;
+}
 
 
 .nav-right {

@@ -1,7 +1,7 @@
 import './App.css';
 import Nav from './Navigation.jsx'
 import MoviePoster from './assets/movie-poster1.jpg'
-import MovieCard from "./MovieCard"
+import MovieCard from "./MovieCard.jsx"
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
 import ProfilePage from './profile/Profile.jsx';
 import RecommendationsPage from './recommendations/Recommendations.jsx';

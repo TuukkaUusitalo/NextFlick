@@ -1,7 +1,7 @@
 import '../App.css';
 import plusIcon from '../assets/plusIcon.png';
 import Recommendation from './Recommendation';
-import '/.Profile.css';
+import './Profile.css';
 
 
 function ProfilePage(props){

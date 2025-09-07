@@ -69,22 +69,25 @@ h2{
 .MovieCardContainer{
   display: grid;
   grid-template-columns: repeat(auto-fill, minmax(140px, 1fr));
-  gap: 20px;
-  padding: 10px;
   justify-items: center;
-  margin-left: 40px;
-  margin-right: 40px;
+  margin-left: 2rem;
+  margin-right: 2rem;
 
 
-  
+  column-gap: 1.15rem;
+  row-gap: 1.5rem;
 }
 .MovieCard{
-  width: 140px;
-  height: 320px;
+  width: 10rem;
+  height: 21rem;
   box-shadow:  0 8px 16px rgba(0, 0, 0, 0.932);
   background-color:#000000;
   font-family: sans-serif;
-  
+  overflow: hidden;
+}
+.MovieCard:hover{
+    box-shadow: 0 0 16px  #FF5000;;
+
 }
 
 .MovieCard h3{
@@ -94,21 +97,26 @@ h2{
   font-size: medium;
 }
 
-.MovieCard p{
-  font-size: small;
-  text-align: center;
-}
+
 
 .trendingMovieimg{
-  width:9rem;
+  width:10rem;
 }
 
 .trendingMovieName{
   color:#FF5000;
+  font-size: medium;
   text-align: center;
-  height: 3rem;
 }
-
+.trendingMovieOverview{
+  text-align: center;
+  font-size:x-small;
+  height: 2.9rem;
+  overflow: hidden;
+  margin-left: 0.5rem;
+  margin-right: 0.5rem;
+;
+}
 
 
 

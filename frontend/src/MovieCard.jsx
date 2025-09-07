@@ -27,8 +27,6 @@ const MovieCard = (props) => {
     return(
                 
         <div>
-            <TrendingMovies/>
-            
             <div className="MovieCard">
                 <img src={movieChoice(props.name)} alt="Movie" style={{width:"140px"}}></img>
                 <h3>{props.name}</h3>

@@ -8,7 +8,7 @@ import RecommendationsPage from './recommendations/Recommendations.jsx';
 import ReviewsPage from './Reviews.jsx';
 import TrendingPage from './TrendingMovies.jsx';
 import TrendingMovies from './TrendingMovies.jsx';
-
+import TrendingTvshows from './TrendingTvshows.jsx';
 
 
 function Homepage() {
@@ -19,7 +19,8 @@ function Homepage() {
     </header>
      <img src={MoviePoster} alt="MoviePoster"
     style={{width: "80%", marginLeft:"10%"}}></img>
-        
+                    <TrendingMovies/>
+                    <TrendingTvshows/>
     <h2>What to watch next?</h2>
     <MovieCard
       name="F1: The Movie"

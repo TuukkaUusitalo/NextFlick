@@ -1,24 +1,19 @@
 import React, { useEffect, useState } from 'react';
-import MoviePopup from './MoviePopup.jsx'
 
 
 
-
-
-const TrendingMovies = () => {
-  const [movies, setMovies] = useState([]);
+const TrendingTvshows = () => {
+  const [tvshows, setTvshows] = useState([]);
   const [error, setError] = useState(null);
-  const [selectedMovie, setSelectedMovie] = useState(null);
-
 
   useEffect(() => {
-    const fetchTrendingMovies = async () => {
+    const fetchTrendingTvshows = async () => {
       try {
 
         {/*NOT SECURE*/}
         const response = await fetch(
 
-          'https://api.themoviedb.org/3/trending/movie/day?language=en-US',
+          'https://api.themoviedb.org/3/trending/tv/day?language=en-US',
           {
             method: 'GET',
             headers: {
@@ -33,50 +28,42 @@ const TrendingMovies = () => {
         }
 
         const data = await response.json();
-        setMovies(data.results);
+        setTvshows(data.results);
       } catch (err) {
         setError(err.message);
       }
     };
 
-    fetchTrendingMovies();
+    fetchTrendingTvshows();
   }, []);
 
   return (
     <div>
-      <h1>Trending Movies</h1>
+      <h1>Trending TV Shows</h1>
       {error && <p>Error: {error}</p>}
                       
 
           
 
-    <div className="MovieCardContainer" > 
+    <div className="MovieCardContainer"> 
 
-        {movies.map(movie => (
-          <div key={movie.id } className="MovieCard" onClick={() => setSelectedMovie(movie)} >
+        {tvshows.map(tvshow => (
+          <div key={tvshow.id } className="MovieCard" >
             <img className='trendingMovieimg'
             
-              src={`https://image.tmdb.org/t/p/w500${movie.poster_path}`}>
+              src={`https://image.tmdb.org/t/p/w500${tvshow.poster_path}`}>
                 
               </img>
-            <p className='trendingMovieName'>{movie.title} </p>
-          <p className='trendingMovieOverview'>{movie.overview}</p>
-
+            <p className='trendingMovieName'>{tvshow.name} </p>
+            <p className='trendingMovieOverview'>{tvshow.overview}</p>
           </div>
              
         ))}
-
         </div>
-       {/* ✅ Show popup if movie is selected */}
-      {selectedMovie && (
-        <MoviePopup
-          movie={selectedMovie}
-          onClose={() => setSelectedMovie(null)}
-        />
-      )}
+      
  
     </div>
   );
 };
 
-export default TrendingMovies;
+export default TrendingTvshows;

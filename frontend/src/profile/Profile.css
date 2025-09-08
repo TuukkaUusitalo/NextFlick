@@ -29,34 +29,20 @@
 
 
 
+
 /* Recommendations section */
 .recommendationsSection {
     width: 80%;
     margin-top: 20px;
 }
-.linearGradientLeft {
-    background: linear-gradient(to right, #ff7e5f, #000000);
-    height: auto;
-    width: 4rem;
-    margin-top: 20px;
-    margin-bottom: 20px;
-}
-.linearGradientRight {
-    background: linear-gradient(to right, #000000, #feb47b);
-    height: auto;
-    width: 4rem;
-    margin-top: 20px;
-    margin-bottom: 20px;
-}
 .movieCardContainerRecommendation {
     flex-shrink: 0;
     width: 12rem;              /* Kortin leveys */
-    height: 20rem;             /* Kortin korkeus */
+    height: 20rem;             
     display: flex;
     justify-content: center;
     align-items: center;
   }
-  
   .movieCardRecommendation {
     display: flex;
     flex-direction: column;
@@ -89,39 +75,19 @@
     padding: 0.5rem;
     text-align: center;
   }
-  
   .movieCardText h3 {
     margin: 0.3rem 0;
     font-size: 1rem;
     color: #f36502;
     font-weight: bold;
   }
-  
   .movieCardText p {
     margin: 0;
     font-size: 0.85rem;
     color: #ddd;
   }
   .movieCardRecommendation:hover{
-    box-shadow: 0 0 16px  #FF5000;;
-
-}
-
-
-
-.linearGradient {
-    background: linear-gradient(to right, #ff7e5f, #feb47b);
-    height: auto;
-    width: 100%;
-    margin-top: 20px;
-    margin-bottom: 20px;
-}
-.linearGradient left {
-    background: linear-gradient(to left, #000000, #feb47b);
-}
-
-.linearGradient right {
-    background: linear-gradient(to right, #ff7e5f, #000000);
+    box-shadow: 0 0 16px  #FF5000;
 }
 
 
@@ -146,7 +112,6 @@
     mask-repeat: no-repeat;
     mask-size: cover;
   }
-  
   .scroll-content {
     display: inline-flex;      /* Sijoittaa kuvat vierekkäin */
     gap: 2rem;                 /* Välit kuvien väliin */
@@ -154,7 +119,6 @@
     margin-top: 3rem;
     margin-bottom: 5rem;
   }
-  
   .scroll-content img {
     height: 100%;
     flex-shrink: 0;

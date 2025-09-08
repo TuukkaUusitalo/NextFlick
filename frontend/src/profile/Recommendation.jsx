@@ -22,15 +22,16 @@ function movieChoice(movie){
 
 function Recommendation(props){
     return(
-        <div style={{width: '50%'}}>
-            <div className="movieCardContainerRecommendation">
-                <div className="movieCardRecommendation">
-                    <img src={movieChoice(props.name)} alt="Movie" style={{width:"100%"}}></img>
-                    <h3 style={{color: '#f36502'}}>{props.name}</h3>
-                    <p>{props.text}</p>
-                </div>
-            </div>
-        </div>
+        <div className="movieCardContainerRecommendation">
+  <div className="movieCardRecommendation">
+    <img src={movieChoice(props.name)} alt="Movie" />
+    <div className="movieCardText">
+      <h3>{props.name}</h3>
+      <p>{props.text}</p>
+    </div>
+  </div>
+</div>
+
     )
 
 }

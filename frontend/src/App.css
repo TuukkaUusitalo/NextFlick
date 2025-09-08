@@ -84,6 +84,7 @@ h2{
   background-color:#000000;
   font-family: sans-serif;
   overflow: hidden;
+  cursor:pointer;
 }
 .MovieCard:hover{
     box-shadow: 0 0 16px  #FF5000;;
@@ -93,7 +94,6 @@ h2{
 .MovieCard h3{
   color:#FF5000;
   text-align: center;
-  height:10px;
   font-size: medium;
 }
 
@@ -107,17 +107,30 @@ h2{
   color:#FF5000;
   font-size: medium;
   text-align: center;
+  height: 1.1rem;
+  overflow: hidden;
+  margin-top:0.5rem;
 }
 .trendingMovieOverview{
   text-align: center;
   font-size:x-small;
-  height: 2.9rem;
+  height: 1.5rem;
   overflow: hidden;
   margin-left: 0.5rem;
   margin-right: 0.5rem;
-;
+  
 }
 
+.trendingMovieGenres{
+  text-align: center;
+  font-size: x-small;
 
+}
 
+.genreName{
+  border:solid;
+  padding:1px;
+  border-radius: 5px;
+  margin-left: 2%;
+}
 

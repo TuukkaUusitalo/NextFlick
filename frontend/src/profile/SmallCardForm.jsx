@@ -1,7 +1,7 @@
 import f1 from "../assets/movie-f1.jpg"
 import shangchi from "../assets/movie-Shang-Chi.jpg"
 import thewitch from "../assets/movie-TheWitch.jpg"
-import './Profile.css';
+import './Watched.css';
 
 
 
@@ -20,14 +20,18 @@ function movieChoice(movie){
     }
 }
 
-function Recommendation(props){
+function SmallCardForm(props){
     return(
-        <div className="movieCardContainerRecommendation">
-            <div className="movieCardRecommendation">
+        <div className="movieCardContainer">
+            <div className="movieCard">
                 <img src={movieChoice(props.name)} alt="Movie" />
                 <div className="movieCardText">
-                    <h3>{props.name}</h3>
-                    <p>Tägejä: jännitys, komedia...</p>
+                    {/* <h3>{props.name}</h3> */}
+                    {/* Tähän tehdään sellainen review
+                     eli käyttäjän arosana esim tähtinä */}
+                    <p>Arvostelu</p>
+                    <p>oransseina</p>
+                    <p>tähtinä</p>
                 </div>
             </div>
         </div>
@@ -36,4 +40,4 @@ function Recommendation(props){
 
 }
 
-export default Recommendation
+export default SmallCardForm

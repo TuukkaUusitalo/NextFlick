@@ -1,49 +1,14 @@
-.container {
-    width: 100%;
-    height: auto;
-    display: flex;
-}
 
 
-
-.profilePicAndText {
-    width: 20%;
-    height: auto;
-    margin-left: 5rem;
-    margin-right: 5rem;
-    text-align: center;
-    align-items: center;
-    margin-top: 6rem;
-    width: 30%;
-}
-.profilePic {
-    width: 60%;
-    border-radius: 105px;
-    box-shadow:  0 8px 16px rgba(0, 0, 0, 0.932);
-}
-.profileText {
-    width: auto;
-    height: auto;
-    text-align: justify;
-}
-
-
-
-
-/* Recommendations section */
-.recommendationsSection {
-    width: 80%;
-    margin-top: 20px;
-}
-.movieCardContainerRecommendation {
+.movieCardContainer {
     flex-shrink: 0;
-    width: 12rem;              /* Kortin leveys */
-    height: 20rem;             
+    width: 6rem;              /* Kortin leveys */
+    height: 10rem;             
     display: flex;
     justify-content: center;
     align-items: center;
   }
-  .movieCardRecommendation {
+  .movieCard {
     display: flex;
     flex-direction: column;
     justify-content: flex-start;
@@ -57,7 +22,7 @@
   }
   
   /* Kuva vie yläosan */
-  .movieCardRecommendation img {
+  .movieCard img {
     width: 100%;
     height: 65%;                /* Kuva vie suurimman osan kortista */
     object-fit: cover;
@@ -84,20 +49,17 @@
     margin: 0;
     font-size: 0.85rem;
     color: #ddd;
-    width: 90%;
   }
-  .movieCardRecommendation:hover{
+  .movieCard:hover{
     box-shadow: 0 0 16px  #FF5000;
 }
 
 
 
 
-
-
 .gradient-box {
     position: relative;
-    width: 90%;
+    width: 80%;
     height: auto;
     overflow-x: auto;
     overflow-y: hidden;
@@ -116,7 +78,7 @@
     display: inline-flex;      /* Sijoittaa kuvat vierekkäin */
     gap: 2rem;                 /* Välit kuvien väliin */
     padding: 0 10%;            /* Pieni sisennys, jotta gradientti ei peitä kuvia heti reunoilla */
-    margin-top: 3rem;
+    margin-top: 2rem;
     margin-bottom: 5rem;
   }
   .scroll-content img {

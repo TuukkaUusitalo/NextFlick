@@ -1,5 +1,23 @@
+
+import { FaRegPlusSquare, FaRegComment, FaRegBookmark } from 'react-icons/fa';
+import { AiOutlineLike, AiFillLike} from 'react-icons/ai'
+import { useState } from 'react';
+
+
+
+
 function MoviePopup({ movie, onClose }) {
   if (!movie) return null; // safety check
+
+  
+  const [liked, setLiked] = useState(false);
+
+
+  const toggleLike = () => {
+    setLiked(!liked);
+       
+  };
+
 
   return (
     <div
@@ -18,23 +36,107 @@ function MoviePopup({ movie, onClose }) {
     >
       <div
         style={{
-          background:"grey",
+          background:"rgba(31, 31, 31, 1)",
+          boxShadow:"0 0 8px black",
           padding: "20px",
-          borderRadius: "8px",
+          borderRadius: "10px",
           width: "30rem",
           height:"40rem",
           position: "relative"
         }}
         onClick={(e) => e.stopPropagation()} // prevent closing when clicking inside
       >
+        <div style={{
+          border:"solid black"
+        }}>
         <h2>{movie.title}</h2>
-<img 
-  src={`https://image.tmdb.org/t/p/w500${movie.poster_path}`} 
-  alt={movie.title} style={{width:"12rem", marginLeft:"5%"}}
-/>        <p>{movie.overview}</p>
+        </div>
+
+        <div style={{
+          border:"solid black",
+          display:"flex"
+        }}>
+          <img 
+            src={`https://image.tmdb.org/t/p/w500${movie.poster_path}`} 
+            alt={movie.title} style={{width:"12rem", marginLeft:"5%"}}
+          />  
+
+          <div style={{
+            marginLeft:"5%",
+            marginRight:"5%",          
+          }}>
+          
+           <div style={{
+            display:"flex",
+            fontSize:"medium",
+            cursor:"pointer",
+            alignItems:"center",
+            gap:"5%"
+           }}>
+            <p>Add to recommendations </p>
+           <FaRegPlusSquare size={30} color="white"/> 
+           </div>      
+      
+          
+          
+           <div style={{
+            border:"solid black",
+            height:"150px",
+           }}>
+            <p style={{margin:"0px", height:"31%",border:"solid black" }}>review 1</p>
+            <p style={{margin:"0px", height:"31%",border:"solid black" }}>review 2</p>
+            <p style={{margin:"0px", height:"31%",border:"solid black" }}>review 3</p>
+
+           </div>
+
+
+            <div style={{
+              display:"flex",
+              border: "solid black",
+              gap:"5%",
+              alignItems:"center",
+              float: "right"
+            }}>
+
+
+
+
+              {liked ? (
+                <AiFillLike size={20} color="white" cursor="pointer" onClick={toggleLike} />
+              ) : (
+                <AiOutlineLike size={20} color="white" cursor="pointer" onClick={toggleLike} />
+              )}
+
+
+              <FaRegComment size={20} color="white"/>
+              <FaRegBookmark size={18} color="white"/>
+
+              
+            </div>
+          </div>
+        
+        </div>
+
+        <div style={{
+          border:"solid black",
+          height:"170px",
+          overflow:"hidden"
+        }}>
+        <p>{movie.overview}</p>
+        </div>
+        
+        <div style={{
+          border:"solid black",
+          height:"40px",
+          textAlign:"center",
+        }}> 
+        Tags
+        
+        </div>
         <button
           onClick={onClose}
           style={{
+            float:" right",
             marginTop: "10px",
             padding: "5px 10px",
             background: "red",

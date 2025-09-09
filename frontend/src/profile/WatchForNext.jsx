@@ -1,12 +1,30 @@
-import React from 'react'
+import { useState } from 'react'
 import SmallCardForm from './SmallCardForm';
+import { FaRegPlusSquare } from 'react-icons/fa';
+import ReviewCard from './ReviewCard';
+import './Profile.css';
 
 
 const WatchForNext = () => {
+
+    const [showReviewCard, setShowReviewCard] = useState(false);
+
+    function handleAddMovie() {
+      setShowReviewCard(true);
+    }
+  
+    function handleCloseReviewCard() {
+      setShowReviewCard(false);
+    }
+    
   return (
     <>
         <div style={{justifyContent: 'center', alignItems: 'center', display: 'flex',}}>
             <h1 style={{textAlign: 'center'}}>I'd Like to Watch</h1>
+            <FaRegPlusSquare
+            style={{ fontSize: '2rem', cursor: 'pointer' }}
+            onClick={handleAddMovie}
+            />
         </div>
         <div>
             <div class="gradient-box">
@@ -29,6 +47,14 @@ const WatchForNext = () => {
                     <SmallCardForm name="The Witch" text="Spooky and atmospheric, a must-watch for horror fans." movie="The Witch"/>
                 </div>
             </div>
+            {/* MODAALI */}
+            {showReviewCard && (
+                <div className="modal-overlay" onClick={handleCloseReviewCard}>
+                <div className="modal-content" onClick={(e) => e.stopPropagation()}>
+                    <ReviewCard onClose={handleCloseReviewCard} />
+                </div>
+                </div>
+            )}
         </div>
     </>
   )

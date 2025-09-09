@@ -2,13 +2,15 @@ import React from 'react'
 import '../App.css';
 import Recommendation from './Recommendation';
 import './Profile.css';
+import { FaRegPlusSquare } from 'react-icons/fa';
 
 
 const MyRecommendation = () => {
   return (
-    <div style={{width: '70%', marginTop: '5rem'}}>
+    <div style={{width: '70%', marginTop: '3rem'}}>
         <div style={{justifyContent: 'center', alignItems: 'center', display: 'flex',}}>
             <h1 style={{textAlign: 'center'}}>My Recommendations</h1>
+            <FaRegPlusSquare style={{ fontSize: '2rem', color: ''}}/>
         </div>
         <div class="gradient-box">
             <div class="scroll-content">

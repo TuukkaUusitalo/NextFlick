@@ -1,12 +1,13 @@
 import React from "react";
 import SmallCardForm from "./SmallCardForm";
-
+import { FaRegPlusSquare } from 'react-icons/fa';
 
 const Watched = () => {
   return (
     <>
         <div style={{justifyContent: 'center', alignItems: 'center', display: 'flex',}}>
             <h1 style={{textAlign: 'center'}}>I'v Watched</h1>
+            <FaRegPlusSquare style={{ fontSize: '2rem', color: ''}}/>
         </div>
         <div>
             <div class="gradient-box">

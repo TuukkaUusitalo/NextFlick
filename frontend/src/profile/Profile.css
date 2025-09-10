@@ -129,27 +129,17 @@
 
 
 /* ReviewCard component */
-  .modal-overlay {
-    position: fixed;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    background: rgba(0, 0, 0, 0.5);
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    z-index: 1000;
-  }
-  
-  .modal-content {
-    background: black;
-    padding: 1rem;
-    border-radius: 0.5rem;
-    width: 50%;
-    max-width: 50rem;
-    height: 20rem;
-    box-shadow: 0 0.5rem 1rem rgba(0, 0, 0, 0.3);
-    position: relative;
-  }
-  
+
+
+
+
+.plus-icon {
+font-size: 2rem;
+cursor: pointer;
+transition: color 0.3s ease;
+}
+
+.plus-icon:hover {
+    box-shadow: 0 0 16px  #FF5000;
+    border-radius: 6px;
+}

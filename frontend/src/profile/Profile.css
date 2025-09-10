@@ -153,3 +153,16 @@
     position: relative;
   }
   
+
+
+
+.plus-icon {
+font-size: 2rem;
+cursor: pointer;
+transition: color 0.3s ease;
+}
+
+.plus-icon:hover {
+    box-shadow: 0 0 16px  #FF5000;
+    border-radius: 6px;
+}

@@ -22,7 +22,7 @@ const WatchForNext = () => {
         <div style={{justifyContent: 'center', alignItems: 'center', display: 'flex',}}>
             <h1 style={{textAlign: 'center'}}>I'd Like to Watch</h1>
             <FaRegPlusSquare
-            style={{ fontSize: '2rem', cursor: 'pointer' }}
+            className="plus-icon"
             onClick={handleAddMovie}
             />
         </div>

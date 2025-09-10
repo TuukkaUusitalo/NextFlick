@@ -23,8 +23,13 @@ export default function ReviewCard() {
         <div style={{width: '50%', height: '17rem'}}>
             <p>ReviewCard</p>
             <FaRegStar />
-            <div>
-                
+            <div style={{width: '100%'}}>
+                <div style={{width: '40%'}}>
+                    
+                </div>
+                <div style={{width: '40%'}}>
+
+                </div>
             </div>
         </div>
     </div>

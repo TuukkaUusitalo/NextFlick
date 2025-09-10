@@ -7,7 +7,9 @@ const Watched = () => {
     <>
         <div style={{justifyContent: 'center', alignItems: 'center', display: 'flex',}}>
             <h1 style={{textAlign: 'center'}}>I'v Watched</h1>
-            <FaRegPlusSquare style={{ fontSize: '2rem', color: ''}}/>
+            <FaRegPlusSquare 
+            className="plus-icon"
+            />
         </div>
         <div>
             <div class="gradient-box">

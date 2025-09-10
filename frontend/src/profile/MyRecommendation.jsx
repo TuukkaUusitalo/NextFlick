@@ -10,7 +10,9 @@ const MyRecommendation = () => {
     <div style={{width: '70%', marginTop: '3rem'}}>
         <div style={{justifyContent: 'center', alignItems: 'center', display: 'flex',}}>
             <h1 style={{textAlign: 'center'}}>My Recommendations</h1>
-            <FaRegPlusSquare style={{ fontSize: '2rem', color: ''}}/>
+            <FaRegPlusSquare 
+            className="plus-icon"
+            />
         </div>
         <div class="gradient-box">
             <div class="scroll-content">

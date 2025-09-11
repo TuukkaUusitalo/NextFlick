@@ -41,7 +41,6 @@ const TrendingMovies = () => {
      
        const apiKey = import.meta.env.VITE_MOVIE_API_KEY;
 
-    console.log("API Key:", apiKey); // Check if it's loaded
 
       try {
         
@@ -126,3 +125,4 @@ const TrendingMovies = () => {
 };
 
 export default TrendingMovies;
+

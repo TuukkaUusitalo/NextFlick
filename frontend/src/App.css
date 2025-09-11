@@ -7,7 +7,7 @@ html{
 
 .navbar{
   
- display: flex;
+  display: flex;
   justify-content: space-between;
   align-items: center;
   background-color: #000000;
@@ -150,5 +150,44 @@ h2{
 
 .genreName:hover{
   background-color: #f7f7f773;
+}
+
+.reviewCard{
+  box-shadow: 0 0 16px black;
+  display: inline-block;
+  height: 12rem;
+  margin:1rem;
+  padding:1rem;
+}
+.reviewMovieAuthor{
+  text-decoration: underline #FF5000;
+  font-family:'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
+  margin:0px;
+  float:left;
+  height:fit-content
+}
+.reviewMovieTitle{
+  color:#FF5000;
+
+  margin-top: 0rem;
+  margin-left: 10rem;
+  width:fit-content;
+  height:fit-content;
+}
+.reviewMoviecontent{
+  margin-left:7rem;
+  margin-top: 0rem;
+  display: block;
+  border:solid black;
+  height: 9rem;
+  overflow:auto;
+
+}
+.reviewMovieImage{
+  float:left;
+  margin-top: 0rem;
+  width: 6rem;
+  height:9rem;
+
 }
 

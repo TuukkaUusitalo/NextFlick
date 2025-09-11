@@ -8,10 +8,9 @@ import MoviePopup from './MoviePopup.jsx'
 const TrendingMovies = () => {
   const [movies, setMovies] = useState([]);
   const [error, setError] = useState(null);
+  const [selectedMovie, setSelectedMovie] = useState(null);
   const [genres, setGenres] = useState([]);
 
-  const [selectedMovie, setSelectedMovie] = useState(null);
-     
   useEffect(() => {
     const fetchGenres = async () => {
       try {
@@ -35,9 +34,6 @@ const TrendingMovies = () => {
   }, []);
 
   useEffect(() => {
-
-
-
 
     const fetchTrendingMovies = async () => {
       try {

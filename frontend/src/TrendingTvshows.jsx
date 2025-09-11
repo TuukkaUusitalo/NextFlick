@@ -95,8 +95,9 @@ const TrendingTvshows = () => {
               </img>
             <p className='trendingMovieName'>{tvshow.name} </p>
             <p className='trendingMovieOverview'>{tvshow.overview}</p>
+          <div className="genreContainer">
           <p className="trendingMovieGenres">{getGenreNames(tvshow.genre_ids)}</p>
-
+          </div>
           </div>
              
         ))}

@@ -96,8 +96,11 @@ const TrendingMovies = () => {
               </img>
             <p className='trendingMovieName'>{movie.title} </p>
           <p className='trendingMovieOverview'>{movie.overview}</p>
-          
+            
+            <div className="genreContainer">
+
             <p className="trendingMovieGenres">{getGenreNames(movie.genre_ids)}</p>
+          </div>
 
           </div>
              

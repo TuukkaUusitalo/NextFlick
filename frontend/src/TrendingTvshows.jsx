@@ -11,6 +11,8 @@ const TrendingTvshows = () => {
   
     useEffect(() => {
       const fetchGenres = async () => {
+        const apiKey = import.meta.env.VITE_MOVIE_API_KEY;
+
         try {
           const response = await fetch(
             'https://api.themoviedb.org/3/genre/tv/list?language=en-US',
@@ -18,7 +20,7 @@ const TrendingTvshows = () => {
             {method: 'GET',
               headers: {
                 accept: 'application/json',
-                Authorization: 'Bearer eyJhbGciOiJIUzI1NiJ9.eyJhdWQiOiI5OTY0MmY0YjBmNzU5MjVhOGY1ODNmMTVmY2JlN2Y5MiIsIm5iZiI6MTc1Njk4Mjc2Ni42NDUsInN1YiI6IjY4Yjk2ZGVlYmExMjkzYjM5MjliYjMyMSIsInNjb3BlcyI6WyJhcGlfcmVhZCJdLCJ2ZXJzaW9uIjoxfQ.fkFegz8468h6zHApXeHZ0d1W_7X7JRnn2wxgvnyyOIE'
+                Authorization: `Bearer ${apiKey}`
               }}
           );
           if (!response.ok) throw new Error('Failed to fetch genres');
@@ -33,6 +35,8 @@ const TrendingTvshows = () => {
 
   useEffect(() => {
     const fetchTrendingTvshows = async () => {
+      const apiKey = import.meta.env.VITE_MOVIE_API_KEY;
+
       try {
 
         {/*NOT SECURE*/}
@@ -43,7 +47,7 @@ const TrendingTvshows = () => {
             method: 'GET',
             headers: {
               accept: 'application/json',
-              Authorization: 'Bearer eyJhbGciOiJIUzI1NiJ9.eyJhdWQiOiI5OTY0MmY0YjBmNzU5MjVhOGY1ODNmMTVmY2JlN2Y5MiIsIm5iZiI6MTc1Njk4Mjc2Ni42NDUsInN1YiI6IjY4Yjk2ZGVlYmExMjkzYjM5MjliYjMyMSIsInNjb3BlcyI6WyJhcGlfcmVhZCJdLCJ2ZXJzaW9uIjoxfQ.fkFegz8468h6zHApXeHZ0d1W_7X7JRnn2wxgvnyyOIE'
+              Authorization: `Bearer ${apiKey}`
             }
           }
         );

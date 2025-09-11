@@ -10,7 +10,7 @@ const Blog = require("../models/blogModel");
   }
  };
 
-
+// POST /blogs
 const createBlog = async (req, res) => {
   try {
     const newBlog = await Blog.create({ ...req.body });
@@ -20,6 +20,7 @@ const createBlog = async (req, res) => {
   }
 };
 
+// GET /blogs/:blogId
 const getBlogById = async (req, res) => {
   const { blogId } = req.params;
 
@@ -39,6 +40,7 @@ const getBlogById = async (req, res) => {
   }
 };
 
+// PUT /blogs/:blogId
 const updateBlog = async (req, res) => {
   const { blogId } = req.params;
 
@@ -61,6 +63,7 @@ const updateBlog = async (req, res) => {
   }
 };
 
+// DELETE /blogs/:blogId
 const deleteBlog = async (req, res) => {
   const { blogId } = req.params;
   if (!mongoose.Types.ObjectId.isValid(blogId)) {

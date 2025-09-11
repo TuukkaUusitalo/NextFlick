@@ -11,12 +11,31 @@ const getAllUsers = async (req, res) => {
 };
  
 // POST /users
+// User signing up
 const createUser = async (req, res) => {
     try {
+      if (User.findOne({ username: req.body.username ,email: req.body.email })) {
+        return res.status(400).json({ message: "Username or Email already in use" });
+      }
     const newUser = await User.create({ ...req.body });
     res.status(201).json(newUser);
   } catch (error) {
     res.status(400).json({ message: "Failed to create user", error: error.message });
+  }
+};
+//GET /users/:userName
+//For when user try to login
+const getUserByUsername = async (req, res) => {
+    const { username } = req.params;
+    try {
+    const user = await User.findOne({ username: username });
+    if (user) {
+      res.status(200).json(user);
+    } else {
+      res.status(404).json({ message: "User not found" });
+    }
+    } catch (error) {
+    res.status(500).json({ message: "Failed to retrieve user" });
   }
 };
 

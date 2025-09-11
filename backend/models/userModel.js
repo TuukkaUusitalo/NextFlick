@@ -10,14 +10,14 @@ const userSchema = new Schema(
     profilePicture: { type: String }, // URL to profile picture 
     bio: { type: String }, // User biography
     recommendedMovies: [{type: Schema.Types.ObjectId, ref: 'Blog'}], //Array of blog that have author that is the user
-    watchedMovies: {
+    watchedMovies: [{
       name: String,
       movieId: String,
-    }, //Movies the user has watched
-    yetToWatchMovies: {
+    }], //Movies the user has watched
+    yetToWatchMovies: [{
       name: String,
       movieId: String,
-    }, // Movies the user plan to watch
+    }], // Movies the user plan to watch
   },
   { timestamps: true }
 );

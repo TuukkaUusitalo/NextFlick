@@ -12,11 +12,11 @@ const userSchema = new Schema(
     recommendedMovies: [{type: Schema.Types.ObjectId, ref: 'Blog'}], //Array of blog that have author that is the user
     watchedMovies: [{
       name: String,
-      movieId: String,
+      movieId: Number,
     }], //Movies the user has watched
     yetToWatchMovies: [{
       name: String,
-      movieId: String,
+      movieId: Number,
     }], // Movies the user plan to watch
   },
   { timestamps: true }

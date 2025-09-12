@@ -4,7 +4,7 @@ const Schema = mongoose.Schema;
 
 const blogSchema = new Schema({
   movie: {
-    type: String,
+    type: Number,
     required: true,
   },
   body: {

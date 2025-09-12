@@ -13,11 +13,36 @@ const getPopularMovies = async (req, res) => {
             method: 'GET',
             headers: headers
         });
-        const data = await response.json();
-        res.status(200).json(data);
+        res.status(200).json(response);
     } catch (error) {
         res.status(500).json({ message: "Failed to retrieve popular movies", error: error.message });
     }
 };
 
-module.exports = { getPopularMovies };
+//GET /movies/genres
+const getMovieGenres = async (req, res) => {
+    try {
+        const genres = await fetch(`${url}/genre/movie/list?language=en-US`, {
+            method: 'GET',
+            headers: headers}
+        );
+        res.status(200).json(genres);
+    } catch (error) {
+        res.status(500).json({ message: "Failed to retrieve movie genres", error: error.message });
+    }
+};
+
+//GET /movies/:movieId
+const getMovieById = async (req, res) => {
+    const { movieId } = req.params;
+    try {
+        const movie = await fetch(`${url}/movie/${movieId}?language=en-US`, {
+            method: 'GET',
+            headers: headers}
+        );
+        res.status(200).json(movie);
+    } catch (error) {
+        res.status(500).json({ message: "Failed to retrieve movie", error: error.message });
+    }
+};
+module.exports = { getPopularMovies, getMovieGenres, getMovieById };

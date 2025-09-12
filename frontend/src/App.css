@@ -168,12 +168,12 @@ h2{
 }
 .reviewMovieTitle{
   color:#FF5000;
-
   margin-top: 0rem;
   margin-left: 10rem;
   width:fit-content;
   height:fit-content;
 }
+
 .reviewMoviecontent{
   margin-left:7rem;
   margin-top: 0rem;
@@ -191,3 +191,66 @@ h2{
 
 }
 
+.heroCards{
+  display:flex;
+  gap:5%;
+  justify-content: center;
+  align-items: center; 
+
+}
+.heroCards p{
+  margin-left: 5%;
+  margin-right: 5%;
+  height: 3rem;
+}
+.heroCards img{
+  margin-top: 20%;
+  border-radius: 1rem;
+  width: 11rem;
+  height:11rem;
+}
+.heroCards a{
+  border: solid green;
+  background-color: #0fcb22;
+  color:#000000;
+  border-radius: 1rem;
+  margin-top: 0.5rem;
+  padding: 0.3rem;
+  cursor: pointer;
+}
+.heroCards a:hover{
+  color:#f7f7f7
+}
+.heroCardOne{
+  margin-top: 2rem;
+  border-radius: 2rem;
+  box-shadow: 0 0 16px #FF5000;
+  border: solid #FF5000;
+  text-align: center;
+  width:225px;
+  height:350px;
+  background-color: #151515;
+}
+
+
+.heroCardTwo{
+  margin-top: 2rem;
+  border-radius: 2rem;
+  box-shadow: 0 0 16px #FF5000;
+  border: solid #FF5000;
+  text-align: center;
+  width:225px;
+  height:350px;
+  background-color: #151515;
+
+}
+.heroCardThree{
+  margin-top: 2rem;
+  border-radius: 2rem;
+  box-shadow: 0 0 16px #FF5000;
+  background-color: #151515;
+  border: solid #FF5000;
+  text-align: center;
+  width:225px;
+  height:350px;
+}

@@ -1,6 +1,6 @@
 import './App.css';
-import Nav from './Navigation.jsx'
-import MoviePoster from './assets/movie-poster1.jpg'
+import Nav from './Navigation'
+import Hero from './Hero'
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
 import ProfilePage from './profile/Profile.jsx';
 import RecommendationsPage from './recommendations/Recommendations.jsx';
@@ -14,11 +14,9 @@ function Homepage() {
   return(
   <div>
     <header>
-      <h1>A social way to watch your favorite movies and series</h1>
+      
+      <Hero/>
     </header>
-     <img src={MoviePoster} alt="MoviePoster"
-    style={{width: "80%", marginLeft:"10%"}}></img>
-                    
                     <TrendingMovies/>
                     <TrendingTvshows/>
     

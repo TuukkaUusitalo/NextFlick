@@ -62,13 +62,12 @@ function ReviewsPage(){
     },[selectedMovieId]); // <-- Depends on movies
 
 
-
-
     return(
         <div>
             <h1> Welcome to the Reviews page</h1>
             <h2>Movie Reviews:</h2>
             <p>Choose a Movie:</p>
+             
              <select
         value={selectedMovieId}
         onChange={(e) => setSelectedMovieId(e.target.value)}

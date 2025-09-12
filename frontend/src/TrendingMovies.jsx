@@ -8,12 +8,13 @@ import MoviePopup from './MoviePopup.jsx'
 const TrendingMovies = () => {
   const [movies, setMovies] = useState([]);
   const [error, setError] = useState(null);
+  const [selectedMovie, setSelectedMovie] = useState(null);
   const [genres, setGenres] = useState([]);
 
-  const [selectedMovie, setSelectedMovie] = useState(null);
-     
   useEffect(() => {
     const fetchGenres = async () => {
+      const apiKey = import.meta.env.VITE_MOVIE_API_KEY;
+
       try {
         const response = await fetch(
           'https://api.themoviedb.org/3/genre/movie/list?language=en-US',
@@ -21,7 +22,7 @@ const TrendingMovies = () => {
           {method: 'GET',
             headers: {
               accept: 'application/json',
-              Authorization: 'Bearer eyJhbGciOiJIUzI1NiJ9.eyJhdWQiOiI5OTY0MmY0YjBmNzU5MjVhOGY1ODNmMTVmY2JlN2Y5MiIsIm5iZiI6MTc1Njk4Mjc2Ni42NDUsInN1YiI6IjY4Yjk2ZGVlYmExMjkzYjM5MjliYjMyMSIsInNjb3BlcyI6WyJhcGlfcmVhZCJdLCJ2ZXJzaW9uIjoxfQ.fkFegz8468h6zHApXeHZ0d1W_7X7JRnn2wxgvnyyOIE'
+              Authorization: `Bearer ${apiKey}`
             }}
         );
         if (!response.ok) throw new Error('Failed to fetch genres');
@@ -36,11 +37,13 @@ const TrendingMovies = () => {
 
   useEffect(() => {
 
-
-
-
     const fetchTrendingMovies = async () => {
+     
+       const apiKey = import.meta.env.VITE_MOVIE_API_KEY;
+
+
       try {
+        
 
         {/*NOT SECURE*/}
         const response = await fetch(
@@ -50,8 +53,7 @@ const TrendingMovies = () => {
             method: 'GET',
             headers: {
               accept: 'application/json',
-              Authorization: 'Bearer eyJhbGciOiJIUzI1NiJ9.eyJhdWQiOiI5OTY0MmY0YjBmNzU5MjVhOGY1ODNmMTVmY2JlN2Y5MiIsIm5iZiI6MTc1Njk4Mjc2Ni42NDUsInN1YiI6IjY4Yjk2ZGVlYmExMjkzYjM5MjliYjMyMSIsInNjb3BlcyI6WyJhcGlfcmVhZCJdLCJ2ZXJzaW9uIjoxfQ.fkFegz8468h6zHApXeHZ0d1W_7X7JRnn2wxgvnyyOIE'
-            }
+              Authorization: `Bearer ${apiKey}` }
           }
         );
 
@@ -100,8 +102,11 @@ const TrendingMovies = () => {
               </img>
             <p className='trendingMovieName'>{movie.title} </p>
           <p className='trendingMovieOverview'>{movie.overview}</p>
-          
+            
+            <div className="genreContainer">
+
             <p className="trendingMovieGenres">{getGenreNames(movie.genre_ids)}</p>
+          </div>
 
           </div>
              
@@ -120,3 +125,4 @@ const TrendingMovies = () => {
 };
 
 export default TrendingMovies;
+

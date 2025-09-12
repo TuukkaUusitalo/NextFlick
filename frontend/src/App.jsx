@@ -1,7 +1,6 @@
 import './App.css';
 import Nav from './Navigation.jsx'
 import MoviePoster from './assets/movie-poster1.jpg'
-import MovieCard from "./MovieCard.jsx"
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
 import ProfilePage from './profile/Profile.jsx';
 import RecommendationsPage from './recommendations/Recommendations.jsx';
@@ -19,14 +18,13 @@ function Homepage() {
     </header>
      <img src={MoviePoster} alt="MoviePoster"
     style={{width: "80%", marginLeft:"10%"}}></img>
+                    
                     <TrendingMovies/>
                     <TrendingTvshows/>
-    <h2>What to watch next?</h2>
-    <MovieCard
-      name="F1: The Movie"
-      text="Similar to the last movie you watched."
-    />
     
+    
+    
+    <p>{'\u00A0'}</p> {/*Unicode non-breaking space*/}
     <p>{'\u00A0'}</p> {/*Unicode non-breaking space*/}
 
 

@@ -13,10 +13,7 @@ const ProfilePic = () => {
 
         <div className='profileText'>
             <p style={{fontSize: 25, fontWeight: 'bold', textAlign: 'center'}}>User Name</p>
-            <text>
-                Here is my portfolio. I like movies that has action, but also romantic movies are my type.
-                I also like horror movies, but not too scary. My favorite movie is "Inception" because it has a great plot and amazing visual effects.
-            </text>
+            {/*  <input placeholder="Search friends" style={{margin: '2rem', width: '100%', color: 'white', backgroundColor: '#202020', border: '0.2px solid white', borderRadius: '10px', padding: '0.5rem', boxShadow: '0 0.5rem 1rem rgba(0, 0, 0, 0.5)'}} />  */}
         </div>
     </div>
   )

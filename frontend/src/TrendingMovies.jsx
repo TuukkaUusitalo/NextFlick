@@ -2,9 +2,6 @@ import React, { useEffect, useState } from 'react';
 import MoviePopup from './MoviePopup.jsx'
 
 
-
-
-
 const TrendingMovies = () => {
   const [movies, setMovies] = useState([]);
   const [error, setError] = useState(null);

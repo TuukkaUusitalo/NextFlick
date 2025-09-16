@@ -8,6 +8,7 @@ import ReviewsPage from './Reviews.jsx';
 import TrendingPage from './TrendingMovies.jsx';
 import TrendingMovies from './TrendingMovies.jsx';
 import TrendingTvshows from './TrendingTvshows.jsx';
+import SignupPage from './components/SignupPage.jsx'
 
 
 function Homepage() {
@@ -40,8 +41,8 @@ function App(){
       <Route path="/Trending" element={<TrendingPage />} />
       <Route path="/Reviews" element={<ReviewsPage />} />
       <Route path="/Recommendations" element={<RecommendationsPage />} />
-
       <Route path="/Profile" element={<ProfilePage />} />
+
     </Routes>
   
   </Router>

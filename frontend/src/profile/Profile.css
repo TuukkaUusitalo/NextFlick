@@ -4,7 +4,19 @@
     display: flex;
 }
 
-
+.findFriendBtn {
+    background-color: #202020;
+    border: 0.2px solid #f36502;
+    border-radius: 10px;
+    padding: 0.7rem;
+    color: white;
+    margin: 1rem;
+    box-shadow: 0 0.5rem 1rem rgba(0, 0, 0, 0.5);
+    font-weight: bold;
+}
+.findFriendBtn:hover {
+    box-shadow: 0 0 16px  #FF5000;
+}
 
 .profilePicAndText {
     width: 20%;
@@ -14,7 +26,6 @@
     text-align: center;
     align-items: center;
     margin-top: 6rem;
-    width: 30%;
 }
 .profilePic {
     width: 60%;

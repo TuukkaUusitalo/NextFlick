@@ -4,7 +4,6 @@ import LikeShare from './assets/LikeShare.jpeg'
 import SignUp from './assets/SignUp.jpeg'
 import SignupPage from "./components/SignupPage.jsx";
 import SigninPage from "./components/SigninPage.jsx";
-
 import './App.css'
 import { useState } from "react";
 
@@ -29,16 +28,17 @@ const Hero = () => {
     <div className='heroCardTwo'>
         <img src={LikeShare}></img>
         <p>Follow friends, see and write reviews.</p>
-        <a>See Reviews</a>
+        <a href="./reviews">See Reviews</a>
 
     </div>
     <div className='heroCardThree'>
         <img src={SignUp}></img>
         <p>Add movies to your collection and recommend to others</p>
         <div className='signupsContainer'>
+          
         <a onClick={() => setShowSignup(true)}>Sign Up</a>
-        <span style={{fontSize:"x-large"}}>/</span>
-        <a onClick={() => showSignin(true)}>Sign In</a>
+        <span style={{fontSize:"x-large", color:"#FF5000"}}> {'\u00A0'}/{'\u00A0'} </span>
+        <a onClick={() => setShowSignin(true)}>Sign In</a>
         
         </div>
 
@@ -47,26 +47,16 @@ const Hero = () => {
     </div>
     </div>
     {showSignup && (
-      <div
-          style={{
-            position: "fixed",
-            top: 0,
-            left: 0,
-            width: "100%",
-            height: "100%",
-            backgroundColor: "rgba(0,0,0,0.7)", // dim effect
-            display: "flex",
-            justifyContent: "center",
-            alignItems: "center",
-            zIndex: 1000,
-          }}
-        >
+
         <SignupPage
-          onClose={() => setShowSignup(false)}
+          onClose={() => setShowSignup(null)}
         />
-        </div>
       )}
- 
+    {showSignin &&(
+      <SigninPage
+          onClose={() => setShowSignin(null)}
+        />
+    )}
     </div>
 </div>
 </div>

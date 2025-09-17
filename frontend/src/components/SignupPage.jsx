@@ -3,7 +3,7 @@ import './SignupPage.css'
 
 
 
-function SignupPage() {
+function SignupPage({onClose}) {
   const [nationality, setNationality]=useState("");
   const [email, setEmail]=useState("");
   const [isValid, setIsValid] = useState(null);
@@ -79,12 +79,15 @@ function SignupPage() {
   
   
   return (
-    <div className='signupContainer' onClick={onClose}>
-      <h3>Sign up</h3>
+  <div className="overlay" onClick={onClose}>
+
+    <div className='signupContainer'  onClick={(e) => e.stopPropagation()} >
+      
+      <h3 >Sign up</h3>
 
     <p>Email</p>
       <input className='emailInput' 
-      placeholder='--Email here--' 
+      placeholder='-- Email here --' 
       onChange={checkEmail}
       style={{border: !email ? "3px solid white":
         isValid
@@ -98,7 +101,7 @@ function SignupPage() {
         </p>
       )}
       <p>Password</p>
-      <input type='password'className='passwordInput' placeholder='--Password here--'
+      <input type='password'className='passwordInput' placeholder='-- Password here --'
       onChange={checkStr}
       style={{border: !passw ?"3px solid white": 
       isStrong
@@ -110,7 +113,8 @@ function SignupPage() {
         <p style={{color: isStrong ? "green" : "red"}}>
           {isStrong ? "Your password is strong" : "Your password is weak"}</p>
       )}
-      
+      <p>Username</p>
+      <input placeholder="-- Username here --"></input>
       
       <p>Nationality</p>
       <div>
@@ -126,9 +130,21 @@ function SignupPage() {
     </div>
     <button className='signUpButton'>Sign up</button>
     <p>{fetchGreeting()}</p>
+    <button className="closeButton" onClick={onClose}
+      style={{
+            float:" right",
+            marginTop:"10px",
+            padding: "5px 10px",
+            background: "red",
+            color: "white",
+            border: "none",
+            borderRadius: "4px",
+            cursor: "pointer"
+          }}
+        >Close</button>
     </div>
 
-    
+    </div>
   )
 }
 

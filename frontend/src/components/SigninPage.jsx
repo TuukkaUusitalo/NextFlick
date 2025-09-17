@@ -1,9 +1,10 @@
-import {useState} from 'react'
+import React, {useState} from 'react'
 import './SignupPage.css'
 
 
 
-function SigninPage() {
+function SignupPage({onClose}) {
+  const [nationality, setNationality]=useState("");
   const [email, setEmail]=useState("");
   const [isValid, setIsValid] = useState(null);
   const [passw, setPassW] = useState("")
@@ -20,6 +21,40 @@ function SigninPage() {
       setIsStrong(false)
     }
   }
+
+
+
+
+  function fetchGreeting(){
+    if (nationality==='Finland')
+      return(
+      <div>
+        <p>Moi,</p>
+        <p>Sähköpostisi on: {email}</p>
+      </div>
+      )
+    if (nationality==='England')
+      return(
+      <div>
+        <p>Hello,</p>
+        <p>Your email is: {email}</p>
+      </div>
+      )
+    if (nationality==='German')
+      return(
+      <div>
+        <p>Hallo,</p>
+        <p>Ihre email lautet: {email}</p>
+      </div>
+        )
+    if (nationality==='France')
+      return(
+      <div>
+        <p>Bonjour,</p>
+        <p>Votre email est: {email}</p>
+      </div>
+      )
+  }
  
   function checkEmail(e){
     const value = e.target.value;
@@ -34,8 +69,11 @@ function SigninPage() {
   
   
   return (
-    <div className='signupContainer'>
-      <h3>Sign up</h3>
+  <div className="overlay" onClick={onClose}>
+
+    <div className='signinContainer'  onClick={(e) => e.stopPropagation()} >
+      
+      <h3 >Sign in</h3>
 
     <p>Email</p>
       <input className='emailInput' 
@@ -60,17 +98,32 @@ function SigninPage() {
       ?"3px solid green"
       :"3px solid red"}}>
       </input>
-      
+
       {passw &&(
         <p style={{color: isStrong ? "green" : "red"}}>
           {isStrong ? "Your password is strong" : "Your password is weak"}</p>
       )}
       
       
+
+    <button className='signUpButton'>Sign in</button>
+    <p>{fetchGreeting()}</p>
+    <button className="closeButton" onClick={onClose}
+      style={{
+            float:" right",
+            marginTop:"10px",
+            padding: "5px 10px",
+            background: "red",
+            color: "white",
+            border: "none",
+            borderRadius: "4px",
+            cursor: "pointer"
+          }}
+        >Close</button>
     </div>
 
-    
+    </div>
   )
 }
 
-export default SigninPage
+export default SignupPage

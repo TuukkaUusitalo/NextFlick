@@ -28,8 +28,8 @@ const MyRecommendation = () => {
             onClick={handleAddMovie}
             />
         </div>
-        <div class="gradient-box">
-            <div class="scroll-content">
+        <div className="gradient-box">
+            <div className="scroll-content">
                 <Recommendation name="F1: The Movie" text="Amazing cinematography and thrilling racing scenes!" movie="F1: The Movie"/>
                 <Recommendation name="Shang-Chi" text="Great movie, would recommend!" movie="Shang-Chi"/>
                 <Recommendation name="The Witch" text="Spooky and atmospheric, a must-watch for horror fans." movie="The Witch"/>

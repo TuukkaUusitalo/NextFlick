@@ -1,0 +1,145 @@
+.overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  background: rgba(0,0,0,0.7); /* dim background */
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+/* Container */
+.signupContainer {
+  position:fixed;
+  width: 300px;
+  padding: 3rem;
+  background-color: #1f1f1f;
+  border-radius: 12px;
+  box-shadow: 0 0px 16px rgba(0, 0, 0, 1);
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  border:solid #FF5000;
+}
+
+.signinContainer {
+  position:fixed;
+  max-width: 220px;
+  padding: 3rem;
+  background-color: #1f1f1f;
+  border-radius: 12px;
+  box-shadow: 0 0px 16px rgba(0, 0, 0, 1);
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  border:solid #FF5000;
+}
+
+/* Headings */
+.signupContainer h3 {
+  text-align: center;
+  margin-bottom: 1.5rem;
+  color:#FF5000;
+}
+
+/* Labels */
+.signupContainer p {
+  margin: 0.5rem 0 0.25rem 0;
+  font-weight: 500;
+  color:#ffffff;
+}
+
+/* Inputs */
+.signupContainer input,
+.signupContainer select {
+  width: 100%;
+  padding: 0.6rem 0.75rem;
+  margin-bottom: 0.5rem;
+  border: 2px solid #ccc;
+  border-radius: 8px;
+  font-size: 1rem;
+  transition: border 0.3s, box-shadow 0.3s;
+  box-sizing: border-box;
+}
+
+.signupContainer input:focus,
+.signupContainer select:focus {
+  outline: none;
+  border-color: #007bff;
+  box-shadow: 0 0 5px rgba(0, 123, 255, 0.5);
+}
+
+/* Headings */
+.signinContainer h3 {
+  text-align: center;
+  margin-bottom: 1.5rem;
+  color:#FF5000;
+}
+
+/* Labels */
+.signinContainer p {
+  margin: 0.5rem 0 0.25rem 0;
+  font-weight: 500;
+  color:#ffffff;
+}
+
+/* Inputs */
+.signinContainer input,
+.signinContainer select {
+  width: 100%;
+  padding: 0.6rem 0.75rem;
+  margin-bottom: 0.5rem;
+  border: 2px solid #ccc;
+  border-radius: 8px;
+  font-size: 1rem;
+  transition: border 0.3s, box-shadow 0.3s;
+  box-sizing: border-box;
+}
+
+.signinContainer input:focus,
+.signinContainer select:focus {
+  outline: none;
+  border-color: #007bff;
+  box-shadow: 0 0 5px rgba(0, 123, 255, 0.5);
+}
+
+/* Valid / invalid styles applied dynamically */
+.valid {
+  border-color: green !important;
+}
+.invalid {
+  border-color: red !important;
+}
+
+/* Button */
+.signUpButton {
+  width: 100%;
+  padding: 0.8rem;
+  background-color: #007bff;
+  border: none;
+  border-radius: 8px;
+  color: white;
+  font-size: 1rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: background-color 0.3s;
+}
+
+.signUpButton:hover {
+  background-color: #0056b3;
+}
+
+/* Messages */
+.message {
+  margin-bottom: 0.5rem;
+  font-weight: 500;
+}
+
+/* Greeting box */
+.greetingBox {
+  margin-top: 1rem;
+  padding: 1rem;
+  background-color: #f1f8ff;
+  border-left: 5px solid #007bff;
+  border-radius: 6px;
+  color: #333;
+}
+

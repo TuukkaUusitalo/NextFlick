@@ -1,9 +1,10 @@
 const connectDB = require("./config/db");
 const express = require("express");
-const userRouter = require('./routes/userRouter');
+const userRouter = require("./routes/userRouter");
 const blogRouter = require("./routes/blogRouter");
 const movieRouter = require("./routes/movieRouter");
 const {requestLogger,unknownEndpoint,errorHandler} = require("./middleware/customMiddleware");
+require("dotenv").config();
  
 // express app
 const app = express();

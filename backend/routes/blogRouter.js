@@ -15,13 +15,13 @@ router.get("/", getAllBlogs);
 router.post("/", createBlog);
 
 // GET /cars/:carId
-router.get("/:carId", getBlogById);
+router.get("/:blogId", getBlogById);
 
 // PUT /cars/:carId
-router.put("/:carId", updateBlog);
+router.put("/:blogId", updateBlog);
 
 // DELETE /cars/:carId
-router.delete("/:carId", deleteBlog);
+router.delete("/:blogId", deleteBlog);
 
 // Update car using PATCH 
 // router.patch('/:carId', patchCar)

@@ -18,6 +18,10 @@ const userSchema = new Schema(
       name: String,
       movieId: Number,
     }], // Movies the user plan to watch
+    preferences: {
+      genres: [String] || None, // Preferred movie genres
+      movies: [String] || None, // Preferred movies
+    },
   },
   { timestamps: true }
 );

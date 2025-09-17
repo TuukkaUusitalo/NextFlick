@@ -1,6 +1,5 @@
 import React, {useState, useEffect} from 'react'
 import { FaRegStar } from "react-icons/fa";
-import TrendingMovies from '../TrendingMovies';
 
 
 export default function ReviewCard() {
@@ -32,7 +31,7 @@ export default function ReviewCard() {
             } catch (error) {
               console.error("Virhe haussa:", error);
             }
-          };
+        };
           
         fetchMovies();
       }, [searchTerm]); // Uusi haku aina kun hakusana muuttuu

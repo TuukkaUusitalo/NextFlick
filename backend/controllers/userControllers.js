@@ -156,7 +156,7 @@ const addWatchedMovie = async (req, res) => {
     try {
     const updatedUser = await User.findOneAndUpdate(
       { _id: userId },
-      { $addToSet: { watchedMovies: {name:movieName,movieId:movieId }}}, // Use $addToSet to avoid duplicates
+      { $addToSet: { watchedMovies: {name:movieName,movieId:movieId}}}, // Use $addToSet to avoid duplicates
       { new: true }
     );
     if (updatedUser) {
@@ -201,7 +201,9 @@ const updatePreferences = async (req, res) => {
     try {
     const updatedUser = await User.findOneAndUpdate(
       { _id: userId },
-      { $addToSet: { genrePreferences: req.body.genrePreferences,moviePreferences: req.body.moviePreferences }},
+      { $addToSet: { 
+        "preferences.genres": req.body.genrePreferences,
+        "preferences.movies": req.body.moviePreferences }},
       { new: true }
     );
     if (updatedUser) {

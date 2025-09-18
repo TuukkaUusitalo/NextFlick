@@ -12,6 +12,7 @@ const {
   deleteUser,
   // patchUser
 } = require("../controllers/userControllers");
+const {generateList} = require("../controllers/recommendControllers");
 const { requireAuth } = require("../middleware/requireAuth");
  
 // // GET /users
@@ -25,6 +26,9 @@ router.post("/login",  loginUser);
 
 // GET /users/:userId
 router.get("/:userId", getUserById);
+
+// POST /users/recommend
+router.post("/recommend/:userId",requireAuth, generateList);
 
 // PUT /users/:userId
 router.put("/:userId",requireAuth, updateUser);

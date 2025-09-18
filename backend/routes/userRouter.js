@@ -27,7 +27,7 @@ router.post("/login",  loginUser);
 // GET /users/:userId
 router.get("/:userId", getUserById);
 
-// POST /users/recommend
+// POST /users/recommend/:userId
 router.post("/recommend/:userId",requireAuth, generateList);
 
 // PUT /users/:userId

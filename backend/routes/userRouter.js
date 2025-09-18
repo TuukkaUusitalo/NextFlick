@@ -6,6 +6,9 @@ const {
   createUser,
   loginUser,
   updateUser,
+  addWatchedMovie,
+  addYetToWatchMovie,
+  updatePreferences,
   deleteUser,
   // patchUser
 } = require("../controllers/userControllers");
@@ -25,6 +28,12 @@ router.get("/:userId", getUserById);
 
 // PUT /users/:userId
 router.put("/:userId",requireAuth, updateUser);
+
+router.put("/preferences/:userId",requireAuth, updatePreferences);
+
+router.put("/watched/:userId",requireAuth, addWatchedMovie);
+
+router.put("/yettowatch/:userId",requireAuth, addYetToWatchMovie);
 
 // DELETE /users/:userId
 router.delete("/:userId",requireAuth, deleteUser,

@@ -146,6 +146,74 @@ const updateUser = async (req, res) => {
     }
 };
 
+//PUT /users/watched/:userId
+const addWatchedMovie = async (req, res) => {
+    const { userId } = req.params;
+    const { movieId, movieName } = req.body;
+    if (!mongoose.Types.ObjectId.isValid(userId)) {
+    return res.status(400).json({ message: "Invalid user ID" });
+  }
+    try {
+    const updatedUser = await User.findOneAndUpdate(
+      { _id: userId },
+      { $addToSet: { watchedMovies: {name:movieName,movieId:movieId }}}, // Use $addToSet to avoid duplicates
+      { new: true }
+    );
+    if (updatedUser) {
+      res.status(200).json(updatedUser);
+    } else {
+      res.status(404).json({ message: "User not found" });
+    }
+    } catch (error) {
+    res.status(500).json({ message: "Failed to update user" });
+  }
+};
+
+//PUT /users/yettowatch/:userId
+const addYetToWatchMovie = async (req, res) => {
+    const { userId } = req.params;
+    const { movieId, movieName } = req.body;
+    if (!mongoose.Types.ObjectId.isValid(userId)) {
+    return res.status(400).json({ message: "Invalid user ID" });
+  }
+    try {
+      const updatedUser = await User.findOneAndUpdate(
+      { _id: userId },
+      { $addToSet: { yetToWatchMovies: {name:movieName,movieId:movieId }}}, // Use $addToSet to avoid duplicates
+      { new: true }
+    );
+    if (updatedUser) {
+      res.status(200).json(updatedUser);
+    } else {
+      res.status(404).json({ message: "User not found" });
+    }
+    } catch (error) {
+    res.status(500).json({ message: "Failed to update user" });
+  }
+};
+
+//PUT /users/preferences/:userId
+const updatePreferences = async (req, res) => {
+    const { userId } = req.params;
+    if (!mongoose.Types.ObjectId.isValid(userId)) {
+    return res.status(400).json({ message: "Invalid user ID" });
+  }
+    try {
+    const updatedUser = await User.findOneAndUpdate(
+      { _id: userId },
+      { $addToSet: { genrePreferences: req.body.genrePreferences,moviePreferences: req.body.moviePreferences }},
+      { new: true }
+    );
+    if (updatedUser) {
+      res.status(200).json(updatedUser);
+    } else {
+      res.status(404).json({ message: "User not found" });
+    }
+    } catch (error) {
+    res.status(500).json({ message: "Failed to update user" });
+  }
+};
+
 // DELETE /users/:userId
 const deleteUser = async (req, res) => {
     const { userId } = req.params;
@@ -170,5 +238,8 @@ module.exports = {
   createUser,
   loginUser,
   updateUser,
+  addWatchedMovie,
+  addYetToWatchMovie,
+  updatePreferences,
   deleteUser,
 };

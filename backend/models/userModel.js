@@ -7,7 +7,7 @@ const userSchema = new Schema(
     username: { type: String, required: true }, // Unique username
     email: { type: String, required: true }, // Unique email address
     password: { type: String, required: true }, // Hashed password
-    profilePicture: { type: String }, // URL to profile picture 
+    profilePicture: {img:{ type: String,default:'../assets/profile_placeholder.png'}}, // URL to profile picture 
     bio: { type: String }, // User biography
     recommendedMovies: [{type: Schema.Types.ObjectId, ref: 'Blog'}], //Array of blog that have author that is the user
     watchedMovies: [{

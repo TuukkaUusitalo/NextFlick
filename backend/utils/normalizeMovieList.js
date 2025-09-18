@@ -13,6 +13,7 @@ function normalizeMovieList(list) {
 
   // Ensure the simplified schema with safe defaults
   return movieList.map((movie) => ({
+    movieId: movie.movieId || "Unknown ID",
     movie: movie.movie || "Unknown Movie",
     reason: movie.reason || "No reason provided",
     summary: movie.summary || "No summary available",

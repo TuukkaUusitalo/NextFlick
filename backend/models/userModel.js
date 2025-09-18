@@ -13,17 +13,15 @@ const userSchema = new Schema(
     watchedMovies: [{
       name: String,
       movieId: Number,
-    }], //Movies the user has watched
+      _id: false}], //Movies the user has watched
     yetToWatchMovies: [{
       name: String,
       movieId: Number,
-    }], // Movies the user plan to watch
-    // preferences: {
-    //   genres: [String] || None, // Preferred movie genres
-    //   movies: [String] || None, // Preferred movies
-    // },
-    genrePreferences: [String], // Preferred movie genres
-    moviePreferences: [String], // Preferred movies
+      _id: false}], // Movies the user plan to watch
+    preferences: {
+      genres: [String, {_id: false}], // Preferred movie genres
+      movies: [String, {_id: false}], // Preferred movies
+    },
   },
   { timestamps: true }
 );

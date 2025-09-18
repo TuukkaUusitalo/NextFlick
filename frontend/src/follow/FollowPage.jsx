@@ -47,20 +47,21 @@ function FollowPage() {
       <div style={{ display: 'flex', margin: 'auto' }}>
         <div className='modal-user-view'>
           <div style={{ display: 'flex' }}>
-            <div style={{ width: '20%', justifyContent: 'center', display: 'flex' }}>
+            <div style={{ width: '30%', justifyContent: 'center', display: 'flex' }}>
               <OtherUserProfilePic />
             </div>
-            <div>
+            <div style={{width: '70%'}}>
               <p style={{ marginTop: '2rem', fontSize: '18px', marginLeft: '3rem', fontWeight: 'bold' }}>
                 Recommends
               </p>
               <UserWatched />
+              <p style={{ marginTop: '2rem', fontSize: '18px', marginLeft: '2rem', fontWeight: 'bold' }}>
+                Has Watched
+              </p>
+              <UserWatched />
             </div>
           </div>
-            <p style={{ marginTop: '2rem', fontSize: '18px', marginLeft: '2rem', fontWeight: 'bold' }}>
-                Has Watched
-            </p>
-          <UserWatched />
+            
         </div>
 
         <div>

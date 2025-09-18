@@ -3,12 +3,43 @@ import './SignupPage.css'
 
 
 
+
 function SignupPage({onClose}) {
-  const [nationality, setNationality]=useState("");
   const [email, setEmail]=useState("");
+  const [username, setUsername]=useState("");
+
   const [isValid, setIsValid] = useState(null);
   const [passw, setPassW] = useState("")
   const [isStrong, setIsStrong] = useState(false)
+
+const createUser = async () => {
+  try {
+    const response = await fetch('http://localhost:4000/api/users', {
+      method: "POST",
+      headers: {
+  "Content-Type": "application/json"
+      },
+    
+      body: JSON.stringify({
+        username: username,
+        email: email,
+        password: passw,
+        
+      })
+    });
+
+    if (!response.ok) {
+      console.log('Fetch failed in creating user');
+    } else {
+      const data = await response.json();
+      console.log('User created:', data);
+    }
+  } catch (error) {
+    console.log('Error:', error);
+  }
+};
+
+
 
 
   function checkStr(e){
@@ -21,56 +52,14 @@ function SignupPage({onClose}) {
       setIsStrong(false)
     }
   }
-
-
-  function greetingLanguage(e){
-    const value = e.target.value
-    if (value === 'Finland')
-      setNationality("Finland")
-    if (value === 'England')
-      setNationality("England")
-    if (value === 'German')
-      setNationality("German")
-    if (value === 'France')
-      setNationality("France")
-  }
-
-  function fetchGreeting(){
-    if (nationality==='Finland')
-      return(
-      <div>
-        <p>Moi,</p>
-        <p>Sähköpostisi on: {email}</p>
-      </div>
-      )
-    if (nationality==='England')
-      return(
-      <div>
-        <p>Hello,</p>
-        <p>Your email is: {email}</p>
-      </div>
-      )
-    if (nationality==='German')
-      return(
-      <div>
-        <p>Hallo,</p>
-        <p>Ihre email lautet: {email}</p>
-      </div>
-        )
-    if (nationality==='France')
-      return(
-      <div>
-        <p>Bonjour,</p>
-        <p>Votre email est: {email}</p>
-      </div>
-      )
-  }
+  
  
   function checkEmail(e){
     const value = e.target.value;
     setEmail(value)
     if (value.includes('@')&& value.includes('.com') || value.includes('.fi') ){
       setIsValid(true)
+      
     }
     else{
       setIsValid(false)
@@ -114,22 +103,21 @@ function SignupPage({onClose}) {
           {isStrong ? "Your password is strong" : "Your password is weak"}</p>
       )}
       <p>Username</p>
-      <input placeholder="-- Username here --"></input>
+      <input placeholder="-- Username here --" onChange={(e) => setUsername(e.target.value)}></input>
+          <button className="signupButton" onClick={createUser}
+      style={{
+            fontSize:"medium",
+            justifyContent:"center",
+            marginTop:"10px",
+            padding: "10px 20px",
+            background: "Blue",
+            color: "white",
+            border: "none",
+            borderRadius: "4px",
+            cursor: "pointer"
+          }}
+        >Sign up</button>
       
-      <p>Nationality</p>
-      <div>
-      <select onChange={greetingLanguage} defaultValue="">
-        <option value="" disabled>
-            -- Select nationality --
-          </option>
-        <option value="Finland">Finland</option>
-        <option value="England">England</option>
-        <option value="German">German</option>
-        <option value="France">France</option>
-      </select>
-    </div>
-    <button className='signUpButton'>Sign up</button>
-    <p>{fetchGreeting()}</p>
     <button className="closeButton" onClick={onClose}
       style={{
             float:" right",

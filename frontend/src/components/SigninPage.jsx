@@ -4,7 +4,6 @@ import './SignupPage.css'
 
 
 function SignupPage({onClose}) {
-  const [nationality, setNationality]=useState("");
   const [email, setEmail]=useState("");
   const [isValid, setIsValid] = useState(null);
   const [passw, setPassW] = useState("")
@@ -22,39 +21,6 @@ function SignupPage({onClose}) {
     }
   }
 
-
-
-
-  function fetchGreeting(){
-    if (nationality==='Finland')
-      return(
-      <div>
-        <p>Moi,</p>
-        <p>Sähköpostisi on: {email}</p>
-      </div>
-      )
-    if (nationality==='England')
-      return(
-      <div>
-        <p>Hello,</p>
-        <p>Your email is: {email}</p>
-      </div>
-      )
-    if (nationality==='German')
-      return(
-      <div>
-        <p>Hallo,</p>
-        <p>Ihre email lautet: {email}</p>
-      </div>
-        )
-    if (nationality==='France')
-      return(
-      <div>
-        <p>Bonjour,</p>
-        <p>Votre email est: {email}</p>
-      </div>
-      )
-  }
  
   function checkEmail(e){
     const value = e.target.value;
@@ -66,7 +32,7 @@ function SignupPage({onClose}) {
       setIsValid(false)
     }
   }
-  
+
   
   return (
   <div className="overlay" onClick={onClose}>

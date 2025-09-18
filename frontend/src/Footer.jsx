@@ -1,6 +1,5 @@
 import { FaFacebook, FaTwitter, FaInstagram, FaYoutube } from "react-icons/fa";
 import './Footer.css'
-import logo from './assets/NextFlickLogo1.jpg'
 
 
 const Footer = () => {

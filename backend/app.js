@@ -5,12 +5,15 @@ const blogRouter = require("./routes/blogRouter");
 const movieRouter = require("./routes/movieRouter");
 const {requestLogger,unknownEndpoint,errorHandler} = require("./middleware/customMiddleware");
 require("dotenv").config();
- 
+ const cors = require('cors');
+
+
 // express app
 const app = express();
 
 connectDB();
- 
+app.use(cors());
+
 // middleware
 app.use(express.json());
 

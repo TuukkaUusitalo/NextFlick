@@ -15,7 +15,7 @@
   
   .modal-content2 {
     border-radius: 2rem;
-    width: 75%;
+    width: 85%;
     box-shadow: 0 0.5rem 1rem rgba(0, 0, 0, 0.3);
     background-color: #202020;
     height: 70%;
@@ -23,7 +23,7 @@
 
   .modal-user-view {
     border-radius: 1.5rem;
-    width: 70%;
+    width: 75%;
     height: 37rem;
     margin: 1.5rem;
     box-shadow: 0 0.5rem 1rem rgba(0, 0, 0, 0.3);
@@ -43,7 +43,7 @@
     margin-top: 1rem;
     align-self: center;
     width: 100%;
-    border-radius: 80px;
+    border-radius: 110px;
     box-shadow:  0 15px 20px rgba(0, 0, 0, 0.932);
 }
 .profile_text {
@@ -65,6 +65,10 @@
     margin: 1rem;
     box-shadow: 0 0.5rem 1rem rgba(0, 0, 0, 0.5);
     font-weight: bold;
+    width: 8rem;
+    justify-content: center;
+    justify-self: center;
+    display: flex;
 }
 .followBtn:hover {
     box-shadow: 0 0 16px  #FF5000;

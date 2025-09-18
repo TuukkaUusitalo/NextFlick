@@ -11,8 +11,9 @@ const OtherUserProfilePic = () => {
         </div>
 
         <div className='profile_text'>
-            <p style={{fontSize: 22, fontWeight: 'bold', textAlign: 'center'}}>First Lastname</p>
+            <p style={{fontSize: 22, fontWeight: 'bold', textAlign: 'center'}}>username</p>
             <button className='followBtn'>Follow</button>
+            <p>Movies watched in total:</p>
         </div>
     </div>
   )

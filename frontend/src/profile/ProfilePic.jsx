@@ -4,11 +4,6 @@ import './Profile.css';
 import profile_placeholder from '../assets/profile_placeholder.png';
 
 const ProfilePic = () => {
-
-  const [userData, setUserData] = useState(null); // saves user info
-  const [loading, setLoading] = useState(true); // loading state
-
-
   return (
     <div className={"profilePicAndText"}>
                     

@@ -6,12 +6,15 @@ import Watched from './Watched';
 import ProfilePic from './ProfilePic';
 import MyRecommendation from './MyRecommendation';
 import FollowPage from '../follow/FollowPage'
-import React, {useState} from 'react';
+import React, {useState, useEffect} from 'react';
 
 
 function ProfilePage() {
 
     const [userWindow, setUserWindow] = useState(false);
+    const [dataForm, setDataForm] = useState(null); // Saving data from backend
+    const [loading, setLoading] = useState(true);
+    const [error, setError] = useState(null);
 
     function handleOpenFollowPage() {
         setUserWindow(true);

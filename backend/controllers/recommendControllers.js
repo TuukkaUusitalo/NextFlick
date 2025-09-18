@@ -1,12 +1,24 @@
 const { generateMovieList } = require("../services/movieService");
 const { normalizeMovieList } = require("../utils/normalizeMovieList");
+const mongoose = require("mongoose");
+const User = require("../models/userModel");
 // Controller to handle movie recommendation requests
 //movie and genre preference is saved with user profile
 // promptInput is taken from user input in the request body
 const generateList = async (req, res) => {
   try {
-    const {moviePreferences,genrePreference, promptInput} = req.body;
-
+    const { userId } = req.params;
+      if (!mongoose.Types.ObjectId.isValid(userId)) {
+      return res.status(400).json({ message: "Invalid user ID" });
+    }
+    const promptInput = req.body;
+    const user = await User.findById(userId);
+    if (!user) {
+      return res.status(404).json({ message: "User not found" });
+    }
+    const moviePreferences = user.preferences.movies;
+    const genrePreference = user.preferences.genres;
+    console.log("User preferences:", moviePreferences, genrePreference);
     if (!moviePreferences && !promptInput && !genrePreference) {
       return res.status(400).json({ message: "At least one field is required" });
     }

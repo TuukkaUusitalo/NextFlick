@@ -1,9 +1,14 @@
-import React from 'react'
+import React, { useState, useEffect } from 'react'
 import '../App.css';
 import './Profile.css';
 import profile_placeholder from '../assets/profile_placeholder.png';
 
 const ProfilePic = () => {
+
+  const [userData, setUserData] = useState(null); // saves user info
+  const [loading, setLoading] = useState(true); // loading state
+
+
   return (
     <div className={"profilePicAndText"}>
                     
@@ -12,8 +17,9 @@ const ProfilePic = () => {
         </div>
 
         <div className='profileText'>
-            <p style={{fontSize: 25, fontWeight: 'bold', textAlign: 'center'}}>User Name</p>
-            {/*  <input placeholder="Search friends" style={{margin: '2rem', width: '100%', color: 'white', backgroundColor: '#202020', border: '0.2px solid white', borderRadius: '10px', padding: '0.5rem', boxShadow: '0 0.5rem 1rem rgba(0, 0, 0, 0.5)'}} />  */}
+            <p style={{fontSize: 25, fontWeight: 'bold', textAlign: 'center'}}>username</p>
+            <textarea placeholder="Bio" style={{display: 'block', margin: 'auto', width: '100%', color: 'white', backgroundColor: '#202020', border: '0.2px solid white', borderRadius: '10px', padding: '0.5rem', boxShadow: '0 0.5rem 1rem rgba(0, 0, 0, 0.5)', height: '4rem'}} />
+            
         </div>
     </div>
   )

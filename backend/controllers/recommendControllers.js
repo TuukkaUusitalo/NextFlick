@@ -1,15 +1,17 @@
 const { generateMovieList } = require("../services/movieService");
 const { normalizeMovieList } = require("../utils/normalizeMovieList");
-
+// Controller to handle movie recommendation requests
+//movie and genre preference is saved with user profile
+// promptInput is taken from user input in the request body
 const generateList = async (req, res) => {
   try {
-    const {moviePreferences, watchedMovies, promptInput} = req.body;
+    const {moviePreferences,genrePreference, promptInput} = req.body;
 
-    if (!moviePreferences || !watchedMovies || !promptInput) {
-      return res.status(400).json({ message: "All fields are required." });
+    if (!moviePreferences && !promptInput && !genrePreference) {
+      return res.status(400).json({ message: "At least one field is required" });
     }
 
-    const rawResponse = await generateMovieList(moviePreferences, watchedMovies, promptInput);
+    const rawResponse = await generateMovieList(moviePreferences,genrePreference, promptInput);
 
     // Try to extract JSON from markdown fences
     const jsonMatch = rawResponse.match(/```json\s*([\s\S]*?)\s*```/);

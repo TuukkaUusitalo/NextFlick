@@ -1,7 +1,7 @@
 const model = require("../config/gemini"); 
 
-async function generateMovieList(moviePreferences, watchedMovies, promptInput) {
-if (!moviePreferences && !watchedMovies && !promptInput) {
+async function generateMovieList(moviePreferences,genrePreference, promptInput) {
+if (!moviePreferences && !promptInput && !genrePreference) {
     throw new Error("At least one input (moviePreferences, watchedMovies, or promptInput) is required");
   }
   const prompt = `
@@ -21,8 +21,8 @@ if (!moviePreferences && !watchedMovies && !promptInput) {
     ,...]
 
     ### User Input:
-    I have watched the following movies: **${watchedMovies || "None"}**.
-    My movie preferences are: **${moviePreferences || "None"}**.
+    The movies I like are: **${moviePreferences || "None"}**.
+    My genre preferences are: **${genrePreference || "None"}**.
     Additional input: **${promptInput || "None"}**.
     Generate a movie list for me to watch based on this information.
 

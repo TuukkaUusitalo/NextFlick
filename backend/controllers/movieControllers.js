@@ -45,4 +45,32 @@ const getMovieById = async (req, res) => {
         res.status(500).json({ message: "Failed to retrieve movie", error: error.message });
     }
 };
-module.exports = { getPopularMovies, getMovieGenres, getMovieById };
+
+//GET /movies/search?query=
+const searchMovies = async (req, res) => {
+    const { query } = req.query;
+    try {
+        const movies = await fetch(`${url}/search/movie?query=${query}&language=en-US&page=1&include_adult=false`, {
+            method: 'GET',
+            headers: headers}
+        );
+        res.status(200).json(movies);
+    } catch (error) {
+        res.status(500).json({ message: "Failed to search movies", error: error.message });
+    }
+};
+
+//GET /movies/reviews?movieId=
+ const getMovieReviews = async (req, res) => {
+     const { movieId } = req.query;
+        try {
+            const reviews = await fetch(`${url}/movie/${movieId}/reviews?language=en-US&page=1`, {
+                method: 'GET',
+                headers: headers}
+            );
+            res.status(200).json(reviews);
+        } catch (error) {
+            res.status(500).json({ message: "Failed to retrieve movie reviews", error: error.message });
+        }
+    };
+module.exports = { getPopularMovies, getMovieGenres, getMovieById, searchMovies };

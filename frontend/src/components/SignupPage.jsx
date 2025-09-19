@@ -33,6 +33,8 @@ const createUser = async () => {
     } else {
       const data = await response.json();
       console.log('User created:', data);
+      localStorage.setItem('username', data.username || username);
+      console.log("local sotrage, username:", localStorage.getItem('username'))
     }
   } catch (error) {
     console.log('Error:', error);

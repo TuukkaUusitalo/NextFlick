@@ -87,51 +87,51 @@ function FollowPage() {
               />
       
               {/* Hakutulokset */}
-<div
-  style={{
-    width: "100%",
-    listStyleType: "none",
-    padding: 0,
-    overflowY: "auto",
-    overflowX: "hidden",
-    scrollBehavior: "smooth",
-    maxHeight: "250px",
-  }}
->
-  {Array.isArray(users) && users.length > 0 ? (
-    users
-      // Suodatetaan vain ne, jotka alkavat hakusanalla
-      .filter((user) => {
-        const normalize = (str) =>
-          str
-            .toLocaleLowerCase("fi")
-            .normalize("NFD") // Poistaa skandit
-            .replace(/[\u0300-\u036f]/g, ""); 
+                <div
+                    style={{
+                        width: "100%",
+                        listStyleType: "none",
+                        padding: 0,
+                        overflowY: "auto",
+                        overflowX: "hidden",
+                        scrollBehavior: "smooth",
+                        maxHeight: "250px",
+                    }}
+                    >
+                    {Array.isArray(users) && users.length > 0 ? (
+                        users
+                        // Suodatetaan vain ne, jotka alkavat hakusanalla
+                        .filter((user) => {
+                            const normalize = (str) =>
+                            str
+                                .toLocaleLowerCase("fi")
+                                .normalize("NFD") // Poistaa skandit
+                                .replace(/[\u0300-\u036f]/g, ""); 
 
-        return normalize(user.username).startsWith(normalize(searchTerm));
-      })
-      .map((user) => (
-        <li
-          key={user.username}
-          style={{
-            margin: "auto",
-            width: "70%",
-            color: "#FFFAF0",
-            padding: "0.7rem",
-            boxShadow: "0 0.5rem 1rem rgba(0, 0, 0, 0.5)",
-            marginBottom: "0.5rem",
-            display: "flex",
-            alignItems: "center",
-            borderRadius: "0.5rem",
-          }}
-        >
-          <p style={{ margin: 0 }}>{user.username}</p>
-        </li>
-      ))
-  ) : (
-    searchTerm.length >= 3 && <p style={{ color: "white" }}>No users found</p>
-  )}
-</div>
+                            return normalize(user.username).startsWith(normalize(searchTerm));
+                        })
+                        .map((user) => (
+                            <li
+                            key={user.username}
+                            style={{
+                                margin: "auto",
+                                width: "70%",
+                                color: "#FFFAF0",
+                                padding: "0.7rem",
+                                boxShadow: "0 0.5rem 1rem rgba(0, 0, 0, 0.5)",
+                                marginBottom: "0.5rem",
+                                display: "flex",
+                                alignItems: "center",
+                                borderRadius: "0.5rem",
+                            }}
+                            >
+                            <p style={{ margin: 0 }}>{user.username}</p>
+                            </li>
+                        ))
+                    ) : (
+                        searchTerm.length >= 3 && <p style={{ color: "white" }}>No users found</p>
+                    )}
+                </div>
 
             </div>
           </div>

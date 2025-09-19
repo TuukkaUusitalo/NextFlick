@@ -12,7 +12,7 @@ const ProfilePic = () => {
         </div>
 
         <div className='profileText'>
-            <p style={{fontSize: 25, fontWeight: 'bold', textAlign: 'center'}}>username</p>
+            <p style={{fontSize: 25, fontWeight: 'bold', textAlign: 'center'}}>{localStorage.getItem('username')}</p>
             <textarea placeholder="Bio" style={{display: 'block', margin: 'auto', width: '100%', color: 'white', backgroundColor: '#202020', border: '0.2px solid white', borderRadius: '10px', padding: '0.5rem', boxShadow: '0 0.5rem 1rem rgba(0, 0, 0, 0.5)', height: '4rem'}} />
             
         </div>

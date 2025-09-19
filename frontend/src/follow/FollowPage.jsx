@@ -18,7 +18,7 @@ function FollowPage() {
 
       const fetchUsers = async () => {
         try {
-          const response = await fetch(`${httpPath}/users?username=${searchTerm}`, {
+          const response = await fetch(`${httpPath}/users?username`, {
             method: 'GET',
             headers: {
               accept: 'application/json'
@@ -87,35 +87,52 @@ function FollowPage() {
               />
       
               {/* Hakutulokset */}
-              <div style={{ width: '100%', listStyleType: 'none', padding: 0, overflowY: 'auto', overflowX: 'hidden', scrollBehavior: 'smooth', maxHeight: '250px',}}>
-                {users.length > 0 ? (
-                  users.map((user) => (
-                    <li
-                      key={user.username}
-                      style={{
-                        margin: 'auto',
-                        width: '70%',
-                        color: '#FFFAF0',
-                        padding: '0.7rem',
-                        boxShadow: '0 0.5rem 1rem rgba(0, 0, 0, 0.5)',
-                        marginBottom: '0.5rem',
-                        display: 'flex',
-                        alignItems: 'center',
-                        borderRadius: '0.5rem',
-                      }}
-                    >
-                      {/* <img
-                        src={user.profilePicture || '/default-profile.png'}
-                        alt="profile"
-                        style={{ width: '40px', height: '40px', borderRadius: '50%', marginRight: '1rem' }}
-                      /> */}
-                      <p style={{ margin: 0 }}>{user.username}</p>
-                    </li>
-                  ))
-                ) : (
-                  searchTerm.length >= 3 && <p style={{ color: 'white' }}>No users found</p>
-                )}
-              </div>
+<div
+  style={{
+    width: "100%",
+    listStyleType: "none",
+    padding: 0,
+    overflowY: "auto",
+    overflowX: "hidden",
+    scrollBehavior: "smooth",
+    maxHeight: "250px",
+  }}
+>
+  {Array.isArray(users) && users.length > 0 ? (
+    users
+      // Suodatetaan vain ne, jotka alkavat hakusanalla
+      .filter((user) => {
+        const normalize = (str) =>
+          str
+            .toLocaleLowerCase("fi")
+            .normalize("NFD") // Poistaa skandit
+            .replace(/[\u0300-\u036f]/g, ""); 
+
+        return normalize(user.username).startsWith(normalize(searchTerm));
+      })
+      .map((user) => (
+        <li
+          key={user.username}
+          style={{
+            margin: "auto",
+            width: "70%",
+            color: "#FFFAF0",
+            padding: "0.7rem",
+            boxShadow: "0 0.5rem 1rem rgba(0, 0, 0, 0.5)",
+            marginBottom: "0.5rem",
+            display: "flex",
+            alignItems: "center",
+            borderRadius: "0.5rem",
+          }}
+        >
+          <p style={{ margin: 0 }}>{user.username}</p>
+        </li>
+      ))
+  ) : (
+    searchTerm.length >= 3 && <p style={{ color: "white" }}>No users found</p>
+  )}
+</div>
+
             </div>
           </div>
         </div>

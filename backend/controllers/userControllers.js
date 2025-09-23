@@ -18,25 +18,22 @@ const getAllUsers = async (req, res) => {
     res.status(500).json({ message: "Failed to retrieve users" });
   }
 };
-//Normally get all users is not needed, so commenting it out
+//Normally get all users is not needed, so comment it out in the final version
 
  
 // POST /users
 // User signing up
 const createUser = async (req, res) => {
     try {
-      console.log("1");
       const findUser = await User.findOne({ username: req.body.usernameusername }) ||
         await User.findOne({ email: req.body.email });
       if (findUser) {
         return res.status(400).json({ message: "Username or Email already in use" });
       } //Check if username or email already in use
     const password = req.body.password;
-    console.log("2");
     const salt = await bcrypt.genSalt(10);
     const hashedPassword = await bcrypt.hash(password, salt);
     req.body.password = hashedPassword;
-    console.log(req.body.password);
     //generate hashed password before storing to db
     const newUser = await User.create({ ...req.body });
     const user = {

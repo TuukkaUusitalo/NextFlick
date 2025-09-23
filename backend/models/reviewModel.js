@@ -2,8 +2,13 @@ const mongoose = require('mongoose');
 
 const Schema = mongoose.Schema;
 
-const blogSchema = new Schema({
-  movie: {
+const reviewSchema = new Schema({
+  user_id: {
+    type: mongoose.Schema.Types.ObjectId,
+    required: true,
+    ref: "User",
+  },
+  movie_id: {
     type: Number,
     required: true,
   },
@@ -21,4 +26,4 @@ const blogSchema = new Schema({
   },
 }, { timestamps: true });
 
-module.exports = mongoose.model('Blog', blogSchema);
+module.exports = mongoose.model('Review', reviewSchema);

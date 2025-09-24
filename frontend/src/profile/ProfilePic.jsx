@@ -5,17 +5,23 @@ import profile_placeholder from '../assets/profile_placeholder.png';
 
 const ProfilePic = () => {
   const [bio, setBio] = useState('');
+  const [saving, setSaving] = useState(false);
+  const [saved, setSaved] = useState(false);
 
   const handleSaveBio = async () => {
     try {
-      const httpPath = import.meta.env.VITE_HTTP_PATH;
-      const token = localStorage.getItem("token"); // jos käytät JWT:tä
+      setSaving(true);
+      setSaved(false);
 
-      const response = await fetch(`${httpPath}/users/bio`, {
-        method: 'POST',
+      const httpPath = import.meta.env.VITE_HTTP_PATH;
+      const token = localStorage.getItem("token");
+      const id = localStorage.getItem("id")
+
+      const response = await fetch(`${httpPath}/users/${id}`, {
+        method: 'PUT',
         headers: {
           'Content-Type': 'application/json',
-          'Authorization': `Bearer ${token}` // jos vaaditaan auth
+          'Authorization': `Bearer ${token}`
         },
         body: JSON.stringify({ bio })
       });
@@ -24,12 +30,27 @@ const ProfilePic = () => {
         throw new Error(`HTTP error: ${response.status}`);
       }
 
-      alert("Bio saved successfully!");
+      setSaving(false);
+      setSaved(true);
+
+      // Piilotetaan "Saved" 2 sekunnin kuluttua
+      setTimeout(() => setSaved(false), 2000);
     } catch (error) {
       console.error("Error saving bio:", error);
+      setSaving(false);
     }
   };
 
+  // Käytetään debouncea: tallennetaan 1s viiveen jälkeen
+  useEffect(() => {
+    if (bio === "") return; // ei lähetetä tyhjää heti
+
+    const timer = setTimeout(() => {
+      handleSaveBio();
+    }, 1000);
+
+    return () => clearTimeout(timer); // jos kirjoitetaan lisää, perutaan edellinen tallennus
+  }, [bio]);
 
   return (
     <div className={"profilePicAndText"}>
@@ -40,8 +61,9 @@ const ProfilePic = () => {
 
         <div className='profileText'>
             <p style={{fontSize: 25, fontWeight: 'bold', textAlign: 'center'}}>{localStorage.getItem('username')}</p>
-            <textarea placeholder="Bio" style={{display: 'block', margin: 'auto', width: '100%', color: 'white', backgroundColor: '#202020', border: '0.2px solid white', borderRadius: '10px', padding: '0.5rem', boxShadow: '0 0.5rem 1rem rgba(0, 0, 0, 0.5)', height: '4rem'}} />
-            
+            <textarea placeholder="Bio" onChange={(e) => setBio(e.target.value)} style={{display: 'block', margin: 'auto', width: '100%', color: 'white', backgroundColor: '#202020', border: '0.2px solid white', borderRadius: '10px', padding: '0.5rem', boxShadow: '0 0.5rem 1rem rgba(0, 0, 0, 0.5)', height: '4rem'}} />
+            {saving && <p style={{fontSize: 12, color: 'gray'}}>Saving...</p>}
+            {saved && <p style={{fontSize: 12, color: 'lightgreen'}}>Saved</p>}
         </div>
     </div>
   )

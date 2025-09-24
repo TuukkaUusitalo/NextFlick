@@ -1,9 +1,10 @@
 const mongoose = require('mongoose');
+const User = require('./userModel');
 
 const Schema = mongoose.Schema;
 
 const reviewSchema = new Schema({
-  user_id: {
+  author: {
     type: mongoose.Schema.Types.ObjectId,
     required: true,
     ref: "User",
@@ -20,10 +21,16 @@ const reviewSchema = new Schema({
     type: Number,
     required: true,
   },
-  author: {
-    type: mongoose.Schema.Types.ObjectId,
-    required: true,
-  },
 }, { timestamps: true });
+
+reviewSchema.statics.postReview = async function({userId, movieId, body, rating}) {
+  const user = await User.findById(userId);
+  if (!user) {
+    throw Error("User not found");
+  }
+  const review = await this.create({movie_id: movieId, body, rating, author: userId });
+  await User.findByIdAndUpdate(userId, { $push: { reviewedMovies: review._id } });
+  return review;
+}
 
 module.exports = mongoose.model('Review', reviewSchema);

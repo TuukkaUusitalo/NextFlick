@@ -1,3 +1,4 @@
+const { default: mongoose } = require("mongoose");
 const Review = require("../models/reviewModel");
 
  // GET /reviews
@@ -44,7 +45,7 @@ const getReviewById = async (req, res) => {
     return res.status(400).json({ message: "Invalid review ID" });
   }
   try {
-    const review = await Review.findById(blogId);
+    const review = await Review.findById(reviewId);
     if (review) {
       res.status(200).json(review);
     } else {
@@ -52,15 +53,23 @@ const getReviewById = async (req, res) => {
     }
   } 
     catch (error) {
-    res.status(500).json({ message: "Failed to retrieve review" });
+    res.status(500).json({ message: "Failed to retrieve review", error: error.message });
   }
 };
 
 // POST /reviews
 const createReview = async (req, res) => {
   try {
-    const user_id = req.body.user_id;
-    const newReview = await Review.create({ ...req.body, user_id: user_id });
+    const userId = req.body.userId;
+    if (!mongoose.Types.ObjectId.isValid(userId)) {
+      return res.status(400).json({ message: "Invalid user ID" });
+    }
+    const newReview = await Review.postReview({
+      userId: req.body.userId,
+      movieId: req.body.movieId,
+      body: req.body.body,
+      rating: req.body.rating
+    });
     res.status(201).json(newReview);
   } catch (error) {
     res.status(400).json({ message: "Failed to create review", error: error.message });

@@ -23,8 +23,6 @@ const generateList = async (req, res) => {
       moviePreferences = user.preferences.movies;
       genrePreference = user.preferences.genres;
     }
-    console.log("Prompt input:", promptInput);
-    console.log("User preferences:", moviePreferences, genrePreference);
     if (!moviePreferences && !promptInput && !genrePreference) {
       return res.status(400).json({ message: "At least one field is required" });
     }

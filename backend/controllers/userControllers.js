@@ -21,34 +21,15 @@ const getAllUsers = async (req, res) => {
 //Normally get all users is not needed, so comment it out in the final version
 
  
-// POST /users
+// POST /users/signup
 // User signing up
 const createUser = async (req, res) => {
     try {
-      const findUser = await User.findOne({ username: req.body.usernameusername }) ||
-        await User.findOne({ email: req.body.email });
-      if (findUser) {
-        return res.status(400).json({ message: "Username or Email already in use" });
-      } //Check if username or email already in use
-    const password = req.body.password;
-    const salt = await bcrypt.genSalt(10);
-    const hashedPassword = await bcrypt.hash(password, salt);
-    req.body.password = hashedPassword;
-    //generate hashed password before storing to db
-    const newUser = await User.create({ ...req.body });
-    const user = {
-      username: newUser.username,
-      email: newUser.email,
-      id: newUser._id,
-      profilePicture: newUser.profilePicture,
-      bio: newUser.bio,
-      recommendMovies: newUser.recommendedMovies,
-      watchedMovies: newUser.watchedMovies,
-      yetToWatchMovies: newUser.yetToWatchMovies,
-      preferences: newUser.preferences,
-    };
+    const { username, email, password } = req.body;
+    const newUser = await User.signup(username, email, password);
+
     const token = createToken(newUser._id); // Create a token for the new user
-    res.status(201).json({message: "User created",user: user, token:token});
+    res.status(201).json({message: "User created",user: newUser, token:token});
   } catch (error) {
     res.status(400).json({ message: "Failed to create user", error: error.message });
   }
@@ -58,31 +39,17 @@ const createUser = async (req, res) => {
 //User logging in
  const loginUser = async (req, res) => {
    try {
-     const foundUser = await User.findOne({ username:req.body.username });
-    if (!foundUser) {
-      return res.status(400).json({ message: "Invalid credentials" });
-      //Username not found
+     const { username, password } = req.body;
+     const user = await User.login(username, password);
+
+     if (user) {
+      const token = createToken(user._id); // Create a token for the logged-in user
+      res.status(200).json({ message: "Login successful", user: user, token: token });
+    } else {
+      res.status(400).json({ message: "Invalid username or password" });
     }
-    const isMatch = await bcrypt.compare(req.body.password, foundUser.password);
-    if (!isMatch) {
-      return res.status(400).json({ message: "Invalid credentials" });
-      //Wrong password
-    }
-    const user = {
-      username: foundUser.username,
-      email: foundUser.email,
-      id: foundUser._id,
-      profilePicture: foundUser.profilePicture,
-      bio: foundUser.bio,
-      recommendMovies: foundUser.recommendMovies,
-      watchedMovies: foundUser.watchedMovies,
-      yetToWatchMovies: foundUser.yetToWatchMovies,
-      preferences: foundUser.preferences,
-    };
-    const token = createToken(foundUser._id); // Create a token for the logged-in user
-    res.status(200).json({ message: "Login successful", user: user, token: token });
   } catch (error) {
-    res.status(500).json({ error: "Server error" });
+    res.status(500).json({ error: error.message });
   }
  };
 
@@ -234,6 +201,7 @@ const deleteUser = async (req, res) => {
 module.exports = {
   getAllUsers,
   getUserById,
+  getUserByUsername,
   createUser,
   loginUser,
   updateUser,

@@ -17,7 +17,7 @@ const createUser = async () => {
     const response = await fetch('http://localhost:4000/api/users', {
       method: "POST",
       headers: {
-  "Content-Type": "application/json"
+    "Content-Type": "application/json"
       },
     
       body: JSON.stringify({
@@ -33,6 +33,12 @@ const createUser = async () => {
     } else {
       const data = await response.json();
       console.log('User created:', data);
+
+      localStorage.setItem('username', data.username || username);
+      localStorage.setItem('token', data.token);
+
+      console.log("local sotrage, username:", localStorage.getItem('username'));
+      console.log("token", localStorage.getItem('token'));
     }
   } catch (error) {
     console.log('Error:', error);

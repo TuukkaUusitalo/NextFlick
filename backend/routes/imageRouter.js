@@ -10,7 +10,7 @@ const {getMovieImage,
 router.get("/movie/:size/:filePath", getMovieImage);
 
 //GET /image/user/:filePath
-router.get("/user/:filePath", getProfileImage);
+router.get("/user/:userId", getProfileImage);
 
 //POST /image/user/:userId
 router.post("/user/:userId",uploadMiddleware, newProfileImage);

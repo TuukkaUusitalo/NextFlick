@@ -31,7 +31,5 @@ router.put("/:reviewId", updateReview);
 // DELETE /cars/:carId
 router.delete("/:reviewId", deleteReview);
 
-// Update car using PATCH 
-// router.patch('/:carId', patchCar)
 
 module.exports = router;

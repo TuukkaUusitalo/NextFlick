@@ -28,12 +28,12 @@ const userSchema = new Schema(
       type: Schema.Types.ObjectId, ref: 'Blog'
     }], //Array of blog that have author that is the user
     watchedMovies: [{
-      name: String,
-      movieId: Number,
+      name: {type: String},
+      movieId: {type: Number},
       _id: false}], //Movies the user has watched
     yetToWatchMovies: [{
-      name: String,
-      movieId: Number,
+      name: {type: String},
+      movieId: {type: Number},
       _id: false}], // Movies the user plan to watch
     preferences: {
       genres: [String, {_id: false}], // Preferred movie genres

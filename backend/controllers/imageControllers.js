@@ -23,7 +23,15 @@ const getMovieImage = async (req, res) => {
 
 //GET /image/user/:filePath
 const getProfileImage = async (req, res) => {
-    const filePath = `./assets/${req.params.filePath}`;
+    const userId = req.params.userId;
+    if (!mongoose.Types.ObjectId.isValid(userId)) {
+        return res.status(400).json({ message: "Invalid user ID" });
+    }
+    const user = await User.findById(userId);
+    if (!user || !user.profilePicture) {
+        return res.status(404).json({ message: "User or profile picture not found" });
+    }
+    const filePath = `./assets/${user.profilePicture}`;
     const absolutePath = path.resolve(filePath);
     try {
         if (!absolutePath) {

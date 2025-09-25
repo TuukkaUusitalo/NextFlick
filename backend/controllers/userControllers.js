@@ -112,14 +112,14 @@ const updateUser = async (req, res) => {
 //PUT /users/watched/:userId
 const addWatchedMovie = async (req, res) => {
     const { userId } = req.params;
-    const { movieId, movieName } = req.body;
     if (!mongoose.Types.ObjectId.isValid(userId)) {
     return res.status(400).json({ message: "Invalid user ID" });
   }
     try {
+    const newWatchedMovie = req.body.watchedMovies;
     const updatedUser = await User.findOneAndUpdate(
       { _id: userId },
-      { $addToSet: { watchedMovies: {name:movieName,movieId:movieId}}}, // Use $addToSet to avoid duplicates
+      { watchedMovies: newWatchedMovie}, // Use $addToSet to avoid duplicates
       { new: true }
     );
     if (updatedUser) {
@@ -135,14 +135,14 @@ const addWatchedMovie = async (req, res) => {
 //PUT /users/yettowatch/:userId
 const addYetToWatchMovie = async (req, res) => {
     const { userId } = req.params;
-    const { movieId, movieName } = req.body;
     if (!mongoose.Types.ObjectId.isValid(userId)) {
     return res.status(400).json({ message: "Invalid user ID" });
   }
     try {
+      const newYetToWatchMovie = req.body.yetToWatchMovies;
       const updatedUser = await User.findOneAndUpdate(
       { _id: userId },
-      { $addToSet: { yetToWatchMovies: {name:movieName,movieId:movieId }}}, // Use $addToSet to avoid duplicates
+      { yetToWatchMovies: newYetToWatchMovie}, // Use $addToSet to avoid duplicates
       { new: true }
     );
     if (updatedUser) {
@@ -164,9 +164,9 @@ const updatePreferences = async (req, res) => {
     try {
     const updatedUser = await User.findOneAndUpdate(
       { _id: userId },
-      { $addToSet: { 
-        "preferences.genres": req.body.genrePreferences,
-        "preferences.movies": req.body.moviePreferences }},
+      { preferences: { 
+        genres: req.body.genrePreferences,
+        movies: req.body.moviePreferences }},
       { new: true }
     );
     if (updatedUser) {

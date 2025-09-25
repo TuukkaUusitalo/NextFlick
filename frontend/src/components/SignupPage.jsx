@@ -36,9 +36,11 @@ const createUser = async () => {
 
       localStorage.setItem('username', data.username || username);
       localStorage.setItem('token', data.token);
+      localStorage.setItem('id', data.user.id);
 
       console.log("local sotrage, username:", localStorage.getItem('username'));
       console.log("token", localStorage.getItem('token'));
+      console.log("userId", localStorage.getItem('id'))
     }
   } catch (error) {
     console.log('Error:', error);

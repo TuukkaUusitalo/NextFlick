@@ -19,7 +19,7 @@ const userSchema = new Schema(
       type: String, 
       required: true }, // Hashed password
     profilePicture: {
-      img:{ type: String,default:'../assets/profile_placeholder.png'}
+      type: String,default:'profile_placeholder.png'
     }, // URL to profile picture 
     bio: { 
       type: String,

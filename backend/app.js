@@ -3,6 +3,7 @@ const express = require("express");
 const userRouter = require("./routes/userRouter");
 const reviewRouter = require("./routes/reviewRouter");
 const movieRouter = require("./routes/movieRouter");
+const imageRouter = require("./routes/imageRouter");
 const {requestLogger,unknownEndpoint,errorHandler} = require("./middleware/customMiddleware");
 require("dotenv").config();
  const cors = require('cors');
@@ -28,6 +29,7 @@ app.use("/api/movies", movieRouter);
 app.use("/api/users", userRouter);
 // Use the reviewRouter for all /review routes
 app.use("/api/reviews", reviewRouter);
+app.use("/api/image", imageRouter);
 app.use(unknownEndpoint);
 app.use(errorHandler);
 

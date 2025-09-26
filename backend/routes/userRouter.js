@@ -42,10 +42,7 @@ router.put("/watched/:userId",requireAuth, addWatchedMovie);
 router.put("/yettowatch/:userId",requireAuth, addYetToWatchMovie);
 
 // DELETE /users/:userId
-router.delete("/:userId",requireAuth, deleteUser,
-);
+router.delete("/:userId",requireAuth, deleteUser,);
 
-// Update user using PATCH 
-// router.patch('/:userId', patchUser)
 
 module.exports = router;

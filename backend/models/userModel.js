@@ -53,10 +53,6 @@ userSchema.statics.signup = async function(username, email, password) {
     throw Error("Email is not valid");
   }
 
-  if (!validator.isStrongPassword(password)) {
-    throw Error("Password not strong enough");
-  }
-
   const emailExists = await this.findOne({ email });
   const usernameExists = await this.findOne({ username });
   if (emailExists || usernameExists) {
@@ -85,5 +81,15 @@ userSchema.statics.login = async function(username, password) {
   }
   return user;
 }
+
+userSchema.set('toJSON', {
+virtuals: true,
+transform: (doc, ret) => {
+    ret.id = ret._id;
+    delete ret._id;
+    delete ret.__v;
+    return ret;
+}
+});
 
 module.exports = mongoose.model("User", userSchema);

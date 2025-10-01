@@ -14,7 +14,7 @@ function SignupPage({onClose}) {
 
 const createUser = async () => {
   try {
-    const response = await fetch('http://localhost:4000/api/users', {
+    const response = await fetch('http://localhost:4000/api/users/signup', {
       method: "POST",
       headers: {
     "Content-Type": "application/json"
@@ -30,13 +30,15 @@ const createUser = async () => {
 
     if (!response.ok) {
       console.log('Fetch failed in creating user');
+      const rsp = await response.json();
+      console.log('Response:', rsp);
     } else {
       const data = await response.json();
       console.log('User created:', data);
 
       localStorage.setItem('username', data.username || username);
       localStorage.setItem('token', data.token);
-      localStorage.setItem('id', data.user.id);
+      localStorage.setItem('id', data.userId);
 
       console.log("local sotrage, username:", localStorage.getItem('username'));
       console.log("token", localStorage.getItem('token'));

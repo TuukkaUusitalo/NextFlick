@@ -1,5 +1,4 @@
 const User = require("../models/userModel");
-const bcrypt = require("bcrypt");
 const mongoose = require("mongoose");
 const jwt = require("jsonwebtoken"); // Import jwt module
 require("dotenv").config();
@@ -18,40 +17,18 @@ const getAllUsers = async (req, res) => {
     res.status(500).json({ message: "Failed to retrieve users" });
   }
 };
-//Normally get all users is not needed, so commenting it out
+//Normally get all users is not needed, so comment it out in the final version
 
  
-// POST /users
+// POST /users/signup
 // User signing up
 const createUser = async (req, res) => {
     try {
-      console.log("1");
-      const findUser = await User.findOne({ username: req.body.usernameusername }) ||
-        await User.findOne({ email: req.body.email });
-      if (findUser) {
-        return res.status(400).json({ message: "Username or Email already in use" });
-      } //Check if username or email already in use
-    const password = req.body.password;
-    console.log("2");
-    const salt = await bcrypt.genSalt(10);
-    const hashedPassword = await bcrypt.hash(password, salt);
-    req.body.password = hashedPassword;
-    console.log(req.body.password);
-    //generate hashed password before storing to db
-    const newUser = await User.create({ ...req.body });
-    const user = {
-      username: newUser.username,
-      email: newUser.email,
-      id: newUser._id,
-      profilePicture: newUser.profilePicture,
-      bio: newUser.bio,
-      recommendMovies: newUser.recommendedMovies,
-      watchedMovies: newUser.watchedMovies,
-      yetToWatchMovies: newUser.yetToWatchMovies,
-      preferences: newUser.preferences,
-    };
+    const { username, email, password } = req.body;
+    const newUser = await User.signup(username, email, password);
+
     const token = createToken(newUser._id); // Create a token for the new user
-    res.status(201).json({message: "User created",user: user, token:token});
+    res.status(201).json({message: "User created",user: newUser, token:token});
   } catch (error) {
     res.status(400).json({ message: "Failed to create user", error: error.message });
   }
@@ -61,31 +38,17 @@ const createUser = async (req, res) => {
 //User logging in
  const loginUser = async (req, res) => {
    try {
-     const foundUser = await User.findOne({ username:req.body.username });
-    if (!foundUser) {
-      return res.status(400).json({ message: "Invalid credentials" });
-      //Username not found
+     const { username, password } = req.body;
+     const user = await User.login(username, password);
+
+     if (user) {
+      const token = createToken(user._id); // Create a token for the logged-in user
+      res.status(200).json({ message: "Login successful", user: user, token: token });
+    } else {
+      res.status(400).json({ message: "Invalid username or password" });
     }
-    const isMatch = await bcrypt.compare(req.body.password, foundUser.password);
-    if (!isMatch) {
-      return res.status(400).json({ message: "Invalid credentials" });
-      //Wrong password
-    }
-    const user = {
-      username: foundUser.username,
-      email: foundUser.email,
-      id: foundUser._id,
-      profilePicture: foundUser.profilePicture,
-      bio: foundUser.bio,
-      recommendMovies: foundUser.recommendMovies,
-      watchedMovies: foundUser.watchedMovies,
-      yetToWatchMovies: foundUser.yetToWatchMovies,
-      preferences: foundUser.preferences,
-    };
-    const token = createToken(foundUser._id); // Create a token for the logged-in user
-    res.status(200).json({ message: "Login successful", user: user, token: token });
   } catch (error) {
-    res.status(500).json({ error: "Server error" });
+    res.status(500).json({ error: error.message });
   }
  };
 
@@ -149,14 +112,14 @@ const updateUser = async (req, res) => {
 //PUT /users/watched/:userId
 const addWatchedMovie = async (req, res) => {
     const { userId } = req.params;
-    const { movieId, movieName } = req.body;
     if (!mongoose.Types.ObjectId.isValid(userId)) {
     return res.status(400).json({ message: "Invalid user ID" });
   }
     try {
+    const newWatchedMovie = req.body.watchedMovies;
     const updatedUser = await User.findOneAndUpdate(
       { _id: userId },
-      { $addToSet: { watchedMovies: {name:movieName,movieId:movieId}}}, // Use $addToSet to avoid duplicates
+      { watchedMovies: newWatchedMovie}, // Use $addToSet to avoid duplicates
       { new: true }
     );
     if (updatedUser) {
@@ -172,14 +135,14 @@ const addWatchedMovie = async (req, res) => {
 //PUT /users/yettowatch/:userId
 const addYetToWatchMovie = async (req, res) => {
     const { userId } = req.params;
-    const { movieId, movieName } = req.body;
     if (!mongoose.Types.ObjectId.isValid(userId)) {
     return res.status(400).json({ message: "Invalid user ID" });
   }
     try {
+      const newYetToWatchMovie = req.body.yetToWatchMovies;
       const updatedUser = await User.findOneAndUpdate(
       { _id: userId },
-      { $addToSet: { yetToWatchMovies: {name:movieName,movieId:movieId }}}, // Use $addToSet to avoid duplicates
+      { yetToWatchMovies: newYetToWatchMovie}, // Use $addToSet to avoid duplicates
       { new: true }
     );
     if (updatedUser) {
@@ -201,9 +164,9 @@ const updatePreferences = async (req, res) => {
     try {
     const updatedUser = await User.findOneAndUpdate(
       { _id: userId },
-      { $addToSet: { 
-        "preferences.genres": req.body.genrePreferences,
-        "preferences.movies": req.body.moviePreferences }},
+      { preferences: { 
+        genres: req.body.genrePreferences,
+        movies: req.body.moviePreferences }},
       { new: true }
     );
     if (updatedUser) {
@@ -237,6 +200,7 @@ const deleteUser = async (req, res) => {
 module.exports = {
   getAllUsers,
   getUserById,
+  getUserByUsername,
   createUser,
   loginUser,
   updateUser,

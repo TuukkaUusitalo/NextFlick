@@ -11,11 +11,14 @@ if (!moviePreferences && !promptInput && !genrePreference) {
     The JSON response should have the following structure:
 
     [{
+      "movieId": "movie id from https://api.themoviedb.org/3"
       "movie": "movie titles or IDs",
       "reason": "short description of why these movies were chosen",
       "summary": "short summary of the movie list"
     },
-    {"movie": "movie titles or IDs",
+    {
+      "movieId": "movie id from https://api.themoviedb.org/3"
+      "movie": "movie titles or IDs",
       "reason": "short description of why these movies were chosen",
       "summary": "short summary of the movie list"}
     ,...]
@@ -27,6 +30,9 @@ if (!moviePreferences && !promptInput && !genrePreference) {
     Generate a movie list for me to watch based on this information.
 
     ### Instructions:
+    - Provide at least 5 movie recommendations.
+    - Recomend new movies that I haven't watched yet.
+    - Do not have repeat movies from the provided moviePreferences.
     - Keep each field concise (1–3 sentences max).
     - Do not include extra fields outside of the schema.
     - Return only valid JSON.

@@ -1,8 +1,8 @@
 const express = require("express");
 const router = express.Router();
-const {getPopularMovies} = require("../controllers/movieControllers");
+const {getMoviesDatabase} = require("../controllers/movieControllers");
 
-// GET /movies/popular/:query
-router.get("/popular", getPopularMovies);
+// GET /movies/:endpoint
+router.get("/:endpoint", getMoviesDatabase);
 
 module.exports = router;

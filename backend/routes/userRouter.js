@@ -20,7 +20,7 @@ const { requireAuth } = require("../middleware/requireAuth");
 // // GET /users
 router.get("/", getAllUsers);
 
-// POST /users
+// POST /users/
 router.post("/", createUser);
 
 //POST /users/login

@@ -7,7 +7,7 @@ export default function ReviewCard() {
     const [movies, setMovies] = useState([]);
     const [selectedMovie, setSelectedMovie] = useState(null);
     const [lists, setLists] = useState({
-      recommendations: false,
+      preferences: false,
       watched: false,
       watchNext: false,
     });
@@ -54,37 +54,63 @@ export default function ReviewCard() {
         movieId: selectedMovie.id,
       };
     
+      const httpPath = import.meta.env.VITE_HTTP_PATH;
+      const id = localStorage.getItem("id");
+      const token = localStorage.getItem("token");
+    
       try {
-        const selectedLists = [];
-        if (lists.recommendations) selectedLists.push("recommendedMovies");
-        if (lists.watched) selectedLists.push("watchedMovies");
-        if (lists.watchNext) selectedLists.push("yetToWatchMovies");
+        // 1. Hae nykyinen käyttäjä
+        const userRes = await fetch(`${httpPath}/users/${id}`, {
+          headers: { Authorization: `Bearer ${token}` },
+        });
+        const user = await userRes.json();
     
-        const httpPath = import.meta.env.VITE_HTTP_PATH;
-        const id = localStorage.getItem("id")
-        const token = localStorage.getItem("token");
-    
-        if (selectedLists.length === 0) {
-          alert("Please choose at least one list!");
-          return;
+        // 2. Päivitä listat ja lähetä koko lista PUTilla
+        if (lists.watched) {
+          const updatedWatched = [...user.watchedMovies, payload];
+          await fetch(`${httpPath}/users/watched/${id}`, {
+            method: "PUT",
+            headers: {
+              "Content-Type": "application/json",
+              Authorization: `Bearer ${token}`,
+            },
+            body: JSON.stringify({ watchedMovies: updatedWatched }),
+          });
         }
     
-        // vaihtoehto 1: lähetetään kaikki yhdellä pyynnöllä
-        const response = await fetch(`${httpPath}/users/recommend/${id}`, {
-          method: "POST",
-          headers: { "Content-Type": "application/json",
-            'Authorization': `Bearer ${token}`
-           },
-          body: JSON.stringify({ lists: selectedLists, movie: payload }),
-        });
+        if (lists.watchNext) {
+          const updatedYetToWatch = [...user.yetToWatchMovies, payload];
+          await fetch(`${httpPath}/users/yettowatch/${id}`, {
+            method: "PUT",
+            headers: {
+              "Content-Type": "application/json",
+              Authorization: `Bearer ${token}`,
+            },
+            body: JSON.stringify({ yetToWatchMovies: updatedYetToWatch }),
+          });
+        }
     
-        const data = await response.json();
-        console.log("Movie saved:", data);
+        if (lists.preferences) {
+          // Jos recommendations tarkoittaa userModelin recommendedMovies arrayta,
+          // tee vastaava put tänne (tai preferences jos tarkoitus oli se).
+          const updatedPreferences = [...user.preferencesMovies, payload];
+          await fetch(`${httpPath}/users/preferences/${id}`, {
+            method: "PUT",
+            headers: {
+              "Content-Type": "application/json",
+              Authorization: `Bearer ${token}`,
+            },
+            body: JSON.stringify({ preferencesMovies: updatedPreferences }),
+          });
+        }
     
+        alert("Movie(s) saved successfully!");
       } catch (error) {
         console.error("Error submitting movie:", error);
       }
     };
+    
+    
     
 
   return (

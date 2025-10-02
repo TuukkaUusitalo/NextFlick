@@ -1,10 +1,8 @@
-import React, {useState} from 'react'
+import { useState } from 'react'
 import './SignupPage.css'
 
 
-
-
-function SignupPage({onClose}) {
+function SignupPage({ setIsAuthenticated, onClose}) {
   const [email, setEmail]=useState("");
   const [username, setUsername]=useState("");
 
@@ -12,7 +10,10 @@ function SignupPage({onClose}) {
   const [passw, setPassW] = useState("")
   const [isStrong, setIsStrong] = useState(false)
 
-const createUser = async () => {
+
+
+const createUser = async (e) => {
+  e.preventDefault();
   try {
     const response = await fetch('http://localhost:4000/api/users/signup', {
       method: "POST",
@@ -35,14 +36,20 @@ const createUser = async () => {
     } else {
       const data = await response.json();
       console.log('User created:', data);
-
+      setIsAuthenticated(true);
       localStorage.setItem('username', data.username || username);
       localStorage.setItem('token', data.token);
       localStorage.setItem('id', data.userId);
 
+      localStorage.setItem("user", JSON.stringify(data))
+      localStorage.setItem("isAuthenticated", "true");
+      localStorage.setItem("token", data.token);
+      localStorage.setItem("loginStatus", "true");
       console.log("local sotrage, username:", localStorage.getItem('username'));
       console.log("token", localStorage.getItem('token'));
       console.log("userId", localStorage.getItem('id'))
+    
+      onClose()
     }
   } catch (error) {
     console.log('Error:', error);
@@ -79,8 +86,8 @@ const createUser = async () => {
   
   return (
   <div className="overlay" onClick={onClose}>
-
-    <div className='signupContainer'  onClick={(e) => e.stopPropagation()} >
+<div className='signupContainer' onClick={(e) => e.stopPropagation()}>
+    <form  onSubmit={createUser} >
       
       <h3 >Sign up</h3>
 
@@ -114,7 +121,7 @@ const createUser = async () => {
       )}
       <p>Username</p>
       <input placeholder="-- Username here --" onChange={(e) => setUsername(e.target.value)}></input>
-          <button className="signupButton" onClick={createUser}
+          <button className="signupButton" type="submit"
       style={{
             fontSize:"medium",
             justifyContent:"center",
@@ -128,7 +135,7 @@ const createUser = async () => {
           }}
         >Sign up</button>
       
-    <button className="closeButton" onClick={onClose}
+    <button className="closeButton"  onClick={onClose}
       style={{
             float:" right",
             marginTop:"10px",
@@ -140,8 +147,8 @@ const createUser = async () => {
             cursor: "pointer"
           }}
         >Close</button>
-    </div>
-
+    </form>
+  </div>
     </div>
   )
 }

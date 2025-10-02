@@ -8,7 +8,7 @@ import './App.css'
 import { useState } from "react";
 
 
-const Hero = () => {
+const Hero = ({setIsAuthenticated}) => {
  const [showSignup, setShowSignup] = useState(false);
  const [showSignin, setShowSignin] = useState(false);
   return (
@@ -36,7 +36,7 @@ const Hero = () => {
         <p>Add movies to your collection and recommend to others</p>
         <div className='signupsContainer'>
           
-        <a onClick={() => setShowSignup(true)}>Sign Up</a>
+        <a  onClick={() => setShowSignup(true)}>Sign Up</a>
         <span style={{fontSize:"x-large", color:"#FF5000"}}> {'\u00A0'}/{'\u00A0'} </span>
         <a onClick={() => setShowSignin(true)}>Sign In</a>
         
@@ -49,11 +49,13 @@ const Hero = () => {
     {showSignup && (
 
         <SignupPage
+          setIsAuthenticated={setIsAuthenticated}
           onClose={() => setShowSignup(null)}
         />
       )}
     {showSignin &&(
       <SigninPage
+          setIsAuthenticated={setIsAuthenticated}
           onClose={() => setShowSignin(null)}
         />
     )}

@@ -1,3 +1,5 @@
+const multer = require('multer');
+
 const requestLogger = (request, response, next) => {
   console.log('Method:', request.method)
   console.log('Path:  ', request.path)
@@ -19,8 +21,20 @@ const errorHandler = (error, request, response, next) => {
   })
 }
 
+const upload = multer({ storage: multer.diskStorage({
+  destination: function (req, file, cb) {
+    cb(null, './assets/')
+  },
+  filename: function (req, file, cb) {
+    const uniqueSuffix = Date.now() + '-' + Math.round(Math.random() * 1E4);
+    cb(null, uniqueSuffix + '-' + file.originalname)
+  }
+})
+});
+const uploadMiddleware = upload.single('image');
 module.exports = { 
     requestLogger,
     unknownEndpoint, 
-    errorHandler
+    errorHandler,
+    uploadMiddleware
 }

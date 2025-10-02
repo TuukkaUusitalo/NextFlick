@@ -1,12 +1,8 @@
 import { useState } from 'react'
-
-import { useNavigate } from 'react-router-dom';
-
 import './SignupPage.css'
 
 
 function SignupPage({ setIsAuthenticated, onClose}) {
-  const navigate = useNavigate();
   const [email, setEmail]=useState("");
   const [username, setUsername]=useState("");
 
@@ -19,10 +15,10 @@ function SignupPage({ setIsAuthenticated, onClose}) {
 const createUser = async (e) => {
   e.preventDefault();
   try {
-    const response = await fetch('http://localhost:4000/api/users', {
+    const response = await fetch('http://localhost:4000/api/users/signup', {
       method: "POST",
       headers: {
-  "Content-Type": "application/json"
+    "Content-Type": "application/json"
       },
     
       body: JSON.stringify({
@@ -35,14 +31,24 @@ const createUser = async (e) => {
 
     if (!response.ok) {
       console.log('Fetch failed in creating user');
+      const rsp = await response.json();
+      console.log('Response:', rsp);
     } else {
       const data = await response.json();
       console.log('User created:', data);
       setIsAuthenticated(true);
+      localStorage.setItem('username', data.username || username);
+      localStorage.setItem('token', data.token);
+      localStorage.setItem('id', data.userId);
+
       localStorage.setItem("user", JSON.stringify(data))
       localStorage.setItem("isAuthenticated", "true");
       localStorage.setItem("token", data.token);
       localStorage.setItem("loginStatus", "true");
+      console.log("local sotrage, username:", localStorage.getItem('username'));
+      console.log("token", localStorage.getItem('token'));
+      console.log("userId", localStorage.getItem('id'))
+    
       onClose()
     }
   } catch (error) {

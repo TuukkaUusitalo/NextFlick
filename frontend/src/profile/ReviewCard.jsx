@@ -15,7 +15,7 @@ export default function ReviewCard() {
     // Let's fetch movies for the user when searchTerm changes
     useEffect(() => {
         if (searchTerm.length < 2) {
-          setMovies([]); // Tyhjennetään lista jos liian vähän kirjaimia
+          setMovies([]); // Clear movies if search term is too short
           return;
         }
     
@@ -40,8 +40,7 @@ export default function ReviewCard() {
         };
           
         fetchMovies();
-      }, [searchTerm]); // Uusi haku aina kun hakusana muuttuu
-     // This fetches always again when search term changes
+      }, [searchTerm]); // This fetches always again when search term changes
 
      const handleSubmit = async () => {
       if (!selectedMovie) {
@@ -59,13 +58,13 @@ export default function ReviewCard() {
       const token = localStorage.getItem("token");
     
       try {
-        // 1. Hae nykyinen käyttäjä
+        // 1. Fetch current user data
         const userRes = await fetch(`${httpPath}/users/${id}`, {
           headers: { Authorization: `Bearer ${token}` },
         });
         const user = await userRes.json();
     
-        // 2. Päivitä listat ja lähetä koko lista PUTilla
+        // 2. Update the relevant lists
         if (lists.watched) {
           const updatedWatched = [...user.watchedMovies, payload];
           await fetch(`${httpPath}/users/watched/${id}`, {
@@ -91,8 +90,6 @@ export default function ReviewCard() {
         }
     
         if (lists.preferences) {
-          // Jos recommendations tarkoittaa userModelin recommendedMovies arrayta,
-          // tee vastaava put tänne (tai preferences jos tarkoitus oli se).
           const updatedPreferences = [...user.preferencesMovies, payload];
           await fetch(`${httpPath}/users/preferences/${id}`, {
             method: "PUT",
@@ -133,26 +130,26 @@ export default function ReviewCard() {
                 <div style={{ marginTop: "0.5rem", height: "22rem", width: "auto", overflowY: "auto" }}>
                     {searchTerm.length >= 2 && movies.length === 0 && <p>No movies found</p>}
                     {movies.map((movie) => (
-  <div 
-    key={movie.id}
-    onClick={() => setSelectedMovie(movie)}
-    style={{
-      cursor: "pointer",
-      border: selectedMovie?.id === movie.id ? "2px solid #FF5733" : "none",
-      marginBottom: "0.5rem",
-      padding: "0.5rem",
-      borderRadius: "0.5rem"
-    }}
-  >
-    <h3>{movie.title}</h3>
-    {movie.poster_path && (
-      <img
-        src={`https://image.tmdb.org/t/p/w200${movie.poster_path}`}
-        alt={movie.title}
-      />
-    )}
-  </div>
-))}
+                  <div 
+                    key={movie.id}
+                    onClick={() => setSelectedMovie(movie)}
+                    style={{
+                      cursor: "pointer",
+                      border: selectedMovie?.id === movie.id ? "2px solid #FF5733" : "none",
+                      marginBottom: "0.5rem",
+                      padding: "0.5rem",
+                      borderRadius: "0.5rem"
+                    }}
+                  >
+                    <h3>{movie.title}</h3>
+                    {movie.poster_path && (
+                      <img
+                        src={`https://image.tmdb.org/t/p/w200${movie.poster_path}`}
+                        alt={movie.title}
+                      />
+                    )}
+                  </div>
+                ))}
                 </div>
             </div>
 
@@ -169,13 +166,17 @@ export default function ReviewCard() {
                   <button
                     onClick={() => setLists({ ...lists, recommendations: !lists.recommendations })}
                     style={{
-                      height: "2.5rem",
-                      borderRadius: "1rem",
-                      backgroundColor: lists.recommendations ? "#C70039" : "#FF5733",
+
+                      backgroundColor: lists.recommendations ? "#FF5000" : "#202020",
+                      border: "0.2px solid #f36502",
+                      borderRadius: "10px",
+                      padding: "0.7rem",
                       color: "white",
-                      border: "none",
                       marginTop: "1rem",
-                      marginLeft: "1rem"
+                      marginLeft: "1rem",
+                      boxShadow: "0 0.5rem 1rem rgba(0, 0, 0, 0.5)",
+                      fontWeight: "bold",
+                      hover: "box-shadow: 0 0 16px  #FF5000",
                     }}
                   >
                     Recommendations
@@ -183,13 +184,17 @@ export default function ReviewCard() {
                   <button
                     onClick={() => setLists({ ...lists, watched: !lists.watched })}
                     style={{
-                      height: "2.5rem",
-                      borderRadius: "1rem",
-                      backgroundColor: lists.watched ? "#C70039" : "#FF5733",
+                     
+                      backgroundColor: lists.watched ? "#FF5000" : "#202020",
+                      border: "0.2px solid #f36502",
+                      borderRadius: "10px",
+                      padding: "0.7rem",
                       color: "white",
-                      border: "none",
                       marginTop: "1rem",
-                      marginLeft: "1rem"
+                      marginLeft: "1rem",
+                      boxShadow: "0 0.5rem 1rem rgba(0, 0, 0, 0.5)",
+                      fontWeight: "bold",
+                      hover: "box-shadow: 0 0 16px  #FF5000",
                     }}
                   >
                     I've Watched
@@ -197,13 +202,18 @@ export default function ReviewCard() {
                   <button
                     onClick={() => setLists({ ...lists, watchNext: !lists.watchNext })}
                     style={{
-                      height: "2.5rem",
-                      borderRadius: "1rem",
-                      backgroundColor: lists.watchNext ? "#C70039" : "#FF5733",
+
+                      backgroundColor: lists.watchNext ? "#FF5000" : "#202020",
+                      
+                      border: "0.2px solid #f36502",
+                      borderRadius: "10px",
+                      padding: "0.7rem",
                       color: "white",
-                      border: "none",
                       marginTop: "1rem",
-                      marginLeft: "1rem"
+                      marginLeft: "1rem",
+                      boxShadow: "0 0.5rem 1rem rgba(0, 0, 0, 0.5)",
+                      fontWeight: "bold",
+                      hover: "box-shadow: 0 0 16px  #FF5000",
                     }}
                   >
                     Watching For Next
@@ -215,13 +225,15 @@ export default function ReviewCard() {
                   <button
                     onClick={handleSubmit}
                     style={{
-                      height: "2.5rem",
-                      borderRadius: "1rem",
-                      backgroundColor: "#FF5733",
+                      backgroundColor: "#202020",
+                      border: "0.2px solid #f36502",
+                      borderRadius: "10px",
+                      padding: "0.7rem",
                       color: "white",
-                      border: "none",
-                      marginTop: "1rem",
-                      marginLeft: "1rem"
+                      margin: "1rem",
+                      boxShadow: "0 0.5rem 1rem rgba(0, 0, 0, 0.5)",
+                      fontWeight: "bold",
+                      hover: "box-shadow: 0 0 16px  #FF5000",
                     }}
                   >
                     Submit

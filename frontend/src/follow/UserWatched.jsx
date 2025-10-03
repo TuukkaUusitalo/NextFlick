@@ -2,26 +2,25 @@ import React from "react";
 import './UserWatched.css';
 import SmallMovies from "./SmallMovies";
 
-const UserWatched = () => {
+const UserWatched = ({ movies = [] }) => {
+  if (!Array.isArray(movies) || movies.length === 0) {
+    return <p style={{ color: "gray" }}>No movies found</p>;
+  }
 
-    
   return (
-    <>
-        
-        <div>
-            <div class="gradient-box2">
-                <div class="scroll-content2">
-                    <SmallMovies name="F1: The Movie" text="Amazing cinematography and thrilling racing scenes!" movie="F1: The Movie"/>
-                    <SmallMovies name="Shang-Chi" text="Great movie, would recommend!" movie="Shang-Chi"/>
-                    <SmallMovies name="The Witch" text="Spooky and atmospheric, a must-watch for horror fans." movie="The Witch"/>
-                    <SmallMovies name="F1: The Movie" text="Amazing cinematography and thrilling racing scenes!" movie="F1: The Movie"/>
-                    <SmallMovies name="Shang-Chi" text="Great movie, would recommend!" movie="Shang-Chi"/>
-                    <SmallMovies name="The Witch" text="Spooky and atmospheric, a must-watch for horror fans." movie="The Witch"/>
-                </div>
-            </div>
-        </div>
-    </>
-  )
-}
+    <div className="gradient-box2">
+      <div className="scroll-content2">
+        {movies.map((movie) => (
+          <SmallMovies
+            key={movie.id|| movie.movieId}
+            name={movie.title}
+            text={movie.overview}
+            poster={`https://image.tmdb.org/t/p/w200${movie.poster_path}`}
+          />
+        ))}
+      </div>
+    </div>
+  );
+};
 
-export default UserWatched
+export default UserWatched;

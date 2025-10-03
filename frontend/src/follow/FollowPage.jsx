@@ -38,28 +38,49 @@ function FollowPage() {
   }, [searchTerm]);
 
   // Kun käyttäjä valitaan, haetaan kaikki sen tiedot
+  const fetchMovieDetails = async (movies) => {
+    return Promise.all(
+      movies.map(async (m) => {
+        const res = await fetch(
+          `https://api.themoviedb.org/3/movie/${m.movieId}`,
+          {
+            headers: {
+              accept: "application/json",
+              Authorization: `Bearer ${import.meta.env.VITE_MOVIE_API_KEY}`,
+            },
+          }
+        );
+        return res.json();
+      })
+    );
+  };
+  
   const handleUserSelect = async (user) => {
     setSelectedUser(user);
     try {
       const httpPath = import.meta.env.VITE_HTTP_PATH;
-      const response = await fetch(`${httpPath}/users/${user._id}`, {
-        method: 'GET',
-        headers: { 'Content-Type': 'application/json' }
-      });
-
-      if (!response.ok) throw new Error(`HTTP error: ${response.status}`);
-
+      const response = await fetch(`${httpPath}/users/${user._id}`);
       const data = await response.json();
-      setSelectedUserData(data);
-    } catch (error) {
-      console.error("Virhe haettaessa käyttäjää:", error);
+  
+      // Information about recommended and watched movies from TMDB
+      const recommended = await fetchMovieDetails(data.recommendedMovies || []);
+      const watched = await fetchMovieDetails(data.watchedMovies || []);
+  
+      setSelectedUserData({
+        ...data,
+        recommendedMovies: recommended,
+        watchedMovies: watched,
+      });
+    } catch (err) {
+      console.error("Virhe haettaessa käyttäjää:", err);
     }
   };
+  
 
   return (
     <div>
       <div style={{ display: 'flex', margin: 'auto' }}>
-        {/* Vasemman puolen profiili ja tiedot */}
+        {/* Left side profileview and infos */}
         <div className='modal-user-view'>
           <div style={{ display: 'flex' }}>
             <div style={{ width: '30%', justifyContent: 'center', display: 'flex' }}>
@@ -69,11 +90,11 @@ function FollowPage() {
               {selectedUserData ? (
                 <>
                   <p style={{ marginTop: '2rem', fontSize: '18px', marginLeft: '3rem', fontWeight: 'bold' }}>
-                    {selectedUserData.username} Recommends
+                     Recommends
                   </p>
                   <UserWatched movies={selectedUserData.recommendedMovies} />
                   <p style={{ marginTop: '2rem', fontSize: '18px', marginLeft: '2rem', fontWeight: 'bold' }}>
-                    {selectedUserData.username} Has Watched
+                     Has Watched
                   </p>
                   <UserWatched movies={selectedUserData.watchedMovies} />
                 </>
@@ -84,7 +105,7 @@ function FollowPage() {
           </div>
         </div>
 
-        {/* Hakukenttä ja hakutulokset */}
+        {/* search bar and results */}
         <div style={{ flex: 1 }}>
           <input
             placeholder="Find friends"
@@ -102,7 +123,7 @@ function FollowPage() {
             }}
           />
 
-          {/* Hakutulokset */}
+          {/* results */}
           <div
             style={{
               width: "100%",

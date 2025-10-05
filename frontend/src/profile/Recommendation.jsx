@@ -1,33 +1,15 @@
-import f1 from "../assets/movie-f1.jpg"
-import shangchi from "../assets/movie-Shang-Chi.jpg"
-import thewitch from "../assets/movie-TheWitch.jpg"
+
 import './Profile.css';
 
 
 
-function movieChoice(movie){
-    if (movie === "F1: The Movie"){
-        return f1
-    }
-     if (movie === "Shang-Chi"){
-        return shangchi
-    }
-     if (movie === "The Witch"){
-        return thewitch
-    }
-     if (movie === "F1"){
-        return f1
-    }
-}
-
-function Recommendation(props){
+function Recommendation(name, text, poster){
     return(
         <div className="movieCardContainerRecommendation">
             <div className="movieCardRecommendation">
-                <img src={movieChoice(props.name)} alt="Movie" />
+                <img src={poster} alt={name} />
                 <div className="movieCardText">
-                    <h3>{props.name}</h3>
-                    <p>Tägejä: jännitys, komedia...</p>
+                    <h3>{name}</h3>
                 </div>
             </div>
         </div>

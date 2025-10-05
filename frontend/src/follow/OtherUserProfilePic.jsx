@@ -13,7 +13,7 @@ const OtherUserProfilePic = ({ selectedUserData }) => {
         <p style={{ fontSize: 22, fontWeight: 'bold', textAlign: 'center' }}>
           {selectedUserData ? selectedUserData.username : "username"}
         </p>
-        <button className='followBtn'>Follow</button>
+        {/*<button className='followBtn'>Follow</button>*/}
         <h4>Bio</h4>
         <p style={{ width: 'auto' }}>
           {selectedUserData ? selectedUserData.bio || "No bio yet" : ""}

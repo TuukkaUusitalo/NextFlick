@@ -17,7 +17,7 @@ const MyRecommendation = () => {
     }
 
     const [showReviewCard, setShowReviewCard] = useState(false);
-    const [preferencedMovies, setPreferencedMovies] = useState([]);
+    const [preferences, setPreferences] = useState([]);
 
     const httpPath = import.meta.env.VITE_HTTP_PATH;
     const id = localStorage.getItem("id");
@@ -31,10 +31,10 @@ const MyRecommendation = () => {
         });
         const user = await res.json();
 
-        if (user?.preferencedMovies?.length > 0) {
+        if (user?.preferences?.length > 0) {
           // Fetch details from TMDB for each movieId
           const tmdbResponses = await Promise.all(
-            user.preferencedMovies.map(async (m) => {
+            user.preferences.map(async (m) => {
               const tmdbRes = await fetch(
                 `https://api.themoviedb.org/3/movie/${m.movieId}`,
                 {
@@ -47,7 +47,7 @@ const MyRecommendation = () => {
               return tmdbRes.json();
             })
           );
-          setPreferencedMovies(tmdbResponses);
+          setPreferences(tmdbResponses);
         }
       } catch (err) {
         console.error("Error fetching recommended movies:", err);
@@ -69,7 +69,7 @@ const MyRecommendation = () => {
 
         <div className="gradient-box">
         <div className="scroll-content">
-          {preferencedMovies.map((movie) => (
+          {preferences.map((movie) => (
             <Recommendation
               key={movie.id}
               name={movie.title}

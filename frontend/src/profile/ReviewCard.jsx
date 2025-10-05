@@ -90,16 +90,20 @@ export default function ReviewCard() {
         }
     
         if (lists.preferences) {
-          const updatedPreferences = [...user.preferencesMovies, payload];
+          const updatedMovies = [...user.preferences.movies, selectedMovie.id];
           await fetch(`${httpPath}/users/preferences/${id}`, {
             method: "PUT",
             headers: {
               "Content-Type": "application/json",
               Authorization: `Bearer ${token}`,
             },
-            body: JSON.stringify({ preferencesMovies: updatedPreferences }),
+            body: JSON.stringify({
+              moviePreferences: updatedMovies,
+              genrePreferences: user.preferences.genres || [],
+            }),
           });
         }
+        
     
         alert("Movie(s) saved successfully!");
       } catch (error) {

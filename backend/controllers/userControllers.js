@@ -162,13 +162,17 @@ const updatePreferences = async (req, res) => {
     return res.status(400).json({ message: "Invalid user ID" });
   }
     try {
-    const updatedUser = await User.findOneAndUpdate(
-      { _id: userId },
-      { preferences: { 
-        genres: req.body.genrePreferences,
-        movies: req.body.moviePreferences }},
-      { new: true }
-    );
+      const { moviePreferences, genrePreferences } = req.body;
+      const updatedUser = await User.findOneAndUpdate(
+        { _id: userId },
+        {
+          preferences: {
+            genres: genrePreferences,
+            movies: moviePreferences,
+          },
+        },
+        { new: true }
+      );
     if (updatedUser) {
       res.status(200).json(updatedUser);
     } else {

@@ -37,6 +37,25 @@ router.put("/:userId",requireAuth, updateUser);
 
 router.put("/preferences/:userId",requireAuth, updatePreferences);
 
+// GET /users/preferences/:userId
+router.get("/preferences/:userId", requireAuth, async (req, res) => {
+  const { userId } = req.params;
+
+  try {
+    const user = await User.findById(userId).select("preferences");
+
+    if (!user) {
+      return res.status(404).json({ message: "User not found" });
+    }
+
+    res.json(user);
+  } catch (err) {
+    console.error("Error fetching preferences:", err);
+    res.status(500).json({ message: "Failed to fetch user preferences" });
+  }
+});
+
+
 router.put("/watched/:userId",requireAuth, addWatchedMovie);
 
 router.put("/yettowatch/:userId",requireAuth, addYetToWatchMovie);

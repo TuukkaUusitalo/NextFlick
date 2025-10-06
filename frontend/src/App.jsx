@@ -14,7 +14,7 @@ import TrendingMovies from './TrendingMovies.jsx';
 import TrendingTvshows from './TrendingTvshows.jsx';
 
 
-function Homepage({setIsAuthenticated}) {
+function Homepage() {
   return(
   <div>
     <header>
@@ -42,9 +42,11 @@ function App(){
   <Route path="/" element={<Homepage setIsAuthenticated={setIsAuthenticated} />} />
   <Route path="/trending" element={<TrendingPage />} />
   <Route path="/reviews" element={<ReviewsPage />} />
-  <Route path="/recommendations" element={<RecommendationsPage />} />
 
-  {/* Protected route example */}
+  <Route path="/recommendations" 
+  element={<RecommendationsPage />} />
+
+  {/* Profile page */}
   <Route
     path="/profile"
     element={

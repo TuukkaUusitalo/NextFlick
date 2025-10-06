@@ -1,11 +1,13 @@
 import React, {useState} from 'react'
 import './SignupPage.css'
+import { useNavigate } from 'react-router-dom';
 
 
 
-function SignupPage({setIsAuthenticated, onClose}) {
+function SigninPage({setIsAuthenticated, onClose}) {
   const [username, setUsername] = useState("");
   const [passw, setPassW] = useState("")
+  const navigate = useNavigate();
 
 const loginUser = async(e) =>{
    e.preventDefault();
@@ -31,20 +33,26 @@ const loginUser = async(e) =>{
       setIsAuthenticated(true);
       localStorage.setItem('username', data.username || username);
       localStorage.setItem('token', data.token);
-      localStorage.setItem('id', data.userId);
       localStorage.setItem("user", JSON.stringify(data))
       localStorage.setItem("isAuthenticated", "true");
       localStorage.setItem("token", data.token);
+      localStorage.setItem("id", data.user._id);
       localStorage.setItem("loginStatus", "true");
       console.log("local sotrage, username:", localStorage.getItem('username'));
       console.log("token", localStorage.getItem('token'));
       console.log("userId", localStorage.getItem('id'))
-      onClose()
+
+      navigate("/"); // To the home page after signup
+      }
+    } catch (error) {
+      console.log('Error:', error);
     }
-  } catch (error) {
-    console.log('Error:', error);
-  }
-};
+  };
+
+
+  const handleClose = () => {
+    navigate("/"); // To the home page
+  };
 
 
   
@@ -69,7 +77,7 @@ const loginUser = async(e) =>{
       </input>
       
     <button className='signUpButton' type="submit">Sign in</button>
-    <button className="closeButton" onClick={onClose} 
+    <button className="closeButton" onClick={handleClose} 
       style={{
             float:" right",
             marginTop:"10px",
@@ -88,4 +96,4 @@ const loginUser = async(e) =>{
   )
 }
 
-export default SignupPage
+export default SigninPage

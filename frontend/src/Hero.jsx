@@ -20,7 +20,7 @@ const Hero = () => {
     <div className='heroCardOne'>
         <img src={SmartMovies}></img>
         <p>Get smart movie recommendations based on your taste.</p>
-        <a>Try our AI</a>
+        <a href="./recommendations">Try our AI</a>
     </div>
     <div className='heroCardTwo'>
         <img src={LikeShare}></img>

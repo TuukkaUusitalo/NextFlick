@@ -129,7 +129,6 @@ useEffect(() => {
 
     return(
         <div>
-            <h1> Welcome to the Reviews page</h1>
             <h2> User Reviews:</h2>
         {showUserReviews ? (
       <div>

@@ -94,7 +94,7 @@ function RecommendationsPage(){
 
     return(
         <div>
-            <h1> Welcome to the Recommendations page</h1>
+            <h2> Try our AI recommendations</h2>
             <div className="recommendationsHeader">
             <textarea placeholder="describe the type of movie you would like..." onChange={(e)=>setUserPrompt(e.target.value)}></textarea>
             <button onClick={getAiRecommendation}>Get AI recommendation</button>

@@ -7,7 +7,7 @@ export default function ReviewCard() {
     const [movies, setMovies] = useState([]);
     const [selectedMovie, setSelectedMovie] = useState(null);
     const [lists, setLists] = useState({
-      recommendations: false,
+      preferences: false,
       watched: false,
       watchNext: false,
     });
@@ -15,7 +15,7 @@ export default function ReviewCard() {
     // Let's fetch movies for the user when searchTerm changes
     useEffect(() => {
         if (searchTerm.length < 2) {
-          setMovies([]); // Tyhjennetään lista jos liian vähän kirjaimia
+          setMovies([]); // Clear movies if search term is too short
           return;
         }
     
@@ -40,8 +40,7 @@ export default function ReviewCard() {
         };
           
         fetchMovies();
-      }, [searchTerm]); // Uusi haku aina kun hakusana muuttuu
-     // This fetches always again when search term changes
+      }, [searchTerm]); // This fetches always again when search term changes
 
      const handleSubmit = async () => {
       if (!selectedMovie) {
@@ -54,37 +53,61 @@ export default function ReviewCard() {
         movieId: selectedMovie.id,
       };
     
+      const httpPath = import.meta.env.VITE_HTTP_PATH;
+      const id = localStorage.getItem("id");
+      const token = localStorage.getItem("token");
+    
       try {
-        const selectedLists = [];
-        if (lists.recommendations) selectedLists.push("recommendedMovies");
-        if (lists.watched) selectedLists.push("watchedMovies");
-        if (lists.watchNext) selectedLists.push("yetToWatchMovies");
+        // 1. Fetch current user data
+        const userRes = await fetch(`${httpPath}/users/${id}`, {
+          headers: { Authorization: `Bearer ${token}` },
+        });
+        const user = await userRes.json();
     
-        const httpPath = import.meta.env.VITE_HTTP_PATH;
-        const id = localStorage.getItem("id")
-        const token = localStorage.getItem("token");
-    
-        if (selectedLists.length === 0) {
-          alert("Please choose at least one list!");
-          return;
+        // 2. Update the relevant lists
+        if (lists.watched) {
+          const updatedWatched = [...user.watchedMovies, payload];
+          await fetch(`${httpPath}/users/watched/${id}`, {
+            method: "PUT",
+            headers: {
+              "Content-Type": "application/json",
+              Authorization: `Bearer ${token}`,
+            },
+            body: JSON.stringify({ watchedMovies: updatedWatched }),
+          });
         }
     
-        // vaihtoehto 1: lähetetään kaikki yhdellä pyynnöllä
-        const response = await fetch(`${httpPath}/users/recommend/${id}`, {
-          method: "POST",
-          headers: { "Content-Type": "application/json",
-            'Authorization': `Bearer ${token}`
-           },
-          body: JSON.stringify({ lists: selectedLists, movie: payload }),
-        });
+        if (lists.watchNext) {
+          const updatedYetToWatch = [...user.yetToWatchMovies, payload];
+          await fetch(`${httpPath}/users/yettowatch/${id}`, {
+            method: "PUT",
+            headers: {
+              "Content-Type": "application/json",
+              Authorization: `Bearer ${token}`,
+            },
+            body: JSON.stringify({ yetToWatchMovies: updatedYetToWatch }),
+          });
+        }
     
-        const data = await response.json();
-        console.log("Movie saved:", data);
+        if (lists.preferences) {
+          const updatedPreferences = [...user.preferencesMovies, payload];
+          await fetch(`${httpPath}/users/preferences/${id}`, {
+            method: "PUT",
+            headers: {
+              "Content-Type": "application/json",
+              Authorization: `Bearer ${token}`,
+            },
+            body: JSON.stringify({ preferencesMovies: updatedPreferences }),
+          });
+        }
     
+        alert("Movie(s) saved successfully!");
       } catch (error) {
         console.error("Error submitting movie:", error);
       }
     };
+    
+    
     
 
   return (
@@ -107,26 +130,26 @@ export default function ReviewCard() {
                 <div style={{ marginTop: "0.5rem", height: "22rem", width: "auto", overflowY: "auto" }}>
                     {searchTerm.length >= 2 && movies.length === 0 && <p>No movies found</p>}
                     {movies.map((movie) => (
-  <div 
-    key={movie.id}
-    onClick={() => setSelectedMovie(movie)}
-    style={{
-      cursor: "pointer",
-      border: selectedMovie?.id === movie.id ? "2px solid #FF5733" : "none",
-      marginBottom: "0.5rem",
-      padding: "0.5rem",
-      borderRadius: "0.5rem"
-    }}
-  >
-    <h3>{movie.title}</h3>
-    {movie.poster_path && (
-      <img
-        src={`https://image.tmdb.org/t/p/w200${movie.poster_path}`}
-        alt={movie.title}
-      />
-    )}
-  </div>
-))}
+                  <div 
+                    key={movie.id}
+                    onClick={() => setSelectedMovie(movie)}
+                    style={{
+                      cursor: "pointer",
+                      border: selectedMovie?.id === movie.id ? "2px solid #FF5733" : "none",
+                      marginBottom: "0.5rem",
+                      padding: "0.5rem",
+                      borderRadius: "0.5rem"
+                    }}
+                  >
+                    <h3>{movie.title}</h3>
+                    {movie.poster_path && (
+                      <img
+                        src={`https://image.tmdb.org/t/p/w200${movie.poster_path}`}
+                        alt={movie.title}
+                      />
+                    )}
+                  </div>
+                ))}
                 </div>
             </div>
 
@@ -143,13 +166,17 @@ export default function ReviewCard() {
                   <button
                     onClick={() => setLists({ ...lists, recommendations: !lists.recommendations })}
                     style={{
-                      height: "2.5rem",
-                      borderRadius: "1rem",
-                      backgroundColor: lists.recommendations ? "#C70039" : "#FF5733",
+
+                      backgroundColor: lists.recommendations ? "#FF5000" : "#202020",
+                      border: "0.2px solid #f36502",
+                      borderRadius: "10px",
+                      padding: "0.7rem",
                       color: "white",
-                      border: "none",
                       marginTop: "1rem",
-                      marginLeft: "1rem"
+                      marginLeft: "1rem",
+                      boxShadow: "0 0.5rem 1rem rgba(0, 0, 0, 0.5)",
+                      fontWeight: "bold",
+                      hover: "box-shadow: 0 0 16px  #FF5000",
                     }}
                   >
                     Recommendations
@@ -157,13 +184,17 @@ export default function ReviewCard() {
                   <button
                     onClick={() => setLists({ ...lists, watched: !lists.watched })}
                     style={{
-                      height: "2.5rem",
-                      borderRadius: "1rem",
-                      backgroundColor: lists.watched ? "#C70039" : "#FF5733",
+                     
+                      backgroundColor: lists.watched ? "#FF5000" : "#202020",
+                      border: "0.2px solid #f36502",
+                      borderRadius: "10px",
+                      padding: "0.7rem",
                       color: "white",
-                      border: "none",
                       marginTop: "1rem",
-                      marginLeft: "1rem"
+                      marginLeft: "1rem",
+                      boxShadow: "0 0.5rem 1rem rgba(0, 0, 0, 0.5)",
+                      fontWeight: "bold",
+                      hover: "box-shadow: 0 0 16px  #FF5000",
                     }}
                   >
                     I've Watched
@@ -171,13 +202,18 @@ export default function ReviewCard() {
                   <button
                     onClick={() => setLists({ ...lists, watchNext: !lists.watchNext })}
                     style={{
-                      height: "2.5rem",
-                      borderRadius: "1rem",
-                      backgroundColor: lists.watchNext ? "#C70039" : "#FF5733",
+
+                      backgroundColor: lists.watchNext ? "#FF5000" : "#202020",
+                      
+                      border: "0.2px solid #f36502",
+                      borderRadius: "10px",
+                      padding: "0.7rem",
                       color: "white",
-                      border: "none",
                       marginTop: "1rem",
-                      marginLeft: "1rem"
+                      marginLeft: "1rem",
+                      boxShadow: "0 0.5rem 1rem rgba(0, 0, 0, 0.5)",
+                      fontWeight: "bold",
+                      hover: "box-shadow: 0 0 16px  #FF5000",
                     }}
                   >
                     Watching For Next
@@ -189,13 +225,15 @@ export default function ReviewCard() {
                   <button
                     onClick={handleSubmit}
                     style={{
-                      height: "2.5rem",
-                      borderRadius: "1rem",
-                      backgroundColor: "#FF5733",
+                      backgroundColor: "#202020",
+                      border: "0.2px solid #f36502",
+                      borderRadius: "10px",
+                      padding: "0.7rem",
                       color: "white",
-                      border: "none",
-                      marginTop: "1rem",
-                      marginLeft: "1rem"
+                      margin: "1rem",
+                      boxShadow: "0 0.5rem 1rem rgba(0, 0, 0, 0.5)",
+                      fontWeight: "bold",
+                      hover: "box-shadow: 0 0 16px  #FF5000",
                     }}
                   >
                     Submit

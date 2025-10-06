@@ -34,7 +34,7 @@ const Hero = () => {
         <div className='signupsContainer'>
           
     <Link to="/signup">Sign up</Link>
-    <span style={{fontSize:"x-large", color:"#FF5000"}}> {'\u00A0'}/{'\u00A0'} </span>
+    <span style={{fontSize:"x-large", color:"#f36502" }}> {'\u00A0'}|{'\u00A0'} </span>
     <Link to="/login">Log in</Link>
 
         </div>

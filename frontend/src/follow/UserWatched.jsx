@@ -23,4 +23,5 @@ const UserWatched = ({ movies = [] }) => {
   );
 };
 
+
 export default UserWatched;

@@ -51,6 +51,7 @@ const ProfilePic = () => {
 
     return () => clearTimeout(timer); // jos kirjoitetaan lisää, perutaan edellinen tallennus
   }, [bio]);
+  
 
   const handleGetBio = async () => {
     try {

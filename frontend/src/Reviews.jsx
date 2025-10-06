@@ -7,19 +7,72 @@ function ReviewsPage(){
     const [error, setError] = useState(null);
     const [reviews, setReviews] = useState([]);
     const [selectedMovieId, setSelectedMovieId] = useState("");//Tracks selected movie
-    
+    const [userReviews, setUserReviews] = useState([])
+    const [showUserReviews ,setShowUserReviews] = useState(false)
+    const [userNames, setUserNames] = useState({})
+    const [moviesMap, setMoviesMap] = useState({});
+
     const { getReviews, reviewsError } = useAllReviews()
                 
+
+
+
+useEffect(() => {
+  const fetchMoviesForReviews = async () => {
+    const apiKey = import.meta.env.VITE_MOVIE_API_KEY;
+    const map = {};
+    for (const review of userReviews) {
+      try {
+        const res = await fetch(`https://api.themoviedb.org/3/movie/${review.movie_id}`, {
+          headers: {
+            accept: "application/json",
+            Authorization: `Bearer ${apiKey}`,
+          },
+        });
+        const data = await res.json();
+        map[review.movie_id] = data;
+      } catch (err) {
+        console.error(err);
+      }
+    }
+    setMoviesMap(map);
+  };
+
+  if (userReviews.length > 0) fetchMoviesForReviews();
+}, [userReviews]);
+
     
     useEffect(() =>{
         const fetchReviews = async() => {
         const reviews = await getReviews()
-        console.log(reviews)
+        console.log((reviews))
+        setUserReviews((reviews))
+        setShowUserReviews(true)
         }
         fetchReviews();
     },[])
 
-    
+    useEffect(() => {
+  const fetchUsernames = async () => {
+    const names = {};
+    for (const review of userReviews) {
+      try {
+        const response = await fetch(`http://localhost:4000/api/users/${review.author}`);
+        const data = await response.json();
+        names[review.author] = data.username; // assuming backend returns { username: "..." }
+      } catch (err) {
+        console.error(err);
+      }
+    }
+    setUserNames(names);
+  };
+
+  if (userReviews.length > 0) {
+    fetchUsernames();
+  }
+}, [userReviews]);
+
+
             //fetch trending movies
     useEffect(() =>{
         const fetchMovies = async () => {
@@ -77,8 +130,37 @@ function ReviewsPage(){
     return(
         <div>
             <h1> Welcome to the Reviews page</h1>
-            <h2>User Reviews:</h2>
-            <a>Review</a>
+            <h2> User Reviews:</h2>
+        {showUserReviews ? (
+      <div>
+        {userReviews.map((userReview) => {
+  // find the movie object that matches this review
+  const movie = moviesMap[userReview.movie_id];
+
+  return (
+    <div className="reviewCard" key={userReview._id}>
+      <div className='reviewHeader'>
+      <p className="reviewMovieAuthor">{userNames[userReview.author] || "Loading..."}</p>
+      <p className="reviewMovieTitle">{movie?.title || "Unknown Movie"}</p>
+      <p className="userReviewRating">{userReview.rating}/5</p>
+      </div>
+      {movie?.poster_path && (
+        <img
+          className="reviewMovieImage"
+          src={`https://image.tmdb.org/t/p/w500${movie.poster_path}`}
+          alt={"Movie poster"}
+        />
+      )}
+      <p className="reviewMoviecontent">{userReview.body}</p>
+    </div>
+  );
+})}
+
+        </div>
+      ) : (
+        <p>Not found</p>
+      )}
+            
 
             <h2>Movie Reviews:</h2>
             <p>Choose a Movie:</p>

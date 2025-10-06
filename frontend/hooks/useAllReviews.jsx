@@ -22,7 +22,7 @@ export default function useAllReviews() {
     }
     setIsLoading(false)
     console.log(reviews)
-    return true;
+    return reviews;
     }
 
   return { getReviews, isLoading, error };

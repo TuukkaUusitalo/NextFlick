@@ -150,7 +150,11 @@ h2{
 .genreName:hover{
   background-color: #f7f7f773;
 }
-
+.reviewHeader {
+  display: flex;
+  align-items: center; /* vertically aligns content */
+  gap: 1rem; /* space between author, title, rating */
+}
 .reviewCard{
   box-shadow: 0 0 16px black;
   display: inline-block;
@@ -168,16 +172,21 @@ h2{
 .reviewMovieTitle{
   color:#FF5000;
   margin-top: 0rem;
-  margin-left: 10rem;
+  margin-left: 6rem;
   width:fit-content;
   height:fit-content;
 }
-
+.userReviewRating{
+    margin-left: 6rem;
+    color:#ffd900;
+    width:fit-content;
+    height:fit-content;
+    margin-top: 0rem;    
+}
 .reviewMoviecontent{
   margin-left:7rem;
   margin-top: 0rem;
   display: block;
-  border:solid black;
   height: 9rem;
   overflow:auto;
 

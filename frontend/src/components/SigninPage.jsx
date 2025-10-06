@@ -3,78 +3,73 @@ import './SignupPage.css'
 
 
 
-function SignupPage({onClose}) {
-  const [email, setEmail]=useState("");
-  const [isValid, setIsValid] = useState(null);
+function SignupPage({setIsAuthenticated, onClose}) {
+  const [username, setUsername] = useState("");
   const [passw, setPassW] = useState("")
-  const [isStrong, setIsStrong] = useState(false)
 
+const loginUser = async(e) =>{
+   e.preventDefault();
+  try {
+    const response = await fetch('http://localhost:4000/api/users/login', {
+      method: "POST",
+      headers: {
+    "Content-Type": "application/json"
+      },
+      body: JSON.stringify({
+        username: username,
+        password: passw,
+      })
+    });
 
-  function checkStr(e){
-    const value = e.target.value
-    setPassW(value)
-    if (value.length >= 6){
-      setIsStrong(true)
+    if (!response.ok) {
+      console.log('Fetch failed in creating user');
+      const rsp = await response.json();
+      console.log('Response:', rsp);
+    } else {
+      const data = await response.json();
+      console.log('User created:', data);
+      setIsAuthenticated(true);
+      localStorage.setItem('username', data.username || username);
+      localStorage.setItem('token', data.token);
+      localStorage.setItem('id', data.userId);
+      localStorage.setItem("user", JSON.stringify(data))
+      localStorage.setItem("isAuthenticated", "true");
+      localStorage.setItem("token", data.token);
+      localStorage.setItem("loginStatus", "true");
+      console.log("local sotrage, username:", localStorage.getItem('username'));
+      console.log("token", localStorage.getItem('token'));
+      console.log("userId", localStorage.getItem('id'))
+      onClose()
     }
-    else{
-      setIsStrong(false)
-    }
+  } catch (error) {
+    console.log('Error:', error);
   }
+};
 
- 
-  function checkEmail(e){
-    const value = e.target.value;
-    setEmail(value)
-    if (value.includes('@')&& value.includes('.com') || value.includes('.fi') ){
-      setIsValid(true)
-    }
-    else{
-      setIsValid(false)
-    }
-  }
 
   
   return (
   <div className="overlay" onClick={onClose}>
 
-    <div className='signinContainer'  onClick={(e) => e.stopPropagation()} >
-      
+    <div className='signinContainer' onClick={(e) => e.stopPropagation()} >
+      <form onSubmit={loginUser} >
       <h3 >Sign in</h3>
 
-    <p>Email</p>
-      <input className='emailInput' 
-      placeholder='--Email here--' 
-      onChange={checkEmail}
-      style={{border: !email ? "3px solid white":
-        isValid
-        ?"3px solid green"
-        :"3px solid red"}}>
+    <p>Username</p>
+      <input className='usernameInput' 
+      placeholder='--Username here--' 
+      onChange={(e) => setUsername(e.target.value)}
+      value={username}>
       </input>
       
-      {email &&(
-         <p style={{ color: isValid ? "green" : "red" }}>
-          {isValid ? "Your email is valid" : "Your email is invalid"}
-        </p>
-      )}
       <p>Password</p>
       <input type='password'className='passwordInput' placeholder='--Password here--'
-      onChange={checkStr}
-      style={{border: !passw ?"3px solid white": 
-      isStrong
-      ?"3px solid green"
-      :"3px solid red"}}>
+      onChange={(e) => setPassW(e.target.value)}
+      value={passw}>
       </input>
-
-      {passw &&(
-        <p style={{color: isStrong ? "green" : "red"}}>
-          {isStrong ? "Your password is strong" : "Your password is weak"}</p>
-      )}
       
-      
-
-    <button className='signUpButton'>Sign in</button>
-    <p>{fetchGreeting()}</p>
-    <button className="closeButton" onClick={onClose}
+    <button className='signUpButton' type="submit">Sign in</button>
+    <button className="closeButton" onClick={onClose} 
       style={{
             float:" right",
             marginTop:"10px",
@@ -86,6 +81,7 @@ function SignupPage({onClose}) {
             cursor: "pointer"
           }}
         >Close</button>
+    </form>
     </div>
 
     </div>

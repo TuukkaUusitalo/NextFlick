@@ -2,15 +2,12 @@ import SmartMovies from './assets/SmartMovies.jpeg'
 import MoviePoster from './assets/movie-poster1.jpg'
 import LikeShare from './assets/LikeShare.jpeg'
 import SignUp from './assets/SignUp.jpeg'
-import SignupPage from "./components/SignupPage.jsx";
-import SigninPage from "./components/SigninPage.jsx";
+import { Link } from "react-router-dom";
 import './App.css'
-import { useState } from "react";
 
 
-const Hero = ({setIsAuthenticated}) => {
- const [showSignup, setShowSignup] = useState(false);
- const [showSignin, setShowSignin] = useState(false);
+const Hero = () => {
+
   return (
 
 <div  style={{ position: "relative" }}>
@@ -36,29 +33,17 @@ const Hero = ({setIsAuthenticated}) => {
         <p>Add movies to your collection and recommend to others</p>
         <div className='signupsContainer'>
           
-        <a  onClick={() => setShowSignup(true)}>Sign Up</a>
-        <span style={{fontSize:"x-large", color:"#FF5000"}}> {'\u00A0'}/{'\u00A0'} </span>
-        <a onClick={() => setShowSignin(true)}>Sign In</a>
-        
+    <Link to="/signup">Sign up</Link>
+    <span style={{fontSize:"x-large", color:"#FF5000"}}> {'\u00A0'}/{'\u00A0'} </span>
+    <Link to="/login">Log in</Link>
+
         </div>
 
     </div>
     
     </div>
     </div>
-    {showSignup && (
 
-        <SignupPage
-          setIsAuthenticated={setIsAuthenticated}
-          onClose={() => setShowSignup(null)}
-        />
-      )}
-    {showSignin &&(
-      <SigninPage
-          setIsAuthenticated={setIsAuthenticated}
-          onClose={() => setShowSignin(null)}
-        />
-    )}
     </div>
 </div>
 </div>

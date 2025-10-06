@@ -6,6 +6,7 @@ import { useState } from 'react'
 import { BrowserRouter, Router, Routes, Route, Navigate } from 'react-router-dom';
 import ProfilePage from './profile/Profile.jsx';
 import SignupPage from './components/SignupPage.jsx';
+import SigninPage from './components/SigninPage.jsx';
 import RecommendationsPage from './recommendations/Recommendations.jsx';
 import ReviewsPage from './Reviews.jsx';
 import TrendingPage from './TrendingMovies.jsx';
@@ -18,7 +19,7 @@ function Homepage({setIsAuthenticated}) {
   <div>
     <header>
       
-      <Hero setIsAuthenticated={setIsAuthenticated}/>
+      <Hero/>
       
     </header>
       <TrendingMovies/>
@@ -38,23 +39,49 @@ function App(){
         <div>
     <Nav isAuthenticated={isAuthenticated} style={{position:"sticky"}}/>
     <Routes>
-      
-      <Route path="/" element={<Homepage setIsAuthenticated={setIsAuthenticated}/>} />
-      <Route path="/Trending" element={<TrendingPage />} />
-      <Route path="/Reviews" element={<ReviewsPage />} />
-      <Route path="/Recommendations" element={<RecommendationsPage />} />
-      <Route path="/Profile" element={<ProfilePage />} />
-       <Route path="/signup"
-                  element={
-                    isAuthenticated ? (
-                      <Navigate to="/" />
-                    ) : (
-                      <SignupPage  />
-                    )
-                  }
-                 />
-   
-    </Routes>
+  <Route path="/" element={<Homepage setIsAuthenticated={setIsAuthenticated} />} />
+  <Route path="/trending" element={<TrendingPage />} />
+  <Route path="/reviews" element={<ReviewsPage />} />
+  <Route path="/recommendations" element={<RecommendationsPage />} />
+
+  {/* Protected route example */}
+  <Route
+    path="/profile"
+    element={
+      isAuthenticated ? (  
+          <ProfilePage setIsAuthenticated={setIsAuthenticated} />
+      ) : (
+          <Navigate to="/" />
+      )
+    
+    } 
+  />
+
+  {/* Signup page */}
+  <Route
+    path="/signup"
+    element={
+      isAuthenticated ? (
+        <Navigate to="/" />
+      ) : (
+        <SignupPage setIsAuthenticated={setIsAuthenticated} />
+      )
+    }
+  />
+
+  {/* Login page */}
+  <Route
+    path="/login"
+    element={
+      isAuthenticated ? (
+        <Navigate to="/" />
+      ) : (
+        <SigninPage setIsAuthenticated={setIsAuthenticated} />
+      )
+    }
+  />
+</Routes>
+
      <p>{'\u00A0'}</p> {/*Unicode non-breaking space*/}
     <p>{'\u00A0'}</p> {/*Unicode non-breaking space*/}
 

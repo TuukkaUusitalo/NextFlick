@@ -1,6 +1,6 @@
 import './App.css';
 import { useState, useEffect } from "react";
-
+import  useAllReviews  from "../hooks/useAllReviews"
 
 function ReviewsPage(){
     const [movies, setMovies] = useState([]);
@@ -8,7 +8,19 @@ function ReviewsPage(){
     const [reviews, setReviews] = useState([]);
     const [selectedMovieId, setSelectedMovieId] = useState("");//Tracks selected movie
     
-    //fetch trending movies
+    const { getReviews, reviewsError } = useAllReviews()
+                
+    
+    useEffect(() =>{
+        const fetchReviews = async() => {
+        const reviews = await getReviews()
+        console.log(reviews)
+        }
+        fetchReviews();
+    },[])
+
+    
+            //fetch trending movies
     useEffect(() =>{
         const fetchMovies = async () => {
         const apiKey = import.meta.env.VITE_MOVIE_API_KEY;          
@@ -65,6 +77,9 @@ function ReviewsPage(){
     return(
         <div>
             <h1> Welcome to the Reviews page</h1>
+            <h2>User Reviews:</h2>
+            <a>Review</a>
+
             <h2>Movie Reviews:</h2>
             <p>Choose a Movie:</p>
              

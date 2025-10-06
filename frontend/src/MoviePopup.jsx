@@ -79,7 +79,7 @@ function MoviePopup({ movie, onClose }) {
             <img
               src={`https://image.tmdb.org/t/p/w500${movie.poster_path}`}
               alt={movie.title}
-              style={{ width: "12rem", marginLeft: "5%" }}
+              style={{ width: "12rem", marginLeft: "5%", borderRadius: '12px' }}
             />
 
             <div style={{ marginLeft: "5%", marginRight: "5%" }}>

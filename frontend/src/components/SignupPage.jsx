@@ -1,4 +1,5 @@
 import { useState } from 'react'
+import { useNavigate } from 'react-router-dom';
 import './SignupPage.css'
 
 
@@ -7,8 +8,10 @@ function SignupPage({ setIsAuthenticated, onClose}) {
   const [username, setUsername]=useState("");
 
   const [isValid, setIsValid] = useState(null);
-  const [passw, setPassW] = useState("")
-  const [isStrong, setIsStrong] = useState(false)
+  const [passw, setPassW] = useState("");
+  const [isStrong, setIsStrong] = useState(false);
+
+  const navigate = useNavigate();
 
 
 
@@ -39,7 +42,7 @@ const createUser = async (e) => {
       setIsAuthenticated(true);
       localStorage.setItem('username', data.username || username);
       localStorage.setItem('token', data.token);
-      localStorage.setItem('id', data.userId);
+      localStorage.setItem("id", data.user._id);
 
       localStorage.setItem("user", JSON.stringify(data))
       localStorage.setItem("isAuthenticated", "true");
@@ -49,12 +52,17 @@ const createUser = async (e) => {
       console.log("token", localStorage.getItem('token'));
       console.log("userId", localStorage.getItem('id'))
     
-      onClose()
+      navigate("/"); // To the home page after signup
+      }
+    } catch (error) {
+      console.log('Error:', error);
     }
-  } catch (error) {
-    console.log('Error:', error);
-  }
-};
+  };
+
+
+  const handleClose = () => {
+    navigate("/"); // To the home page
+  };
 
 
 
@@ -135,7 +143,7 @@ const createUser = async (e) => {
           }}
         >Sign up</button>
       
-    <button className="closeButton"  onClick={onClose}
+    <button className="closeButton"  onClick={handleClose}
       style={{
             float:" right",
             marginTop:"10px",

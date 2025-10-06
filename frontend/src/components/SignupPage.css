@@ -111,20 +111,18 @@
 
 /* Button */
 .signUpButton {
-  width: 100%;
-  padding: 0.8rem;
-  background-color: #007bff;
-  border: none;
-  border-radius: 8px;
+  background-color: #202020;
+  border: 0.2px solid #f36502;
+  border-radius: 10px;
+  padding: 0.7rem;
   color: white;
-  font-size: 1rem;
-  font-weight: 600;
-  cursor: pointer;
-  transition: background-color 0.3s;
+  margin: 1rem;
+  box-shadow: 0 0.5rem 1rem rgba(0, 0, 0, 0.5);
+  font-weight: bold;
 }
 
 .signUpButton:hover {
-  background-color: #0056b3;
+  box-shadow: 0 0 16px  #FF5000;
 }
 
 /* Messages */

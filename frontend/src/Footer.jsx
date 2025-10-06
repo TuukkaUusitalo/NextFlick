@@ -34,16 +34,16 @@ const Footer = () => {
           <div className="socialMedia">
             <h3>Follow us:</h3>
              <a href="https://facebook.com" target="_blank" rel="noreferrer">
-              <FaFacebook size={24} />
+              <FaFacebook size={24} color="white" />
             </a>
             <a href="https://twitter.com" target="_blank" rel="noreferrer">
-              <FaTwitter size={24} />
+              <FaTwitter size={24} color="white" />
             </a>
             <a href="https://instagram.com" target="_blank" rel="noreferrer">
-              <FaInstagram size={24} />
+              <FaInstagram size={24} color="white" />
             </a>
             <a href="https://youtube.com" target="_blank" rel="noreferrer">
-              <FaYoutube size={24} />
+              <FaYoutube size={24} color="white" />
             </a>
             
              <p>© 2025 NextFlick. All rights reserved.</p>

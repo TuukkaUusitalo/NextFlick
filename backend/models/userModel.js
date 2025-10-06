@@ -35,6 +35,10 @@ const userSchema = new Schema(
       name: {type: String},
       movieId: {type: Number},
       _id: false}], // Movies the user plan to watch
+      recommendationsMovies: [{
+        name: {type: String},
+        movieId: {type: Number},
+        _id: false}], // Movies the user plan to watch
     preferences: {
       genres: [String, {_id: false}], // Preferred movie genres
       movies: [String, {_id: false}], // Preferred movies

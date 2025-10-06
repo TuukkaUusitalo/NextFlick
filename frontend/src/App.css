@@ -150,7 +150,11 @@ h2{
 .genreName:hover{
   background-color: #f7f7f773;
 }
-
+.reviewHeader {
+  display: flex;
+  align-items: center; /* vertically aligns content */
+  gap: 1rem; /* space between author, title, rating */
+}
 .reviewCard{
   box-shadow: 0 0 16px black;
   display: inline-block;
@@ -168,16 +172,21 @@ h2{
 .reviewMovieTitle{
   color:#FF5000;
   margin-top: 0rem;
-  margin-left: 10rem;
+  margin-left: 6rem;
   width:fit-content;
   height:fit-content;
 }
-
+.userReviewRating{
+    margin-left: 6rem;
+    color:#ffd900;
+    width:fit-content;
+    height:fit-content;
+    margin-top: 0rem;    
+}
 .reviewMoviecontent{
   margin-left:7rem;
   margin-top: 0rem;
   display: block;
-  border:solid black;
   height: 9rem;
   overflow:auto;
 
@@ -209,16 +218,18 @@ h2{
   height:11rem;
 }
 .heroCards a{
-  border: solid green;
-  background-color: #0fcb22;
-  color:#000000;
-  border-radius: 1rem;
-  padding: 0.3rem;
-  cursor: pointer;
+  background-color: #202020;
+  border: 0.2px solid #f36502;
+  border-radius: 12px;
+  padding: 0.5rem;
+  color: white;
+  margin: 1rem;
+  box-shadow: 0 0.5rem 1rem rgba(0, 0, 0, 0.5);
+  font-weight: bold;
   text-decoration: none;
 }
 .heroCards a:hover{
-  color:#f7f7f7
+  box-shadow: 0 0 16px  #FF5000;
 }
 .heroCardOne{
   margin-top: 2rem;
@@ -261,3 +272,78 @@ h2{
   align-items: center;
   height: 1rem;
 }
+.loaderContainer {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  margin-top: 2rem;
+  color: #ff5000;
+  font-family: 'Poppins', sans-serif;
+}
+
+.spinner {
+  border: 6px solid rgba(255, 255, 255, 0.2);
+  border-top: 6px solid #ff5000;
+  border-radius: 50%;
+  width: 60px;
+  height: 60px;
+  animation: spin 1s linear infinite;
+  margin-bottom: 1rem;
+}
+
+@keyframes spin {
+  0% { transform: rotate(0deg); }
+  100% { transform: rotate(360deg); }
+}
+.recommendationsHeader{
+  margin-left: 5%;
+  display:grid;
+  align-content: center;
+  justify-content: left;
+}
+.recommendationsHeader textarea{
+  min-width: 400px;
+  min-height: 100px;
+}
+.recommendationsHeader button{
+  margin-left: 30%;
+  margin-top: 1rem;
+  width: 12rem;
+  padding: 0.7rem;
+  border-radius: 2rem;
+  box-shadow:0 0 4 4px #000000;
+  background-color:#b03f0a;
+  cursor: pointer;
+}
+.recommendationsHeader button:hover{
+  box-shadow: 0 0 16px  #FF5000;
+}
+.recommendationCard{
+  display: flex;
+  align-content: center;
+  margin-left: 5%;
+  margin-right: 5%;
+}
+
+.recommendationImage{
+  width:10rem;
+  margin:0rem;
+}
+
+.recommendationReason{
+  margin-left: 5%;
+  margin-right: 5%;
+  margin-top: 0rem;
+  align-content: center;
+
+  position:relative;
+}
+
+.recommendationMovieName{
+  margin-left: 3%;
+  color: #FF5000;
+  font-size: x-large;
+  text-decoration: underline white;
+}
+

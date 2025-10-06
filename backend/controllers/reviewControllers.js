@@ -60,13 +60,13 @@ const getReviewById = async (req, res) => {
 // POST /reviews
 const createReview = async (req, res) => {
   try {
-    const userId = req.body.userId;
+    const userId = req.body.author;
     if (!mongoose.Types.ObjectId.isValid(userId)) {
       return res.status(400).json({ message: "Invalid user ID" });
     }
     const newReview = await Review.postReview({
-      userId: req.body.userId,
-      movieId: req.body.movieId,
+      userId: req.body.author,
+      movieId: req.body.movie_id,
       body: req.body.body,
       rating: req.body.rating
     });

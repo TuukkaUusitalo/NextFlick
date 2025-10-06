@@ -12,6 +12,7 @@ const {
   addYetToWatchMovie,
   updatePreferences,
   deleteUser,
+  addRecommendsMovie,
   // patchUser
 } = require("../controllers/userControllers");
 const {generateList} = require("../controllers/recommendControllers");
@@ -29,13 +30,37 @@ router.post("/login",  loginUser);
 // GET /users/:userId
 router.get("/:userId", getUserById);
 
+// FOR AI ?
 // POST /users/recommend/:userId
 router.post("/recommend/:userId",requireAuth, generateList);
+
+// Add movie to user's own recommendations list
+// PUT /users/recommends/:userId
+router.put("/recommends/:userId",requireAuth, addRecommendsMovie);
 
 // PUT /users/:userId
 router.put("/:userId",requireAuth, updateUser);
 
 router.put("/preferences/:userId",requireAuth, updatePreferences);
+
+// GET /users/preferences/:userId
+router.get("/preferences/:userId", requireAuth, async (req, res) => {
+  const { userId } = req.params;
+
+  try {
+    const user = await User.findById(userId).select("preferences");
+
+    if (!user) {
+      return res.status(404).json({ message: "User not found" });
+    }
+
+    res.json(user);
+  } catch (err) {
+    console.error("Error fetching preferences:", err);
+    res.status(500).json({ message: "Failed to fetch user preferences" });
+  }
+});
+
 
 router.put("/watched/:userId",requireAuth, addWatchedMovie);
 

@@ -3,6 +3,7 @@ import { FaRegPlusSquare, FaRegComment, FaRegBookmark } from 'react-icons/fa';
 import { AiOutlineLike, AiFillLike} from 'react-icons/ai'
 import { useState } from 'react';
 import ReviewCard from './profile/ReviewCard';
+import './profile/profile.css';
 
 
 
@@ -38,7 +39,7 @@ function MoviePopup({ movie, onClose }) {
   >
     
       {showReviewCard ? (
-        // ✅ Show ReviewCard instead of popup
+        // Show ReviewCard instead of popup
         <div style={{height:"200px", maxWidth:"600px"}}onClick={(e) => e.stopPropagation()}>
           <ReviewCard />
           <button onClick={() => setShowReviewCard(false)}
@@ -55,7 +56,7 @@ function MoviePopup({ movie, onClose }) {
       >back</button>
         </div>
       ) : (
-        // ✅ Normal popup content
+        // Normal popup content
         <>
     <div
       style={{
@@ -70,11 +71,11 @@ function MoviePopup({ movie, onClose }) {
       onClick={(e) => e.stopPropagation()} // prevent closing when clicking inside
     >
       
-          <div style={{ border: "solid black" }}>
+          <div>
             <h2>{movie.title}</h2>
           </div>
 
-          <div style={{ border: "solid black", display: "flex" }}>
+          <div style={{ display: "flex" }}>
             <img
               src={`https://image.tmdb.org/t/p/w500${movie.poster_path}`}
               alt={movie.title}
@@ -96,17 +97,18 @@ function MoviePopup({ movie, onClose }) {
                   size={30}
                   color="white"
                   onClick={() => setShowReviewCard(true)}
+                  className='plus-icon'
                 />
               </div>
 
-              <div style={{ border: "solid black", height: "150px" }}>
-                <p style={{ margin: "0px", height: "31%", border: "solid black" }}>
+              <div style={{ height: "150px" }}>
+                <p style={{ margin: "0px", height: "31%", border: "solid grey", padding: "0.2rem", borderRadius: '12px', borderWidth: 0.2 }}>
                   review 1
                 </p>
-                <p style={{ margin: "0px", height: "31%", border: "solid black" }}>
+                <p style={{ margin: "0px", height: "31%", border: "solid grey", padding: "0.2rem", marginTop: '0.2rem', marginBottom: '0.2rem', borderRadius: '12px', borderWidth: 0.2}}>
                   review 2
                 </p>
-                <p style={{ margin: "0px", height: "31%", border: "solid black" }}>
+                <p style={{ margin: "0px", height: "31%", border: "solid grey", padding: "0.2rem", borderRadius: '12px', borderWidth: 0.2 }}>
                   review 3
                 </p>
               </div>
@@ -144,14 +146,13 @@ function MoviePopup({ movie, onClose }) {
 
           <div
             style={{
-              border: "solid black",
               height: "170px",
               overflow: "hidden"
             }}
           >
             <p>{movie.overview}</p>
           </div>
-
+{/*
           <div
             style={{
               border: "solid black",
@@ -161,19 +162,20 @@ function MoviePopup({ movie, onClose }) {
           >
             Tags
           </div>
-      
+      */}
 
       <button
         onClick={onClose}
         style={{
           float: "right",
-          marginTop: "10px",
-          padding: "5px 10px",
-          background: "red",
-          color: "white",
-          border: "none",
-          borderRadius: "4px",
-          cursor: "pointer"
+          backgroundColor: '#202020',
+          border: '0.2px solid #f36502',
+          borderRadius: '10px',
+          padding: '0.7rem',
+          color: 'white',
+          margin: '1rem',
+          boxShadow: '0 0.5rem 1rem rgba(0, 0, 0, 0.5)',
+          fontWeight: 'bold',
         }}
       >
         Close

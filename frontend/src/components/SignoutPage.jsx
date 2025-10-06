@@ -24,6 +24,5 @@ function SignoutPage() {
   return null;
 }
 
+
 export default SignoutPage;
-
-

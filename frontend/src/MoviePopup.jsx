@@ -71,6 +71,7 @@ function MoviePopup({ movie, onClose }) {
       onClick={(e) => e.stopPropagation()} // prevent closing when clicking inside
     >
       
+      
           <div>
             <h2>{movie.title}</h2>
           </div>

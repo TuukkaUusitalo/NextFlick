@@ -16,6 +16,7 @@ import ProfilePic from './assets/Profile-pic1.jpg';
 const Nav = () => {
 
 
+
     return(
         <div>
             <nav className="navbar">
@@ -25,8 +26,6 @@ const Nav = () => {
                 style={{width:"90px"}}></img>
                 </Link>                    
                 </div>
-                    
-                    
                     <div className="nav-right">
                     </div>
                 <Link to = "/Reviews" className="Reviews">Reviews</Link>

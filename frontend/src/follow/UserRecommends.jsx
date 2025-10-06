@@ -10,6 +10,7 @@ const UserRecommends = ({ movies = [] }) => {
   // Poistetaan mahdolliset duplikaatit movieId:n perusteella
   const uniqueMovies = Array.from(new Map(movies.map(m => [m.movieId || m.id, m])).values());
 
+  
   return (
     <div className="gradient-box2">
       <div className="scroll-content2">

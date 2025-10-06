@@ -26,6 +26,7 @@ function Homepage() {
   );
 }
 
+
 function App() {
   const [isAuthenticated, setIsAuthenticated] = useState(
     localStorage.getItem("isAuthenticated") === "true"

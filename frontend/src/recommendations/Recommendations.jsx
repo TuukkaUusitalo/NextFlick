@@ -91,7 +91,6 @@ function RecommendationsPage(){
   }, [dataAi]);
 
 
-
     return(
         <div>
             <h1> Welcome to the Recommendations page</h1>

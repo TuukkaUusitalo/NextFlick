@@ -77,18 +77,7 @@ const loginUser = async(e) =>{
       </input>
       
     <button className='signUpButton' type="submit">Sign in</button>
-    <button className="closeButton" onClick={handleClose} 
-      style={{
-            float:" right",
-            marginTop:"10px",
-            padding: "5px 10px",
-            background: "red",
-            color: "white",
-            border: "none",
-            borderRadius: "4px",
-            cursor: "pointer"
-          }}
-        >Close</button>
+    <button className="closeButton" onClick={handleClose} >Close</button>
     </form>
     </div>
 

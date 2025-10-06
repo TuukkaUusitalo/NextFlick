@@ -129,31 +129,11 @@ const createUser = async (e) => {
       )}
       <p>Username</p>
       <input placeholder="-- Username here --" onChange={(e) => setUsername(e.target.value)}></input>
-          <button className="signupButton" type="submit"
-      style={{
-            fontSize:"medium",
-            justifyContent:"center",
-            marginTop:"10px",
-            padding: "10px 20px",
-            background: "Blue",
-            color: "white",
-            border: "none",
-            borderRadius: "4px",
-            cursor: "pointer"
-          }}
+          <button className="signUpButton" type="submit"
         >Sign up</button>
       
     <button className="closeButton"  onClick={handleClose}
-      style={{
-            float:" right",
-            marginTop:"10px",
-            padding: "5px 10px",
-            background: "red",
-            color: "white",
-            border: "none",
-            borderRadius: "4px",
-            cursor: "pointer"
-          }}
+   
         >Close</button>
     </form>
   </div>

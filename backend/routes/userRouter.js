@@ -12,6 +12,7 @@ const {
   addYetToWatchMovie,
   updatePreferences,
   deleteUser,
+  addRecommendsMovie,
   // patchUser
 } = require("../controllers/userControllers");
 const {generateList} = require("../controllers/recommendControllers");
@@ -29,8 +30,13 @@ router.post("/login",  loginUser);
 // GET /users/:userId
 router.get("/:userId", getUserById);
 
+// FOR AI ?
 // POST /users/recommend/:userId
 router.post("/recommend/:userId",requireAuth, generateList);
+
+// Add movie to user's own recommendations list
+// PUT /users/recommends/:userId
+router.put("/recommends/:userId",requireAuth, addRecommendsMovie);
 
 // PUT /users/:userId
 router.put("/:userId",requireAuth, updateUser);

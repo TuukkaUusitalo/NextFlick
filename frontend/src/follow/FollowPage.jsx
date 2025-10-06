@@ -2,6 +2,7 @@ import React, { useState, useEffect } from 'react';
 import './FollowPage.css';
 import OtherUserProfilePic from './OtherUserProfilePic';
 import UserWatched from './UserWatched.jsx';
+import UserRecommends from './UserRecommends.jsx';
 
 function FollowPage() {
   const [searchTerm, setSearchTerm] = useState('');
@@ -45,7 +46,7 @@ function FollowPage() {
   const fetchMovieDetails = async (movies) => {
     if (!Array.isArray(movies)) {
       console.warn("⚠️ movies ei ole taulukko:", movies);
-      return []; // Palautetaan tyhjä array ettei kaadu
+      return []; // Return empty array if movies is not an array
     }
   
     return Promise.all(
@@ -79,12 +80,12 @@ function FollowPage() {
       const data = await response.json();
   
       // Information about recommended and watched movies from TMDB
-      const prefer = await fetchMovieDetails(data.preferences || []);
+      const prefer = await fetchMovieDetails(data.recommendationsMovies || []);
       const watched = await fetchMovieDetails(data.watchedMovies || []);
   
       setSelectedUserData({
         ...data,
-        preferences: prefer,
+        recommendationsMovies: prefer,
         watchedMovies: watched,
       });
     } catch (err) {
@@ -108,7 +109,7 @@ function FollowPage() {
                   <p style={{ marginTop: '2rem', fontSize: '18px', marginLeft: '3rem', fontWeight: 'bold' }}>
                   {selectedUser.username} Prefers
                   </p>
-                  <UserWatched movies={selectedUserData.preferences} />
+                  <UserRecommends movies={selectedUserData.recommendationsMovies} />
                   <p style={{ marginTop: '2rem', fontSize: '18px', marginLeft: '2rem', fontWeight: 'bold' }}>
                      Has Watched
                   </p>

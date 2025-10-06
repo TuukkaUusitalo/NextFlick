@@ -95,9 +95,10 @@ function RecommendationsPage(){
     return(
         <div>
             <h1> Welcome to the Recommendations page</h1>
+            <p style={{marginLeft: '6rem', fontSize: 20}}>AI-Based Movie Recommendations</p>
             <div className="recommendationsHeader">
-            <textarea placeholder="describe the type of movie you would like..." onChange={(e)=>setUserPrompt(e.target.value)}></textarea>
-            <button onClick={getAiRecommendation}>Get AI recommendation</button>
+            <textarea placeholder="Describe your favorite movies or list movie names..." onChange={(e)=>setUserPrompt(e.target.value)} style={{backgroundColor: '#202020', borderRadius: 10, padding: 15, color: 'white'}}></textarea>
+            <button onClick={getAiRecommendation} style={{color: "white", fontSize: 15}}>Get AI recommendation</button>
             </div>
             {isLoading && (
                 <div className="loaderContainer">

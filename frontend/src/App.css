@@ -218,16 +218,18 @@ h2{
   height:11rem;
 }
 .heroCards a{
-  border: solid green;
-  background-color: #0fcb22;
-  color:#000000;
-  border-radius: 1rem;
-  padding: 0.3rem;
-  cursor: pointer;
+  background-color: #202020;
+  border: 0.2px solid #f36502;
+  border-radius: 12px;
+  padding: 0.5rem;
+  color: white;
+  margin: 1rem;
+  box-shadow: 0 0.5rem 1rem rgba(0, 0, 0, 0.5);
+  font-weight: bold;
   text-decoration: none;
 }
 .heroCards a:hover{
-  color:#f7f7f7
+  box-shadow: 0 0 16px  #FF5000;
 }
 .heroCardOne{
   margin-top: 2rem;

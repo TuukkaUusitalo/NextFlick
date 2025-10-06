@@ -7,7 +7,7 @@ export default function ReviewCard() {
     const [movies, setMovies] = useState([]);
     const [selectedMovie, setSelectedMovie] = useState(null);
     const [lists, setLists] = useState({
-      preferences: false,
+      recommends: false,
       watched: false,
       watchNext: false,
     });
@@ -89,17 +89,18 @@ export default function ReviewCard() {
           });
         }
     
-        if (lists.preferences) {
-          const updatedPreferences = [...user.preferencesMovies, payload];
-          await fetch(`${httpPath}/users/preferences/${id}`, {
+        if (lists.recommends) {
+          const updatedRecommendations = [...user.recommendationsMovies, payload];
+          await fetch(`${httpPath}/users/recommends/${id}`, {
             method: "PUT",
             headers: {
               "Content-Type": "application/json",
               Authorization: `Bearer ${token}`,
             },
-            body: JSON.stringify({ preferencesMovies: updatedPreferences }),
+            body: JSON.stringify({ recommendationsMovies: updatedRecommendations }),
           });
         }
+        
     
         alert("Movie(s) saved successfully!");
       } catch (error) {
@@ -135,10 +136,13 @@ export default function ReviewCard() {
                     onClick={() => setSelectedMovie(movie)}
                     style={{
                       cursor: "pointer",
-                      border: selectedMovie?.id === movie.id ? "2px solid #FF5733" : "none",
+                      boxShadow: selectedMovie?.id === movie.id ? "0 0 16px  #FF5000" : "none",
+                      hover: "box-shadow: 0 0 16px  #FF5000",
                       marginBottom: "0.5rem",
                       padding: "0.5rem",
-                      borderRadius: "0.5rem"
+                      borderRadius: "0.7rem",
+                      gap: '0.5rem',
+                      margin: '0.5rem',
                     }}
                   >
                     <h3>{movie.title}</h3>
@@ -146,6 +150,7 @@ export default function ReviewCard() {
                       <img
                         src={`https://image.tmdb.org/t/p/w200${movie.poster_path}`}
                         alt={movie.title}
+                        style={{borderRadius: '0.7rem', marginLeft: 'auto', marginRight: 'auto'}}
                       />
                     )}
                   </div>
@@ -154,33 +159,34 @@ export default function ReviewCard() {
             </div>
 
             <div style={{width: '50%', margin: '1rem'}}>
+              {/*
                 <textarea placeholder='Write review...' style={{width: '100%', height: '8rem', borderRadius: '1rem', padding: '0.5rem', border: 'none', marginBottom: '0.5rem'}} />
                 <FaRegStar />
                 <FaRegStar />
                 <FaRegStar />
                 <FaRegStar />
                 <FaRegStar />
+              */}
 
                 <p style={{fontSize: '20px', fontWeight: 'bold'}}>Add to</p>
                 <div style={{display: 'flex'}}>
-                  <button
-                    onClick={() => setLists({ ...lists, recommendations: !lists.recommendations })}
-                    style={{
+                <button
+                  onClick={() => setLists({ ...lists, recommends: !lists.recommends })}
+                  style={{
+                    backgroundColor: lists.recommends ? "#FF5000" : "#202020",
+                    border: "0.2px solid #f36502",
+                    borderRadius: "10px",
+                    padding: "0.7rem",
+                    color: "white",
+                    marginTop: "1rem",
+                    marginLeft: "1rem",
+                    boxShadow: "0 0.5rem 1rem rgba(0, 0, 0, 0.5)",
+                    fontWeight: "bold",
+                  }}
+                >
+                  Recommendations
+                </button>
 
-                      backgroundColor: lists.recommendations ? "#FF5000" : "#202020",
-                      border: "0.2px solid #f36502",
-                      borderRadius: "10px",
-                      padding: "0.7rem",
-                      color: "white",
-                      marginTop: "1rem",
-                      marginLeft: "1rem",
-                      boxShadow: "0 0.5rem 1rem rgba(0, 0, 0, 0.5)",
-                      fontWeight: "bold",
-                      hover: "box-shadow: 0 0 16px  #FF5000",
-                    }}
-                  >
-                    Recommendations
-                  </button>
                   <button
                     onClick={() => setLists({ ...lists, watched: !lists.watched })}
                     style={{

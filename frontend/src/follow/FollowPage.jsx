@@ -2,6 +2,7 @@ import React, { useState, useEffect } from 'react';
 import './FollowPage.css';
 import OtherUserProfilePic from './OtherUserProfilePic';
 import UserWatched from './UserWatched.jsx';
+import UserRecommends from './UserRecommends.jsx';
 
 function FollowPage() {
   const [searchTerm, setSearchTerm] = useState('');
@@ -19,10 +20,14 @@ function FollowPage() {
 
     const fetchUsers = async () => {
       try {
-        const response = await fetch(`${httpPath}/users?username`, {
+        const response = await fetch(`${httpPath}/users?username=${encodeURIComponent(searchTerm)}`, {
           method: 'GET',
-          headers: { accept: 'application/json' }
+          headers: {
+            accept: 'application/json',
+            Authorization: `Bearer ${localStorage.getItem('token')}`
+          }
         });
+        
 
         if (!response.ok) throw new Error(`HTTP error: ${response.status}`);
 
@@ -39,6 +44,11 @@ function FollowPage() {
 
   // Kun käyttäjä valitaan, haetaan kaikki sen tiedot
   const fetchMovieDetails = async (movies) => {
+    if (!Array.isArray(movies)) {
+      console.warn("⚠️ movies ei ole taulukko:", movies);
+      return []; // Return empty array if movies is not an array
+    }
+  
     return Promise.all(
       movies.map(async (m) => {
         const res = await fetch(
@@ -55,20 +65,27 @@ function FollowPage() {
     );
   };
   
+  
   const handleUserSelect = async (user) => {
     setSelectedUser(user);
     try {
       const httpPath = import.meta.env.VITE_HTTP_PATH;
-      const response = await fetch(`${httpPath}/users/${user._id}`);
+      const response = await fetch(`${httpPath}/users/${user._id}`, {
+        headers: {
+          accept: 'application/json',
+          Authorization: `Bearer ${localStorage.getItem('token')}`
+        }
+      });
+      
       const data = await response.json();
   
       // Information about recommended and watched movies from TMDB
-      const recommended = await fetchMovieDetails(data.recommendedMovies || []);
+      const prefer = await fetchMovieDetails(data.recommendationsMovies || []);
       const watched = await fetchMovieDetails(data.watchedMovies || []);
   
       setSelectedUserData({
         ...data,
-        recommendedMovies: recommended,
+        recommendationsMovies: prefer,
         watchedMovies: watched,
       });
     } catch (err) {
@@ -90,9 +107,9 @@ function FollowPage() {
               {selectedUserData ? (
                 <>
                   <p style={{ marginTop: '2rem', fontSize: '18px', marginLeft: '3rem', fontWeight: 'bold' }}>
-                     Recommends
+                  {selectedUser.username} Prefers
                   </p>
-                  <UserWatched movies={selectedUserData.recommendedMovies} />
+                  <UserRecommends movies={selectedUserData.recommendationsMovies} />
                   <p style={{ marginTop: '2rem', fontSize: '18px', marginLeft: '2rem', fontWeight: 'bold' }}>
                      Has Watched
                   </p>

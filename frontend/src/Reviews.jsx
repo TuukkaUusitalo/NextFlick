@@ -1,6 +1,8 @@
 import './App.css';
 import { useState, useEffect } from "react";
 import  useAllReviews  from "../hooks/useAllReviews"
+import AddReview from './addReview.jsx';
+import { FaRegPlusSquare } from 'react-icons/fa';
 
 function ReviewsPage(){
     const [movies, setMovies] = useState([]);
@@ -11,7 +13,7 @@ function ReviewsPage(){
     const [showUserReviews ,setShowUserReviews] = useState(false)
     const [userNames, setUserNames] = useState({})
     const [moviesMap, setMoviesMap] = useState({});
-
+    const [showAddReview, setShowAddReview] = useState(false)
     const { getReviews, reviewsError } = useAllReviews()
                 
 
@@ -129,8 +131,11 @@ useEffect(() => {
 
     return(
         <div>
-            <h1> Welcome to the Reviews page</h1>
-            <h2> User Reviews:</h2>
+            <h2> User Reviews: <FaRegPlusSquare onClick={() => setShowAddReview(true)}/> </h2>
+          
+          {showAddReview && <AddReview onClose={() => setShowAddReview(false)} />}
+
+
         {showUserReviews ? (
       <div>
         {userReviews.map((userReview) => {

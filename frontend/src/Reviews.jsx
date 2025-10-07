@@ -143,6 +143,7 @@ useEffect(() => {
   const movie = moviesMap[userReview.movie_id];
 
   return (
+    <div className='reviewContainer'>
     <div className="reviewCard" key={userReview._id}>
       <div className='reviewHeader'>
       <p className="reviewMovieAuthor">{userNames[userReview.author] || "Loading..."}</p>
@@ -158,6 +159,8 @@ useEffect(() => {
       )}
       <p className="reviewMoviecontent">{userReview.body}</p>
     </div>
+   </div>
+
   );
 })}
 

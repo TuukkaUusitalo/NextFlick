@@ -6,8 +6,8 @@ import { Link } from "react-router-dom";
 import './App.css'
 
 
-const Hero = () => {
-
+const Hero = ({isAuthenticated, setIsAuthenticated}) => {
+  
   return (
 
 <div  style={{ position: "relative" }}>
@@ -33,12 +33,22 @@ const Hero = () => {
         <p>Add movies to your collection and recommend to others</p>
         <div className='signupsContainer'>
           
+    {isAuthenticated ? (
+              <div className='signupsContainer'>
+
+                  <p style={{ fontSize: "large",   backgroundColor:" #0fcb22", border:"solid green", borderRadius:"2rem",color:"black"}}>
+                    Welcome back, {localStorage.getItem("username")}!
+                  </p>
+                  </div>
+                ) : (
+            <div className='signupsContainer'>
+
     <Link to="/signup">Sign up</Link>
     <span style={{fontSize:"x-large", color:"#f36502" }}> {'\u00A0'}|{'\u00A0'} </span>
     <Link to="/login">Log in</Link>
-
-        </div>
-
+      </div>
+           )}
+       
     </div>
     
     </div>
@@ -47,8 +57,10 @@ const Hero = () => {
     </div>
 </div>
 </div>
-  )
-}
+</div>
+
+  
+)}
 
 export default Hero
 

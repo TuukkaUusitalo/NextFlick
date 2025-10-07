@@ -53,13 +53,12 @@ export default function ReviewCard() {
         movieId: selectedMovie.id,
       };
     
-      const httpPath = import.meta.env.VITE_HTTP_PATH;
       const id = localStorage.getItem("id");
       const token = localStorage.getItem("token");
     
       try {
         // 1. Fetch current user data
-        const userRes = await fetch(`${httpPath}/users/${id}`, {
+        const userRes = await fetch(`/api/users/${id}`, {
           headers: { Authorization: `Bearer ${token}` },
         });
         const user = await userRes.json();
@@ -67,7 +66,7 @@ export default function ReviewCard() {
         // 2. Update the relevant lists
         if (lists.watched) {
           const updatedWatched = [...user.watchedMovies, payload];
-          await fetch(`${httpPath}/users/watched/${id}`, {
+          await fetch(`/api/users/watched/${id}`, {
             method: "PUT",
             headers: {
               "Content-Type": "application/json",
@@ -79,7 +78,7 @@ export default function ReviewCard() {
     
         if (lists.watchNext) {
           const updatedYetToWatch = [...user.yetToWatchMovies, payload];
-          await fetch(`${httpPath}/users/yettowatch/${id}`, {
+          await fetch(`/api/users/yettowatch/${id}`, {
             method: "PUT",
             headers: {
               "Content-Type": "application/json",
@@ -91,7 +90,7 @@ export default function ReviewCard() {
     
         if (lists.recommends) {
           const updatedRecommendations = [...user.recommendationsMovies, payload];
-          await fetch(`${httpPath}/users/recommends/${id}`, {
+          await fetch(`/api/users/recommends/${id}`, {
             method: "PUT",
             headers: {
               "Content-Type": "application/json",

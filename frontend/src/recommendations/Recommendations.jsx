@@ -10,7 +10,6 @@ function RecommendationsPage(){
     const userId = localStorage.getItem("id")
     const token = localStorage.getItem("token")
     const apiKey = import.meta.env.VITE_MOVIE_API_KEY;
-    const httpPath = import.meta.env.VITE_HTTP_PATH;
 
    
 
@@ -19,7 +18,7 @@ function RecommendationsPage(){
     const getAiRecommendation = async() => {
         setIsLoading(true);
         try{
-            const response = await fetch(`${httpPath}/users/recommend/${userId}`,
+            const response = await fetch(`/api/users/recommend/${userId}`,
                 {method:"POST",
                       headers: {
             "Content-Type": "application/json",
@@ -117,7 +116,7 @@ function RecommendationsPage(){
                     <div>                    
                     <p className="recommendationMovieName"> {data.movie}</p>
 
-                   <div className="recommendationCard" key={data.movie_id || data.movie || index}>
+                   <div className="recommendationCard" key={data.movie_id || data.movie }>
                     {movie?.poster_path && (
                       <img
                         className="recommendationImage"

@@ -9,14 +9,13 @@ const WatchForNext = () => {
     const [showReviewCard, setShowReviewCard] = useState(false);
     const [yetToWatchMovies, setYetToWatchMovies] = useState([]);
 
-    const httpPath = import.meta.env.VITE_HTTP_PATH;
     const id = localStorage.getItem("id");
     const token = localStorage.getItem("token");
     
  useEffect(() => {
     const fetchYetToWatch = async () => {
       try {
-        const res = await fetch(`${httpPath}/users/${id}`, {
+        const res = await fetch(`/api/users/${id}`, {
           headers: { Authorization: `Bearer ${token}` },
         });
         const user = await res.json();

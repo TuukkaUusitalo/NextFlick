@@ -60,11 +60,10 @@ const AddReview = ({onClose}) => {
            rating: rating,
          };
       
-         const httpPath = import.meta.env.VITE_HTTP_PATH;
   const token = localStorage.getItem("token");
 
   try {
-    const response = await fetch(`${httpPath}/reviews`, {
+    const response = await fetch(`/api/reviews`, {
       method: "POST",
       headers: {
         "Content-Type": "application/json",

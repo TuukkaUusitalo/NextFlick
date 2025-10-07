@@ -16,11 +16,10 @@ function FollowPage() {
       setUsers([]);
       return;
     }
-    const httpPath = import.meta.env.VITE_HTTP_PATH;
 
     const fetchUsers = async () => {
       try {
-        const response = await fetch(`${httpPath}/users?username=${encodeURIComponent(searchTerm)}`, {
+        const response = await fetch(`/api/users?username=${encodeURIComponent(searchTerm)}`, {
           method: 'GET',
           headers: {
             accept: 'application/json',

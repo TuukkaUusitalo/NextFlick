@@ -13,11 +13,10 @@ const ProfilePic = () => {
       setSaving(true);
       setSaved(false);
 
-      const httpPath = import.meta.env.VITE_HTTP_PATH;
       const token = localStorage.getItem("token");
       const id = localStorage.getItem("id")
 
-      const response = await fetch(`${httpPath}/users/${id}`, {
+      const response = await fetch(`/api/users/${id}`, {
         method: 'PUT',
         headers: {
           'Content-Type': 'application/json',
@@ -55,11 +54,10 @@ const ProfilePic = () => {
 
   const handleGetBio = async () => {
     try {
-      const httpPath = import.meta.env.VITE_HTTP_PATH;
       const token = localStorage.getItem("token");
       const id = localStorage.getItem("id")
 
-      const response = await fetch(`${httpPath}/users/${id}`, {
+      const response = await fetch(`/api/users/${id}`, {
         method: 'GET',
         headers: {
           'Content-Type': 'application/json',

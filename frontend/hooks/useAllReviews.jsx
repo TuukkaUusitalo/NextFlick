@@ -9,7 +9,7 @@ export default function useAllReviews() {
       setIsLoading(true);
       setError(null);
 
-      const response = await fetch("http://localhost:4000/api/reviews",{
+      const response = await fetch("/api/reviews",{
           method:"GET",
         })
       const reviews = await response.json();

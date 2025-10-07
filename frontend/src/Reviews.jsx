@@ -59,7 +59,7 @@ useEffect(() => {
     const names = {};
     for (const review of userReviews) {
       try {
-        const response = await fetch(`http://localhost:4000/api/users/${review.author}`);
+        const response = await fetch(`/api/users/${review.author}`);
         const data = await response.json();
         names[review.author] = data.username; // assuming backend returns { username: "..." }
       } catch (err) {

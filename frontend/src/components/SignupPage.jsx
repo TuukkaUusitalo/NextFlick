@@ -18,7 +18,7 @@ function SignupPage({ setIsAuthenticated, onClose}) {
 const createUser = async (e) => {
   e.preventDefault();
   try {
-    const response = await fetch('http://localhost:4000/api/users/signup', {
+    const response = await fetch('/api/users/signup', {
       method: "POST",
       headers: {
     "Content-Type": "application/json"

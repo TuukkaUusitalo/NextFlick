@@ -1,5 +1,5 @@
 const mongoose = require("mongoose");
-requure("dotenv").config();
+require("dotenv").config();
 
 const mongoURI =
   process.env.NODE_ENV === "test"

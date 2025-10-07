@@ -33,7 +33,9 @@ app.use("/api/image", imageRouter);
 app.use(unknownEndpoint);
 app.use(errorHandler);
 
-const port = process.env.PORT || 4000;
-app.listen(port, () =>
-  console.log(`Server is running on http://localhost:${port}`)
-);
+// const port = process.env.PORT || 4000;
+// app.listen(port, () =>
+//   console.log(`Server is running on http://localhost:${port}`)
+// );
+
+module.exports = app;

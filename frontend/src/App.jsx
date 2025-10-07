@@ -14,11 +14,12 @@ import TrendingMovies from './TrendingMovies.jsx';
 import TrendingTvshows from './TrendingTvshows.jsx';
 import SignoutPage from './components/SignoutPage.jsx';
 
-function Homepage() {
+function Homepage({isAuthenticated,setIsAuthenticated}) {
   return (
     <div>
       <header>
-        <Hero />
+        <Hero   isAuthenticated={isAuthenticated}
+      setIsAuthenticated={setIsAuthenticated} />
       </header>
       <TrendingMovies />
       <TrendingTvshows />
@@ -36,7 +37,8 @@ function App() {
       <BrowserRouter>
         <Nav isAuthenticated={isAuthenticated} style={{ position: "sticky" }} />
         <Routes>
-          <Route path="/" element={<Homepage />} />
+          <Route path="/" element={<Homepage   isAuthenticated={isAuthenticated}
+      setIsAuthenticated={setIsAuthenticated}/>} />
           <Route path="/trending" element={<TrendingPage />} />
           <Route path="/reviews" element={<ReviewsPage />} />
           <Route path="/signout" element={<SignoutPage />} />

@@ -5,6 +5,7 @@ const router = express.Router();
 const {
   getAllUsers,
   getUserById,
+  getUserByUsername,
   createUser,
   loginUser,
   updateUser,
@@ -29,6 +30,9 @@ router.post("/login",  loginUser);
 
 // GET /users/:userId
 router.get("/:userId", getUserById);
+
+// GET /users/username/:username
+router.get("/username/:username", getUserByUsername);
 
 // FOR AI ?
 // POST /users/recommend/:userId

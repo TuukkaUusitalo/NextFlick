@@ -14,11 +14,14 @@ function SignoutPage() {
     localStorage.removeItem("user");
 
     console.log('User logged out successfully.');
-
+    
+    //runs twice only on development
     alert("You have been signed out.");
 
     // Palataan etusivulle
     navigate('/');
+    //force reload
+    setTimeout(() => window.location.reload(), 100);
   }, [navigate]);
 
   return null;

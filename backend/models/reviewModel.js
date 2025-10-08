@@ -33,4 +33,14 @@ reviewSchema.statics.postReview = async function({userId, movieId, body, rating}
   return review;
 }
 
+reviewSchema.set('toJSON', {
+virtuals: true,
+transform: (doc, ret) => {
+    ret.id = ret._id;
+    delete ret._id;
+    delete ret.__v;
+    return ret;
+}
+});
+
 module.exports = mongoose.model('Review', reviewSchema);

@@ -9,6 +9,7 @@ const {
   updateReview,
   deleteReview,
 } = require("../controllers/reviewControllers");
+const { requireAuth } = require("../middleware/requireAuth");
  
 // GET /reviews
 router.get("/", getAllReviews);
@@ -19,17 +20,17 @@ router.get("/user/:userId", getReviewsByUserId);
 //GET /reviews/movie/:movieId
 router.get("/movie/:movieId", getReviewsByMovieId);
 
-// POST /cars
-router.post("/", createReview);
+// POST /reviews
+router.post("/", requireAuth, createReview);
 
-// GET /cars/:carId
+// GET /reviews/:reviewId
 router.get("/:reviewId", getReviewById);
 
-// PUT /cars/:carId
-router.put("/:reviewId", updateReview);
+// PUT /reviews/:reviewId
+router.put("/:reviewId", requireAuth, updateReview);
 
-// DELETE /cars/:carId
-router.delete("/:reviewId", deleteReview);
+// DELETE /reviews/:reviewId
+router.delete("/:reviewId", requireAuth, deleteReview);
 
 
 module.exports = router;

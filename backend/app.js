@@ -6,7 +6,7 @@ const movieRouter = require("./routes/movieRouter");
 const imageRouter = require("./routes/imageRouter");
 const {requestLogger,unknownEndpoint,errorHandler} = require("./middleware/customMiddleware");
 require("dotenv").config();
- const cors = require('cors');
+const cors = require('cors');
 
 
 // express app
@@ -17,10 +17,8 @@ app.use(cors());
 
 // middleware
 app.use(express.json());
-
+app.use(express.static('view'));
 app.use(requestLogger);
-
-app.get("/", (req, res) => res.send("API Running!"));
 
 // routes
 
@@ -29,11 +27,19 @@ app.use("/api/movies", movieRouter);
 app.use("/api/users", userRouter);
 // Use the reviewRouter for all /review routes
 app.use("/api/reviews", reviewRouter);
+
 app.use("/api/image", imageRouter);
+
 app.use(unknownEndpoint);
 app.use(errorHandler);
 
-const port = process.env.PORT || 4000;
-app.listen(port, () =>
-  console.log(`Server is running on http://localhost:${port}`)
-);
+app.use((req, res) => {
+  res.sendFile(__dirname + '/view/index.html');
+});
+
+// const port = process.env.PORT || 4000;
+// app.listen(port, () =>
+//   console.log(`Server is running on http://localhost:${port}`)
+// );
+
+module.exports = app;
